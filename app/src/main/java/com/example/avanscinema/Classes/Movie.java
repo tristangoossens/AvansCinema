@@ -261,9 +261,7 @@ public class Movie implements Serializable {
         this.tagline = tagline;
     }
 
-    public String getTitle() {
-        return title;
-    }
+
 
     public void setTitle(String title) {
         this.title = title;
