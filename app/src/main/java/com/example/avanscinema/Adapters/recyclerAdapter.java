@@ -3,6 +3,7 @@ package com.example.avanscinema.Adapters;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
