@@ -5,7 +5,11 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.avanscinema.Classes.Movie;
-import com.example.avanscinema.Classes.MovieList;
+import com.example.avanscinema.Classes.Review;
+import com.example.avanscinema.JsonParsers.MovieList;
+import com.example.avanscinema.JsonParsers.ReviewList;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,7 +48,7 @@ public class ApiConnection {
         });
     }
 
-    public void getMovieDetails(ResponseListener listener, int id) {
+    public void getMovieDetails(ResponseListener listener, int id, ReviewList reviews) {
         Call<Movie> call = service.getMovie(id, api_key);
         call.enqueue(new Callback<Movie>() {
             @Override
@@ -54,7 +58,7 @@ public class ApiConnection {
                     return;
                 }
                 Log.d("Movie requested: ", "" + response.body().getTitle());
-                listener.getDetails(response.body());
+                listener.getDetails(response.body(), reviews);
             }
 
             @Override
@@ -82,6 +86,27 @@ public class ApiConnection {
             }
         });
     }
+
+    public void getReviews(ResponseListener listener, int id) {
+        Call<ReviewList> call = service.listOfReviews(id, api_key);
+
+        call.enqueue(new Callback<ReviewList>() {
+            @Override
+            public void onResponse(Call<ReviewList> call, Response<ReviewList> response) {
+                if (!(response.code() == 200)) {
+                    Log.d("Bruh", "Error -> " + response.code());
+                    return;
+                }
+                listener.getReviews(response.body(), id);
+            }
+
+            @Override
+            public void onFailure(Call<ReviewList> call, Throwable t) {
+
+            }
+        });
+    }
+
 
 }
 

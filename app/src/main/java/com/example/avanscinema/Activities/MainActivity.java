@@ -15,6 +15,8 @@ import com.example.avanscinema.API.ApiConnection;
 import com.example.avanscinema.API.ResponseListener;
 import com.example.avanscinema.Adapters.recyclerAdapter;
 import com.example.avanscinema.Classes.Movie;
+import com.example.avanscinema.Classes.Review;
+import com.example.avanscinema.JsonParsers.ReviewList;
 import com.example.avanscinema.R;
 
 import java.util.ArrayList;
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
         //Clicked on Movie Item & nieuwe API call met deze Movie
         recyclerAdapter adapter = new recyclerAdapter(movieList, movie -> {
             //Clicked on Movie Item & nieuwe API call met deze Movie
-            apiConnection.getMovieDetails(MainActivity.this, movie.getId());
+            apiConnection.getReviews(MainActivity.this, movie.getId());
         }, position -> {
            if (position >= (movieList.size() - 4)) {
                //Load Next page
@@ -64,33 +66,43 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
 
 
     @Override
-    public void getDetails(Movie movie) {
+    public void getDetails(Movie movie, ReviewList reviews) {
         //Response van API Call van Movie Click
         //Detail page wordt pas geopend wanneer data aanwezig is.
         Intent detailPage = new Intent(getApplicationContext(), DetailPage.class);
         detailPage.putExtra("movie", movie);
+        detailPage.putExtra("reviews", reviews);
         startActivity(detailPage);
     }
 
     @Override
     public void searchMovie(ArrayList<Movie> result) {
+        //Weergeeft opgezochte films in een nieuwe Adapter
         recyclerAdapter adapter = new recyclerAdapter(result, movie -> {
-                //Clicked on Movie Item & nieuwe API call met deze Movie
-                apiConnection.getMovieDetails(MainActivity.this, movie.getId());
+                //Clicked on Movie Item & nieuwe API call met deze Movie (voor searched movies)
+                apiConnection.getReviews(MainActivity.this, movie.getId());
             }, position -> {
+            //Niet benodigt voor Search screen, had ook bestaande Method kunnen gebruiken maar dan problemen met Automatisch lijst extend.
                 });
         recyclerView.setAdapter(adapter);
     }
 
+    @Override
+    public void getReviews(ReviewList list, int id) {
+        //Nieuwe api call voor Details van Films, geeft Reviews mee om te zorgen dat deze beide tot beschikking staan voor Page geopend wordt.
+        apiConnection.getMovieDetails(MainActivity.this, id, list);
+    }
+
     private void setupSearchBar() {
+        //Kleine zoek toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         SearchView searchView = findViewById(R.id.search_view);
-
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
                 if (searchView.getQuery().length() == 0) {
+                    //Als zoekveld leeg is, reset hij de lijst naar Populaire films
                     apiConnection.getPopularMoviesList(MainActivity.this);
                 }
                 return false;
@@ -99,12 +111,14 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                //Api call met gezochte text
                 apiConnection.searchMovies(MainActivity.this, query);
                return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                //Onnodig omdat we  niet filteren op naam
                 return false;
             }
         });

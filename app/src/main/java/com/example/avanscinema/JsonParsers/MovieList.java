@@ -1,9 +1,10 @@
 
-package com.example.avanscinema.Classes;
+package com.example.avanscinema.JsonParsers;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import com.example.avanscinema.Classes.Movie;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

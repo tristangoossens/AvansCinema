@@ -88,7 +88,7 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MovieH
     public interface ItemClickListener {
         void onMovieClick(Movie movie);
     }
-
+    //Interface voor Position wanneer scherm wordt aangeraakt
     public interface OnTouchListener {
         void returnItemPosition(int position);
     }

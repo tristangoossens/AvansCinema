@@ -1,7 +1,8 @@
 package com.example.avanscinema.API;
 
 import com.example.avanscinema.Classes.Movie;
-import com.example.avanscinema.Classes.MovieList;
+import com.example.avanscinema.JsonParsers.ReviewList;
+import com.example.avanscinema.JsonParsers.MovieList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -21,4 +22,8 @@ public interface TheMovieDatabase {
     //Call voor search query (zoeken op film)
     @GET("search/movie")
     Call<MovieList> listFoundMovies(@Query("api_key") String api_key, @Query("query") String query);
+
+    //Call voor Reviews van een movie
+    @GET("movie/{id}/reviews")
+    Call<ReviewList> listOfReviews(@Path("id") int id, @Query("api_key") String api_key);
 }
