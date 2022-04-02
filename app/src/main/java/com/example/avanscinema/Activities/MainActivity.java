@@ -16,6 +16,7 @@ import com.example.avanscinema.API.ResponseListener;
 import com.example.avanscinema.Adapters.recyclerAdapter;
 import com.example.avanscinema.Classes.Movie;
 import com.example.avanscinema.Classes.Review;
+import com.example.avanscinema.JsonParsers.CastList;
 import com.example.avanscinema.JsonParsers.ReviewList;
 import com.example.avanscinema.R;
 
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
         //Clicked on Movie Item & nieuwe API call met deze Movie
         recyclerAdapter adapter = new recyclerAdapter(movieList, movie -> {
             //Clicked on Movie Item & nieuwe API call met deze Movie
-            apiConnection.getReviews(MainActivity.this, movie.getId());
+            apiConnection.getCast(MainActivity.this, movie.getId());
         }, position -> {
            if (position >= (movieList.size() - 4)) {
                //Load Next page
@@ -64,14 +65,14 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
         }
     }
 
-
     @Override
-    public void getDetails(Movie movie, ReviewList reviews) {
+    public void getDetails(Movie movie, ReviewList reviews, CastList cast) {
         //Response van API Call van Movie Click
         //Detail page wordt pas geopend wanneer data aanwezig is.
         Intent detailPage = new Intent(getApplicationContext(), DetailPage.class);
         detailPage.putExtra("movie", movie);
         detailPage.putExtra("reviews", reviews);
+        detailPage.putExtra("cast", cast);
         startActivity(detailPage);
     }
 
@@ -80,17 +81,11 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
         //Weergeeft opgezochte films in een nieuwe Adapter
         recyclerAdapter adapter = new recyclerAdapter(result, movie -> {
                 //Clicked on Movie Item & nieuwe API call met deze Movie (voor searched movies)
-                apiConnection.getReviews(MainActivity.this, movie.getId());
+                apiConnection.getCast(MainActivity.this, movie.getId());
             }, position -> {
             //Niet benodigt voor Search screen, had ook bestaande Method kunnen gebruiken maar dan problemen met Automatisch lijst extend.
                 });
         recyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    public void getReviews(ReviewList list, int id) {
-        //Nieuwe api call voor Details van Films, geeft Reviews mee om te zorgen dat deze beide tot beschikking staan voor Page geopend wordt.
-        apiConnection.getMovieDetails(MainActivity.this, id, list);
     }
 
     private void setupSearchBar() {

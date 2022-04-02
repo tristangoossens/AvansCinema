@@ -5,11 +5,9 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.avanscinema.Classes.Movie;
-import com.example.avanscinema.Classes.Review;
+import com.example.avanscinema.JsonParsers.CastList;
 import com.example.avanscinema.JsonParsers.MovieList;
 import com.example.avanscinema.JsonParsers.ReviewList;
-
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,80 +31,104 @@ public class ApiConnection {
         Call<MovieList> call = service.listPopularMovies(api_key, page);
         call.enqueue(new Callback<MovieList>() {
             @Override
-            public void onResponse(@NonNull Call<MovieList> call, Response<MovieList> response) {
+            public void onResponse(@NonNull Call<MovieList> call, @NonNull Response<MovieList> response) {
                 if (!(response.code() == 200)) {
                     Log.d("Bruh", "Error -> " + response.code());
                     return;
                 }
+                assert response.body() != null;
                 listener.getMoviePopularList(response.body().getResults());
             }
 
             @Override
-            public void onFailure(Call<MovieList> call, Throwable t) {
+            public void onFailure(@NonNull Call<MovieList> call, @NonNull Throwable t) {
                 Log.d("4", "" + t.getMessage());
             }
         });
     }
 
-    public void getMovieDetails(ResponseListener listener, int id, ReviewList reviews) {
+    public void getMovieDetails(ResponseListener listener, int id, ReviewList reviews, CastList cast) {
         Call<Movie> call = service.getMovie(id, api_key);
         call.enqueue(new Callback<Movie>() {
             @Override
-            public void onResponse(Call<Movie> call, Response<Movie> response) {
+            public void onResponse(@NonNull Call<Movie> call, @NonNull Response<Movie> response) {
                 if (!(response.code() == 200)) {
                     Log.d("Bruh", "Error -> " + response.code());
                     return;
                 }
+                assert response.body() != null;
                 Log.d("Movie requested: ", "" + response.body().getTitle());
-                listener.getDetails(response.body(), reviews);
+                listener.getDetails(response.body(), reviews, cast);
             }
 
             @Override
-            public void onFailure(Call<Movie> call, Throwable t) {
+            public void onFailure(@NonNull Call<Movie> call, @NonNull Throwable t) {
 
             }
         });
+
     }
+
     public void searchMovies(ResponseListener listener, String query) {
         Call<MovieList> call = service.listFoundMovies(api_key, query);
 
         call.enqueue(new Callback<MovieList>() {
             @Override
-            public void onResponse(Call<MovieList> call, Response<MovieList> response) {
+            public void onResponse(@NonNull Call<MovieList> call, @NonNull Response<MovieList> response) {
                 if (!(response.code() == 200)) {
                     Log.d("Bruh", "Error -> " + response.code());
                     return;
                 }
+                assert response.body() != null;
                 listener.searchMovie(response.body().getResults());
             }
 
             @Override
-            public void onFailure(Call<MovieList> call, Throwable t) {
+            public void onFailure(@NonNull Call<MovieList> call, @NonNull Throwable t) {
 
             }
         });
     }
 
-    public void getReviews(ResponseListener listener, int id) {
+    public void getReviews(ResponseListener listener, int id, CastList cast) {
         Call<ReviewList> call = service.listOfReviews(id, api_key);
 
         call.enqueue(new Callback<ReviewList>() {
             @Override
-            public void onResponse(Call<ReviewList> call, Response<ReviewList> response) {
+            public void onResponse(@NonNull Call<ReviewList> call, @NonNull Response<ReviewList> response) {
                 if (!(response.code() == 200)) {
                     Log.d("Bruh", "Error -> " + response.code());
                     return;
                 }
-                listener.getReviews(response.body(), id);
+               getMovieDetails(listener, id, response.body(), cast);
             }
 
             @Override
-            public void onFailure(Call<ReviewList> call, Throwable t) {
+            public void onFailure(@NonNull Call<ReviewList> call, @NonNull Throwable t) {
 
             }
         });
     }
 
+    public void getCast(ResponseListener listener, int id) {
+        Call<CastList> call = service.listOfCast(id, api_key);
+
+        call.enqueue(new Callback<CastList>() {
+            @Override
+            public void onResponse(Call<CastList> call, Response<CastList> response) {
+                if (!(response.code() == 200)) {
+                    Log.d("Bruh", "Error -> " + response.code());
+                    return;
+                }
+                getReviews(listener, id, response.body());
+            }
+
+            @Override
+            public void onFailure(Call<CastList> call, Throwable t) {
+
+            }
+        });
+    }
 
 }
 
