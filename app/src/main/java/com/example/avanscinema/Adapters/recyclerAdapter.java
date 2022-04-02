@@ -77,8 +77,7 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MovieH
         Context context = parent.getContext();
         int layoutIdForListItem = R.layout.list_item;
         LayoutInflater inflater = LayoutInflater.from(context);
-        boolean shouldAttachToParentImmediately = false;
-        View view = inflater.inflate(layoutIdForListItem, parent, shouldAttachToParentImmediately);
+        View view = inflater.inflate(layoutIdForListItem, parent, false);
 
 
         return new MovieHolder(view);
@@ -91,7 +90,7 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MovieH
         String title = movie.getTitle();
         String overView = movie.getOverview();
         Integer ID = movie.getId();
-        holder.Moviext.setText(title);
+        holder.Title.setText(title);
         Picasso.get().load(movie.getImage()).resize(150, 200).centerCrop().into(holder.image);
         holder.mDescription.setText(overView);
         holder.itemView.setOnClickListener(view -> {
@@ -126,7 +125,7 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MovieH
 
     //xml wordt hier gekoppeld aan de velden
     public class MovieHolder extends RecyclerView.ViewHolder {
-        private final TextView Moviext, mDescription;
+        private final TextView Title, mDescription;
         private final ImageView image;
         private final ScrollView mScrollViewDescription;
         private final RatingBar mRatingBar;
@@ -134,7 +133,7 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MovieH
         public MovieHolder(@NonNull View itemView) {
             super(itemView);
 
-            Moviext = itemView.findViewById(R.id.Title);
+            Title = itemView.findViewById(R.id.Title);
             image = itemView.findViewById(R.id.movie_poster);
             mDescription = itemView.findViewById(R.id.description);
             mScrollViewDescription = itemView.findViewById(R.id.description_scrollview);
