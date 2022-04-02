@@ -15,6 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiConnection {
     public String api_key = "839967f27e812330b73ed782f61f9286";
+    int page = 0;
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.themoviedb.org/3/")
@@ -24,7 +25,8 @@ public class ApiConnection {
     TheMovieDatabase service = retrofit.create(TheMovieDatabase.class);
 
     public void getPopularMoviesList(ResponseListener listener) {
-        Call<MovieList> call = service.listPopularMovies(api_key);
+        page = page + 1;
+        Call<MovieList> call = service.listPopularMovies(api_key, page);
         call.enqueue(new Callback<MovieList>() {
             @Override
             public void onResponse(@NonNull Call<MovieList> call, Response<MovieList> response) {
@@ -71,7 +73,7 @@ public class ApiConnection {
                     Log.d("Bruh", "Error -> " + response.code());
                     return;
                 }
-                listener.getMoviePopularList(response.body().getResults());
+                listener.searchMovie(response.body().getResults());
             }
 
             @Override

@@ -15,15 +15,28 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:theme="@style/Theme.AppCompat.DayNight"
+            android:layout_gravity="center"
+            android:theme="@style/Theme.AppCompat.Light"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/Theme.AppCompat.DayNight">
+            app:popupTheme="@style/Theme.AppCompat.Light"
+>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                tools:text="AvansCinema" />
 
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/search_view"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                app:queryHint="Search for a movie!" />
+                android:layout_gravity="end"
+                app:queryHint="Search field">
+
+            </androidx.appcompat.widget.SearchView>
 
         </androidx.appcompat.widget.Toolbar>
 

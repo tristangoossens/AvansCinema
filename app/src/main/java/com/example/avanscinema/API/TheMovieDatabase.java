@@ -12,7 +12,7 @@ public interface TheMovieDatabase {
 
     //Call voor ophalen van popular filmlijsten.
     @GET("movie/popular")
-    Call<MovieList> listPopularMovies(@Query("api_key") String api_key);
+    Call<MovieList> listPopularMovies(@Query("api_key") String api_key, @Query("page") int page);
 
     //Call voor film Details van geselecteerde film.
     @GET("movie/{id}")
