@@ -4,7 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.avanscinema.Classes.MovieDetail;
+import com.example.avanscinema.Classes.Movie;
 import com.example.avanscinema.Classes.MovieList;
 
 import retrofit2.Call;
@@ -13,7 +13,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Api {
+public class ApiConnection {
     public String api_key = "839967f27e812330b73ed782f61f9286";
 
     Retrofit retrofit = new Retrofit.Builder()
@@ -23,7 +23,7 @@ public class Api {
 
     TheMovieDatabase service = retrofit.create(TheMovieDatabase.class);
 
-    public void getPopularMoviesList(responseListener listener) {
+    public void getPopularMoviesList(ResponseListener listener) {
         Call<MovieList> call = service.listMovies(api_key);
         call.enqueue(new Callback<MovieList>() {
             @Override
@@ -42,11 +42,11 @@ public class Api {
         });
     }
 
-    public void getMovieDetails(responseListener listener, int id) {
-        Call<MovieDetail> call = service.getMovie(id, api_key);
-        call.enqueue(new Callback<MovieDetail>() {
+    public void getMovieDetails(ResponseListener listener, int id) {
+        Call<Movie> call = service.getMovie(id, api_key);
+        call.enqueue(new Callback<Movie>() {
             @Override
-            public void onResponse(Call<MovieDetail> call, Response<MovieDetail> response) {
+            public void onResponse(Call<Movie> call, Response<Movie> response) {
                 if (!(response.code() == 200)) {
                     Log.d("Bruh", "Error -> " + response.code());
                     return;
@@ -56,7 +56,7 @@ public class Api {
             }
 
             @Override
-            public void onFailure(Call<MovieDetail> call, Throwable t) {
+            public void onFailure(Call<Movie> call, Throwable t) {
 
             }
         });

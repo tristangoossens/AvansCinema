@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 
-public class DetailGenre implements Serializable {
+public class Genre implements Serializable {
 
     @SerializedName("id")
     @Expose

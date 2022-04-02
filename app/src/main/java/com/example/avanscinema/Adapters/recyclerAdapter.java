@@ -31,7 +31,7 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MovieH
             ArrayList<Movie> filteredList = new ArrayList<Movie>();
 //Als er niks ingevuld is wordt de hele lijst weergeven/ anders wordt er een constraint opgesteld.
             if (constraint == null || constraint.length() == 0) {
-                Log.d(TAG, "Testing Moviesize: " + MovieListFull.size());
+                Log.d(TAG, "Movieing Moviesize: " + MovieListFull.size());
                 filteredList.addAll(MovieListFull);
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
@@ -100,6 +100,7 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MovieH
         return MovieFilter;
     }
 
+    //Kleine interface voor ItemClickListener
     public interface ItemClickListener {
         void onMovieClick(Movie movie);
     }

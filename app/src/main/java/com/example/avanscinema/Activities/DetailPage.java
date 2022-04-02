@@ -2,13 +2,12 @@ package com.example.avanscinema.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.avanscinema.Classes.MovieDetail;
+import com.example.avanscinema.Classes.Movie;
 import com.example.avanscinema.R;
 import com.squareup.picasso.Picasso;
 
@@ -26,7 +25,7 @@ public class DetailPage extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        MovieDetail movie = (MovieDetail) intent.getSerializableExtra("movie");
+        Movie movie = (Movie) intent.getSerializableExtra("movie");
         Title.setText(movie.getTitle());
         Picasso.get().load(movie.getImage()).resize(150, 200).centerCrop().into(poster);
     }

@@ -2,34 +2,33 @@ package com.example.avanscinema.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.avanscinema.API.Api;
-import com.example.avanscinema.API.responseListener;
+import com.example.avanscinema.API.ApiConnection;
+import com.example.avanscinema.API.ResponseListener;
 import com.example.avanscinema.Adapters.recyclerAdapter;
 import com.example.avanscinema.Classes.Movie;
-import com.example.avanscinema.Classes.MovieDetail;
 import com.example.avanscinema.R;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements responseListener {
+public class MainActivity extends AppCompatActivity implements ResponseListener {
 
     public RecyclerView recyclerView;
     private recyclerAdapter adapter;
-    private Api api;
+    private ApiConnection apiConnection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        this.api = new Api();
-        api.getPopularMoviesList(this);
+        //Api wordt gemaakt
+        this.apiConnection = new ApiConnection();
+        //Ascyhrone task voor ophalen van popular filmlijst
+        apiConnection.getPopularMoviesList(this);
 
         recyclerView = findViewById(R.id.recView);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
@@ -37,23 +36,23 @@ public class MainActivity extends AppCompatActivity implements responseListener 
 
     @Override
     public void getMoviePopularList(ArrayList<Movie> result) {
-
+    //Response call van API
+        //Adapter wordt gemaakt
         this.adapter = new recyclerAdapter(result, new recyclerAdapter.ItemClickListener() {
             @Override
             public void onMovieClick(Movie movie) {
-                //Clicked on Movie Item
-                //Nieuwe API call
-                api.getMovieDetails(MainActivity.this, movie.getId());
+                //Clicked on Movie Item & nieuwe API call met deze Movie
+                apiConnection.getMovieDetails(MainActivity.this, movie.getId());
             }
         });
-
+    //Adapter wordt in recyclerView geplaatst
         recyclerView.setAdapter(this.adapter);
     }
 
     @Override
-    public void getDetails(MovieDetail movie) {
+    public void getDetails(Movie movie) {
         //Response van API Call van Movie Click
-        //Detail page wordt pas geopend wanneer data aanwezig is
+        //Detail page wordt pas geopend wanneer data aanwezig is.
         Intent detailPage = new Intent(getApplicationContext(), DetailPage.class);
         detailPage.putExtra("movie", movie);
         startActivity(detailPage);
