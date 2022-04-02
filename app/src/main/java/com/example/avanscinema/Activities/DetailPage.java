@@ -22,6 +22,7 @@ public class DetailPage extends AppCompatActivity {
         setContentView(R.layout.movie_detail);
         Title = findViewById(R.id.title_movie);
         poster = findViewById(R.id.detail_movie);
+        getIntentData();
 
 
     }
@@ -29,7 +30,7 @@ public class DetailPage extends AppCompatActivity {
     private void getIntentData(){
         if (getIntent() !=null){
             Intent intent = getIntent();
-            MovieDetail movie = (MovieDetail) intent.getSerializableExtra("movie");
+            Movie movie = (Movie)intent.getSerializableExtra("movie");
             Title.setText(movie.getTitle());
             Picasso.get().load(movie.getImage()).resize(150, 200).centerCrop().into(poster);
         }
