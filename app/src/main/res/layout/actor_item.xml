@@ -12,10 +12,9 @@
 
     <ImageView
         android:id="@+id/actor_image_cardview"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:src="@mipmap/ic_launcher"
-        tools:srcCompat="@drawable/movie_placeholder1"
+        android:layout_width="120dp"
+        android:layout_height="180dp"
+        android:src="@drawable/actor_placeholder"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
         />
@@ -27,6 +26,7 @@
             tools:text="John doe"
             android:gravity="center"
             android:textStyle="bold"
+            android:textColor="#000000"
             />
 
         <TextView
@@ -35,7 +35,8 @@
             android:layout_height="wrap_content"
             tools:text="Shrek"
             android:gravity="center"
-            android:textStyle="italic"/>
+            android:textStyle="italic"
+            android:textColor="#83000000"/>
 
     </LinearLayout>
 

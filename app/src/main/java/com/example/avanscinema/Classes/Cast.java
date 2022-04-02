@@ -76,6 +76,10 @@ public class Cast implements Serializable {
         this.knownForDepartment = knownForDepartment;
     }
 
+    public String getImage(){
+        return "https://image.tmdb.org/t/p/w500/" + getProfilePath();
+    }
+
     public String getName() {
         return name;
     }

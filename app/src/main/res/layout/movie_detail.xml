@@ -31,7 +31,7 @@
                 android:textStyle="bold"
                 android:background="@drawable/description_box_list_item"
                 android:textColor="#C6002A"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
             <TextView
                 android:id="@+id/description_detailpage"
                 android:layout_width="match_parent"
@@ -43,7 +43,7 @@
                 android:textColor="#000000"
                 android:textSize="15sp" />
             <TextView
-                android:id="@+id/Actors"
+                android:id="@+id/runtime_releaseDate_detailview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text="Genre: xxxx  lengte: xxxxx Release data: xxxx"
@@ -53,21 +53,39 @@
                 android:textColor="#000000"
                 android:textSize="15sp" />
             <TextView
-                android:id="@+id/actors_detail_page"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="Actors"
+                android:text="Actors"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:background="@drawable/description_box_list_item"
                 android:textColor="#C6002A"
-                android:textSize="15sp" />
+                android:textSize="20sp" />
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/actor_detail_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
             </androidx.recyclerview.widget.RecyclerView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reviews"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:background="@drawable/description_box_list_item"
+                android:textColor="#C6002A"
+                android:textSize="20sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:text="Review recyclerview on its way"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:background="@drawable/description_box_list_item"
+                android:textColor="#C6002A"
+                android:textSize="20sp" />
 
         </LinearLayout>
     </ScrollView>
