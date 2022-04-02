@@ -3,7 +3,10 @@ package com.example.avanscinema.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,14 +28,32 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Api wordt gemaakt
-        this.apiConnection = new ApiConnection();
-        //Ascyhrone task voor ophalen van popular filmlijst
-        apiConnection.getPopularMoviesList(this);
-
-        recyclerView = findViewById(R.id.recView);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
+        //Api Connectie + ophalen van populaire films
+        setupApi();
+        //Search bar Method
+        setupSearchBar();
+        //Recycler view Method
+        setupRecyclerView();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Override
     public void getMoviePopularList(ArrayList<Movie> result) {
@@ -57,4 +78,35 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
         detailPage.putExtra("movie", movie);
         startActivity(detailPage);
     }
+
+    private void setupSearchBar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        SearchView searchView = findViewById(R.id.search_view);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                apiConnection.searchMovies(MainActivity.this, query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+    }
+
+    private void setupApi() {
+        //Api wordt gemaakt
+        this.apiConnection = new ApiConnection();
+        //Ascyhrone task voor ophalen van popular filmlijst
+        apiConnection.getPopularMoviesList(this);
+    }
+
+    private void setupRecyclerView() {
+        recyclerView = findViewById(R.id.recView);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
+    }
+
 }

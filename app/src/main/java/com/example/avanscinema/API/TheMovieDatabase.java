@@ -11,10 +11,14 @@ import retrofit2.http.Query;
 public interface TheMovieDatabase {
 
     //Call voor ophalen van popular filmlijsten.
-    @GET("popular")
-    Call<MovieList> listMovies(@Query("api_key") String api_key);
+    @GET("movie/popular")
+    Call<MovieList> listPopularMovies(@Query("api_key") String api_key);
 
     //Call voor film Details van geselecteerde film.
-    @GET("{id}")
+    @GET("movie/{id}")
     Call<Movie> getMovie(@Path("id") int id, @Query("api_key") String api_key);
+
+    //Call voor search query (zoeken op film)
+    @GET("search/movie")
+    Call<MovieList> listFoundMovies(@Query("api_key") String api_key, @Query("query") String query);
 }

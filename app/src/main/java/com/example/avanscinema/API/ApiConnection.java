@@ -17,14 +17,14 @@ public class ApiConnection {
     public String api_key = "839967f27e812330b73ed782f61f9286";
 
     Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/3/movie/")
+            .baseUrl("https://api.themoviedb.org/3/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
     TheMovieDatabase service = retrofit.create(TheMovieDatabase.class);
 
     public void getPopularMoviesList(ResponseListener listener) {
-        Call<MovieList> call = service.listMovies(api_key);
+        Call<MovieList> call = service.listPopularMovies(api_key);
         call.enqueue(new Callback<MovieList>() {
             @Override
             public void onResponse(@NonNull Call<MovieList> call, Response<MovieList> response) {
@@ -60,7 +60,26 @@ public class ApiConnection {
 
             }
         });
-
     }
+    public void searchMovies(ResponseListener listener, String query) {
+        Call<MovieList> call = service.listFoundMovies(api_key, query);
+
+        call.enqueue(new Callback<MovieList>() {
+            @Override
+            public void onResponse(Call<MovieList> call, Response<MovieList> response) {
+                if (!(response.code() == 200)) {
+                    Log.d("Bruh", "Error -> " + response.code());
+                    return;
+                }
+                listener.getMoviePopularList(response.body().getResults());
+            }
+
+            @Override
+            public void onFailure(Call<MovieList> call, Throwable t) {
+
+            }
+        });
+    }
+
 }
 
