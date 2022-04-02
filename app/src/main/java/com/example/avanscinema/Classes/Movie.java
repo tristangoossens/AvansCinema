@@ -21,7 +21,7 @@ public class Movie implements Serializable {
     private Integer budget;
     @SerializedName("genres")
     @Expose
-    private List<DetailGenre> genres = null;
+    private List<Genre> genres = null;
     @SerializedName("homepage")
     @Expose
     private String homepage;
@@ -119,11 +119,11 @@ public class Movie implements Serializable {
         this.budget = budget;
     }
 
-    public List<DetailGenre> getGenres() {
+    public List<Genre> getGenres() {
         return genres;
     }
 
-    public void setGenres(List<DetailGenre> genres) {
+    public void setGenres(List<Genre> genres) {
         this.genres = genres;
     }
 
