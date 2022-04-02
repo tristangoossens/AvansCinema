@@ -57,10 +57,11 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MovieH
         Picasso.get().load(movie.getImage()).resize(150, 200).centerCrop().into(holder.image);
         holder.mDescription.setText(overView);
 
+        //Click listener voor het openen van Detail scherm
         holder.itemView.setOnClickListener(view -> {
             mMovieClickListener.onMovieClick(MovieList.get(position));
         });
-
+        //Touch Listener voor het laden van volgende pagina
         holder.itemView.setOnTouchListener((view, motionEvent) -> {
             mTouchListener.returnItemPosition(position);
             return false;

@@ -41,8 +41,8 @@ public class DetailPage extends AppCompatActivity {
     private void getIntentData(){
         if (getIntent() !=null){
             Intent intent = getIntent();
-           List<Cast> cast = retrieveCast(intent);
-           List<Review> reviews = getReviews(intent);
+           ArrayList<Cast> cast = retrieveCast(intent);
+           ArrayList<Review> reviews = getReviews(intent);
             Movie movie = getMovie(intent);
 
             Title.setText(movie.getTitle());
@@ -51,14 +51,14 @@ public class DetailPage extends AppCompatActivity {
     }
 
 
-    private List<Cast> retrieveCast(Intent intent) {
+    private ArrayList<Cast> retrieveCast(Intent intent) {
         CastList cast = (CastList) intent.getSerializableExtra("cast");
-        List<Cast> popes = cast.getCast();
-        return popes;
+        ArrayList<Cast> cast1 = cast.getCast();
+        return cast1;
     }
-    private List<Review> getReviews(Intent intent) {
+    private ArrayList<Review> getReviews(Intent intent) {
         ReviewList reviewlist = (ReviewList) intent.getSerializableExtra("reviews");
-        List<Review> reviews = reviewlist.getResults();
+        ArrayList<Review> reviews = reviewlist.getResults();
         return reviews;
     }
     private Movie getMovie(Intent intent) {

@@ -1,6 +1,7 @@
 package com.example.avanscinema.JsonParsers;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.avanscinema.Classes.Cast;
@@ -14,7 +15,7 @@ public class CastList implements Serializable {
     private Integer id;
     @SerializedName("cast")
     @Expose
-    private List<Cast> cast = null;
+    private ArrayList<Cast> cast = null;
 
     public Integer getId() {
         return id;
@@ -24,11 +25,11 @@ public class CastList implements Serializable {
         this.id = id;
     }
 
-    public List<Cast> getCast() {
+    public ArrayList<Cast> getCast() {
         return cast;
     }
 
-    public void setCast(List<Cast> cast) {
+    public void setCast(ArrayList<Cast> cast) {
         this.cast = cast;
     }
 
