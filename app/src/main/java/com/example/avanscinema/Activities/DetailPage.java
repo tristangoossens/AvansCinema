@@ -23,10 +23,15 @@ public class DetailPage extends AppCompatActivity {
         Title = findViewById(R.id.title_movie);
         poster = findViewById(R.id.detail_movie);
 
-        Intent intent = getIntent();
 
-        Movie movie = (Movie) intent.getSerializableExtra("movie");
-        Title.setText(movie.getTitle());
-        Picasso.get().load(movie.getImage()).resize(150, 200).centerCrop().into(poster);
+    }
+
+    private void getIntentData(){
+        if (getIntent() !=null){
+            Intent intent = getIntent();
+            MovieDetail movie = (MovieDetail) intent.getSerializableExtra("movie");
+            Title.setText(movie.getTitle());
+            Picasso.get().load(movie.getImage()).resize(150, 200).centerCrop().into(poster);
+        }
     }
 }

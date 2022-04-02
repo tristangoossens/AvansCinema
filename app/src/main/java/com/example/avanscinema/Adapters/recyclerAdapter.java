@@ -1,13 +1,18 @@
 package com.example.avanscinema.Adapters;
 
+import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.avanscinema.Classes.Movie;
 import com.example.avanscinema.R;
+import com.google.android.material.internal.ScrimInsetsFrameLayout;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -81,13 +87,26 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MovieH
     @Override
     //Bind de movies aan de recyclerView
     public void onBindViewHolder(@NonNull MovieHolder holder, int position) {
-        String title = MovieList.get(position).getTitle();
-        Integer ID = MovieList.get(position).getId();
+        Movie movie = MovieList.get(position);
+        String title = movie.getTitle();
+        String overView = movie.getOverview();
+        Integer ID = movie.getId();
         holder.Moviext.setText(title);
-        Picasso.get().load(MovieList.get(position).getImage()).resize(150, 200).centerCrop().into(holder.image);
-
+        Picasso.get().load(movie.getImage()).resize(150, 200).centerCrop().into(holder.image);
+        holder.mDescription.setText(overView);
         holder.itemView.setOnClickListener(view -> {
             mMovieClickListener.onMovieClick(MovieList.get(position));
+        });
+        holder.mRatingBar.setRating(movie.getStarRating());
+
+        //Deze listener voorkomt dat de recyclerview scrolled. Zo kan de nested scrollview scrollen. Geen idee waarom hij geel gemarkeerd is.
+        holder.mScrollViewDescription.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                v.getParent().getParent().getParent().getParent().getParent().getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
         });
     }
 
@@ -107,15 +126,20 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MovieH
 
     //xml wordt hier gekoppeld aan de velden
     public class MovieHolder extends RecyclerView.ViewHolder {
-        private final TextView Moviext;
-        private TextView nickTxt;
+        private final TextView Moviext, mDescription;
         private final ImageView image;
+        private final ScrollView mScrollViewDescription;
+        private final RatingBar mRatingBar;
 
         public MovieHolder(@NonNull View itemView) {
             super(itemView);
 
             Moviext = itemView.findViewById(R.id.Title);
             image = itemView.findViewById(R.id.movie_poster);
+            mDescription = itemView.findViewById(R.id.description);
+            mScrollViewDescription = itemView.findViewById(R.id.description_scrollview);
+            mRatingBar = itemView.findViewById(R.id.ratingBar);
+
         }
     }
 }

@@ -159,8 +159,14 @@ public class Movie implements Serializable {
         this.originalLanguage = originalLanguage;
     }
 
-    public String getOriginalTitle() {
-        return originalTitle;
+    public float getStarRating(){
+        double starRating= this.voteAverage/2;
+        float starRating2 = (float)starRating;
+        return starRating2;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public void setOriginalTitle(String originalTitle) {
