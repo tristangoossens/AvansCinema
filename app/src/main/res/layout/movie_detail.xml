@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#4A4A4A"
     android:layout_height="match_parent">
 
     <ScrollView
@@ -14,19 +14,60 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/detail_movie"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:srcCompat="@drawable/movie_placeholder2"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                />
             <TextView
                 android:id="@+id/title_movie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textColor="#000000"
+                tools:text="Titel"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:background="@drawable/description_box_list_item"
+                android:textColor="#C6002A"
                 android:textSize="30sp" />
-
-            <ImageView
-                android:id="@+id/detail_movie"
+            <TextView
+                android:id="@+id/description_detailpage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:srcCompat="@tools:sample/avatars" />
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                android:gravity="center"
+                android:textStyle="bold"
+                android:background="@drawable/description_box_list_item"
+                android:textColor="#000000"
+                android:textSize="15sp" />
+            <TextView
+                android:id="@+id/Actors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Genre: xxxx  lengte: xxxxx Release data: xxxx"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:background="@drawable/description_box_list_item"
+                android:textColor="#000000"
+                android:textSize="15sp" />
+            <TextView
+                android:id="@+id/actors_detail_page"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Actors"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:background="@drawable/description_box_list_item"
+                android:textColor="#C6002A"
+                android:textSize="15sp" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
     </ScrollView>

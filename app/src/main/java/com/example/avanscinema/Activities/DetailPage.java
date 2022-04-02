@@ -2,8 +2,10 @@ package com.example.avanscinema.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,7 +16,8 @@ import com.squareup.picasso.Picasso;
 
 public class DetailPage extends AppCompatActivity {
 
-    private TextView Title;
+    private static final String TAG = DetailPage.class.getSimpleName();
+    private TextView Title, des;
     private ImageView poster;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,8 @@ public class DetailPage extends AppCompatActivity {
         setContentView(R.layout.movie_detail);
         Title = findViewById(R.id.title_movie);
         poster = findViewById(R.id.detail_movie);
+
+
         getIntentData();
 
 
@@ -32,7 +37,7 @@ public class DetailPage extends AppCompatActivity {
             Intent intent = getIntent();
             Movie movie = (Movie)intent.getSerializableExtra("movie");
             Title.setText(movie.getTitle());
-            Picasso.get().load(movie.getImage()).resize(150, 200).centerCrop().into(poster);
+            Picasso.get().load(movie.getLandscapeImage()).into(poster);
         }
     }
 }

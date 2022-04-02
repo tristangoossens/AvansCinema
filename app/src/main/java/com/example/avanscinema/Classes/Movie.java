@@ -86,6 +86,9 @@ public class Movie implements Serializable {
     public Boolean getAdult() {
         return adult;
     }
+    public String getLandscapeImage(){
+        return "https://image.tmdb.org/t/p/w500/" + getBackdropPath();
+    }
 
     public String getImage() {
         return "https://image.tmdb.org/t/p/w500/" + getPosterPath();

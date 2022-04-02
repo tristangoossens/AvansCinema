@@ -99,7 +99,7 @@
                         android:layout_height="150dp"
                         android:layout_marginLeft="15dp"
                         android:layout_marginTop="10dp"
-                        tools:srcCompat="@tools:sample/avatars" />
+                        tools:srcCompat="@drawable/movie_placeholder1"/>
                 </LinearLayout>
             </LinearLayout>
 

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/description_box_list_item">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/description_box_list_item">
+
+    <ImageView
+        android:id="@+id/actor_image_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:src="@mipmap/ic_launcher"
+        tools:srcCompat="@drawable/movie_placeholder1"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        />
+
+        <TextView
+            android:id="@+id/actor_name_cardview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="John doe"
+            android:gravity="center"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/actor_character_cardview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Shrek"
+            android:gravity="center"
+            android:textStyle="italic"/>
+
+    </LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>
