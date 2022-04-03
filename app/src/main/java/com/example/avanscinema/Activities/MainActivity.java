@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -21,6 +25,7 @@ import com.example.avanscinema.Adapters.RecyclerAdapter;
 import com.example.avanscinema.Classes.Movie;
 import com.example.avanscinema.JsonParsers.CastList;
 import com.example.avanscinema.JsonParsers.ReviewList;
+import com.example.avanscinema.JsonParsers.TrailerList;
 import com.example.avanscinema.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -46,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
         setupSearchBar();
         //Recycler view Method
         setupRecyclerView();
-
+        //Navigation Menu
         setupMenu();
     }
 
@@ -66,10 +71,14 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
                 int id = item.getItemId();
                 switch(id) {
                     case R.id.Movie_list:
-
+                        recyclerViewState = null;
+                        apiConnection.getPopularMoviesList(MainActivity.this, true);
                         break;
-                    case R.id.list1:
-
+                    case R.id.Favourites:
+                        //SHow list of Favourite movies
+                        break;
+                    case R.id.settings:
+                        //Go to Settings
                         break;
                 }
 
@@ -92,14 +101,14 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
         RecyclerAdapter adapter = new RecyclerAdapter(movieList, movie -> {
             //Clicked on Movie Item & nieuwe API call met deze Movie
 
-            apiConnection.getCast(MainActivity.this, movie.getId());
+            apiConnection.getTrailer(MainActivity.this, movie.getId());
 
         }, position -> {
            if (position >= (movieList.size() - 4)) {
                //Load Next page
                recyclerViewState = recyclerView.getLayoutManager().onSaveInstanceState();
                Log.d("Touch: ", ""+ position);
-               apiConnection.getPopularMoviesList(this);
+               apiConnection.getPopularMoviesList(this, false);
            }
         });
     //Adapter wordt in recyclerView geplaatst
@@ -110,13 +119,14 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
     }
 
     @Override
-    public void getDetails(Movie movie, ReviewList reviews, CastList cast) {
+    public void getDetails(Movie movie, ReviewList reviews, CastList cast, TrailerList trailer) {
         //Response van API Call van Movie Click
         //Detail page wordt pas geopend wanneer data aanwezig is.
         Intent detailPage = new Intent(getApplicationContext(), DetailPage.class);
         detailPage.putExtra("movie", movie);
         detailPage.putExtra("reviews", reviews);
         detailPage.putExtra("cast", cast);
+        detailPage.putExtra("trailer", trailer);
         startActivity(detailPage);
     }
 
@@ -125,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
         //Weergeeft opgezochte films in een nieuwe Adapter
         RecyclerAdapter adapter = new RecyclerAdapter(result, movie -> {
                 //Clicked on Movie Item & nieuwe API call met deze Movie (voor searched movies)
-                apiConnection.getCast(MainActivity.this, movie.getId());
+                apiConnection.getTrailer(MainActivity.this, movie.getId());
             }, position -> {
             //Niet benodigt voor Search screen, had ook bestaande Method kunnen gebruiken maar dan problemen met Automatisch lijst extend.
                 });
@@ -142,7 +152,9 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
             public boolean onClose() {
                 if (searchView.getQuery().length() == 0) {
                     //Als zoekveld leeg is, reset hij de lijst naar Populaire films
-                    apiConnection.getPopularMoviesList(MainActivity.this);
+                    recyclerViewState = null;
+                    movieList.clear();
+                    apiConnection.getPopularMoviesList(MainActivity.this, true);
                 }
                 return false;
             }
@@ -167,12 +179,15 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
         //Api wordt gemaakt
         this.apiConnection = new ApiConnection();
         //Ascyhrone task voor ophalen van popular filmlijst
-        apiConnection.getPopularMoviesList(this);
+        recyclerViewState = null;
+        movieList.clear();
+        apiConnection.getPopularMoviesList(this, true);
+
+
     }
 
     private void setupRecyclerView() {
         recyclerView = findViewById(R.id.recView);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
     }
-
 }

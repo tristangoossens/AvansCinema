@@ -2,8 +2,10 @@ package com.example.avanscinema.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,6 +17,7 @@ import com.example.avanscinema.Classes.Movie;
 import com.example.avanscinema.Classes.Review;
 import com.example.avanscinema.JsonParsers.CastList;
 import com.example.avanscinema.JsonParsers.ReviewList;
+import com.example.avanscinema.JsonParsers.TrailerList;
 import com.example.avanscinema.R;
 import com.squareup.picasso.Picasso;
 
@@ -28,6 +31,9 @@ public class DetailPage extends AppCompatActivity {
     private ImageView poster;
     private RecyclerView recyclerView;
     private ArrayList<Cast> actorList;
+    private ArrayList<Review> reviews;
+    private TrailerList trailers;
+    private Movie movie;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,16 +46,20 @@ public class DetailPage extends AppCompatActivity {
         getIntentData();
         setupRecyclerView();
 
-
+        poster.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent video = new Intent(getApplicationContext(), TrailerPage.class);
+                video.putExtra("trailer", trailers);
+                startActivity(video);
+            }
+        });
     }
 
     private void getIntentData() {
         if (getIntent() != null) {
             Intent intent = getIntent();
-            actorList = retrieveCast(intent);
-            ArrayList<Review> reviews = getReviews(intent);
-
-            Movie movie = getMovie(intent);
+            retrieveInfo(intent);
             Title.setText(movie.getTitle());
             des.setText(movie.getOverview());
             runtimeRelease.setText(getString(R.string.Runtime)+" "+ movie.getRuntime() + getString(R.string.minutes) +   getString(R.string.releasedate) +" "+ movie.getReleaseDate());
@@ -66,20 +76,14 @@ public class DetailPage extends AppCompatActivity {
     }
 
 
-    private ArrayList<Cast> retrieveCast(Intent intent) {
-        CastList cast = (CastList) intent.getSerializableExtra("cast");
-        ArrayList<Cast> cast1 = cast.getCast();
-        return cast1;
+    private void retrieveInfo(Intent intent) {
+        CastList castlist = (CastList) intent.getSerializableExtra("cast");
+        ReviewList list = (ReviewList) intent.getSerializableExtra("reviews");
+        TrailerList trailers = (TrailerList) intent.getSerializableExtra("trailer");
+        this.trailers = trailers;
+        this.actorList = castlist.getCast();
+        this.movie = (Movie) intent.getSerializableExtra("movie");
+        this.reviews = list.getResults();
     }
 
-    private ArrayList<Review> getReviews(Intent intent) {
-        ReviewList reviewlist = (ReviewList) intent.getSerializableExtra("reviews");
-        ArrayList<Review> reviews = reviewlist.getResults();
-        return reviews;
-    }
-
-    private Movie getMovie(Intent intent) {
-        Movie movie = (Movie) intent.getSerializableExtra("movie");
-        return movie;
-    }
 }

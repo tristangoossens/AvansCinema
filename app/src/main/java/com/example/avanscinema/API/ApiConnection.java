@@ -5,9 +5,11 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.avanscinema.Classes.Movie;
+import com.example.avanscinema.Classes.Trailer;
 import com.example.avanscinema.JsonParsers.CastList;
 import com.example.avanscinema.JsonParsers.MovieList;
 import com.example.avanscinema.JsonParsers.ReviewList;
+import com.example.avanscinema.JsonParsers.TrailerList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,7 +28,10 @@ public class ApiConnection {
 
     TheMovieDatabase service = retrofit.create(TheMovieDatabase.class);
 
-    public void getPopularMoviesList(ResponseListener listener) {
+    public void getPopularMoviesList(ResponseListener listener, boolean refresh) {
+        if (refresh) {
+            page = 0;
+        }
         page = page + 1;
         Call<MovieList> call = service.listPopularMovies(api_key, page);
         call.enqueue(new Callback<MovieList>() {
@@ -47,7 +52,7 @@ public class ApiConnection {
         });
     }
 
-    public void getMovieDetails(ResponseListener listener, int id, ReviewList reviews, CastList cast) {
+    public void getMovieDetails(ResponseListener listener, int id, ReviewList reviews, CastList cast, TrailerList trailer) {
         Call<Movie> call = service.getMovie(id, api_key);
         call.enqueue(new Callback<Movie>() {
             @Override
@@ -58,7 +63,7 @@ public class ApiConnection {
                 }
                 assert response.body() != null;
                 Log.d("Movie requested: ", "" + response.body().getTitle());
-                listener.getDetails(response.body(), reviews, cast);
+                listener.getDetails(response.body(), reviews, cast, trailer);
             }
 
             @Override
@@ -90,7 +95,7 @@ public class ApiConnection {
         });
     }
 
-    public void getReviews(ResponseListener listener, int id, CastList cast) {
+    public void getReviews(ResponseListener listener, int id, CastList cast, TrailerList trailer) {
         Call<ReviewList> call = service.listOfReviews(id, api_key);
 
         call.enqueue(new Callback<ReviewList>() {
@@ -100,7 +105,7 @@ public class ApiConnection {
                     Log.d("Bruh", "Error -> " + response.code());
                     return;
                 }
-               getMovieDetails(listener, id, response.body(), cast);
+               getMovieDetails(listener, id, response.body(), cast, trailer);
             }
 
             @Override
@@ -110,7 +115,7 @@ public class ApiConnection {
         });
     }
 
-    public void getCast(ResponseListener listener, int id) {
+    public void getCast(ResponseListener listener, int id, TrailerList trailer) {
         Call<CastList> call = service.listOfCast(id, api_key);
 
         call.enqueue(new Callback<CastList>() {
@@ -120,11 +125,31 @@ public class ApiConnection {
                     Log.d("Bruh", "Error -> " + response.code());
                     return;
                 }
-                getReviews(listener, id, response.body());
+                getReviews(listener, id, response.body(), trailer);
             }
 
             @Override
             public void onFailure(Call<CastList> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void getTrailer(ResponseListener listener, int id) {
+        Call<TrailerList> call = service.listOfTrailers(id, api_key);
+
+        call.enqueue(new Callback<TrailerList>() {
+            @Override
+            public void onResponse(Call<TrailerList> call, Response<TrailerList> response) {
+                if (!(response.code() == 200)) {
+                    Log.d("Bruh", "Error -> " + response.code());
+                    return;
+                }
+                getCast(listener, id, response.body());
+            }
+
+            @Override
+            public void onFailure(Call<TrailerList> call, Throwable t) {
 
             }
         });

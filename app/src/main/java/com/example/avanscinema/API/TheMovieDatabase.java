@@ -4,6 +4,7 @@ import com.example.avanscinema.Classes.Movie;
 import com.example.avanscinema.JsonParsers.CastList;
 import com.example.avanscinema.JsonParsers.ReviewList;
 import com.example.avanscinema.JsonParsers.MovieList;
+import com.example.avanscinema.JsonParsers.TrailerList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -31,4 +32,8 @@ public interface TheMovieDatabase {
     //Call voor cast van een movie
     @GET("movie/{id}/credits")
     Call<CastList> listOfCast(@Path("id") int id, @Query("api_key") String api_key);
+
+    //Call voor Trailer
+    @GET("movie/{id}/videos")
+    Call<TrailerList> listOfTrailers(@Path("id") int id, @Query("api_key") String api_key);
 }

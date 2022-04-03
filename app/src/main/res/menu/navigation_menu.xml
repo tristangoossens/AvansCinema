@@ -15,7 +15,7 @@
         android:icon="@drawable/favourite"
         />
     <item
-        android:id="@+id/list1"
+        android:id="@+id/To_be_seen"
         android:orderInCategory="3"
         android:title="To be seen"
         app:showAsAction="never"

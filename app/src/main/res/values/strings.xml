@@ -6,4 +6,11 @@
 
     <string name="Open">NavBar</string>
     <string name="Close">NavBar</string>
+
+    <string-array name="spinner_list_sorteren">
+        <item>Datum</item>
+        <item>Rating</item>
+        <item>Verwacht</item>
+    </string-array>
+
 </resources>
