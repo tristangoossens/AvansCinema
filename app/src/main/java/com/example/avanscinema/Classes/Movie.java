@@ -1,6 +1,7 @@
 package com.example.avanscinema.Classes;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -21,7 +22,7 @@ public class Movie implements Serializable {
     private Integer budget;
     @SerializedName("genres")
     @Expose
-    private List<Genre> genres = null;
+    private ArrayList<Genre> genres = null;
     @SerializedName("homepage")
     @Expose
     private String homepage;
@@ -48,7 +49,7 @@ public class Movie implements Serializable {
     private Object posterPath;
     @SerializedName("production_companies")
     @Expose
-    private List<ProductionCompany> productionCompanies = null;
+    private ArrayList<ProductionCompany> productionCompanies = null;
     @SerializedName("production_countries")
     @Expose
     private List<ProductionCountry> productionCountries = null;
@@ -126,7 +127,7 @@ public class Movie implements Serializable {
         return genres;
     }
 
-    public void setGenres(List<Genre> genres) {
+    public void setGenres(ArrayList<Genre> genres) {
         this.genres = genres;
     }
 
@@ -200,11 +201,11 @@ public class Movie implements Serializable {
         this.posterPath = posterPath;
     }
 
-    public List<ProductionCompany> getProductionCompanies() {
+    public ArrayList<ProductionCompany> getProductionCompanies() {
         return productionCompanies;
     }
 
-    public void setProductionCompanies(List<ProductionCompany> productionCompanies) {
+    public void setProductionCompanies(ArrayList<ProductionCompany> productionCompanies) {
         this.productionCompanies = productionCompanies;
     }
 

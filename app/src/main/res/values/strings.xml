@@ -6,6 +6,7 @@
 
     <string name="Open">NavBar</string>
     <string name="Close">NavBar</string>
+    <string name="Trailer_Instruction">Touch the poster above to watch the movie trailer</string>
 
     <string-array name="spinner_list_sorteren">
         <item>Datum</item>

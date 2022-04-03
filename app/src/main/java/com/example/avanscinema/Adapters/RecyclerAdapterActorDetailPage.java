@@ -15,10 +15,10 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class RecyclerAdapterDetailPage extends RecyclerView.Adapter<RecyclerAdapterDetailPage.ActorViewHolder> {
+public class RecyclerAdapterActorDetailPage extends RecyclerView.Adapter<RecyclerAdapterActorDetailPage.ActorViewHolder> {
     private ArrayList<Cast> mCastArrayList;
 
-    public RecyclerAdapterDetailPage (ArrayList<Cast> castArrayList){
+    public RecyclerAdapterActorDetailPage(ArrayList<Cast> castArrayList){
         this.mCastArrayList = castArrayList;
     }
 

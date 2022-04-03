@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/description_box_list_item">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/description_box_list_item">
+
+    <ImageView
+        android:id="@+id/company_image_cardview"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/company_placeholder"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        />
+
+        <TextView
+            android:id="@+id/company_name_cardview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Fox 2022"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="#000000"
+            />
+
+    </LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>

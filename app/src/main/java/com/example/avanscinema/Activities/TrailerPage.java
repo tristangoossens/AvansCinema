@@ -43,7 +43,7 @@ public class TrailerPage extends YouTubeBaseActivity {
 
             @Override
             public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-                Toast.makeText(getApplicationContext(), "Video player Failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Video player Failed, make sure internet connection is established", Toast.LENGTH_SHORT).show();
                 Log.d("error: ",  "" +youTubeInitializationResult);
             }
         });

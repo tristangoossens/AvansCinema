@@ -29,6 +29,10 @@ public class ProductionCompany implements Serializable {
         this.id = id;
     }
 
+    public String getImage(){
+        return "https://image.tmdb.org/t/p/w500/" + getLogoPath();
+    }
+
     public String getLogoPath() {
         return logoPath;
     }

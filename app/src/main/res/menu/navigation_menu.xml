@@ -17,7 +17,7 @@
     <item
         android:id="@+id/To_be_seen"
         android:orderInCategory="3"
-        android:title="To be seen"
+        android:title="Watch Later"
         app:showAsAction="never"
         android:icon="@drawable/to_be_seen"
         />

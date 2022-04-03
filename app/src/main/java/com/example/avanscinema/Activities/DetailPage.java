@@ -5,15 +5,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.avanscinema.Adapters.RecyclerAdapterDetailPage;
+import com.example.avanscinema.Adapters.RecyclerAdapterActorDetailPage;
+import com.example.avanscinema.Adapters.RecyclerAdapterCompanyDetailPage;
 import com.example.avanscinema.Classes.Cast;
 import com.example.avanscinema.Classes.Movie;
+import com.example.avanscinema.Classes.ProductionCompany;
 import com.example.avanscinema.Classes.Review;
 import com.example.avanscinema.JsonParsers.CastList;
 import com.example.avanscinema.JsonParsers.ReviewList;
@@ -32,6 +33,7 @@ public class DetailPage extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ArrayList<Cast> actorList;
     private ArrayList<Review> reviews;
+    private ArrayList<ProductionCompany> pCompanies;
     private TrailerList trailers;
     private Movie movie;
 
@@ -44,7 +46,8 @@ public class DetailPage extends AppCompatActivity {
         runtimeRelease = findViewById(R.id.runtime_releaseDate_detailview);
 
         getIntentData();
-        setupRecyclerView();
+        setupActorRecyclerView();
+        setupCompanyRecyclerView();
 
         poster.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,11 +70,19 @@ public class DetailPage extends AppCompatActivity {
         }
     }
 
-    private void setupRecyclerView() {
+    private void setupActorRecyclerView() {
         recyclerView = findViewById(R.id.actor_detail_recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(DetailPage.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        RecyclerAdapterDetailPage adapter = new RecyclerAdapterDetailPage(this.actorList);
+        RecyclerAdapterActorDetailPage adapter = new RecyclerAdapterActorDetailPage(this.actorList);
+        recyclerView.setAdapter(adapter);
+    }
+
+    private void setupCompanyRecyclerView() {
+        recyclerView = findViewById(R.id.company_detail_recyclerview);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(DetailPage.this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        RecyclerAdapterCompanyDetailPage adapter = new RecyclerAdapterCompanyDetailPage(this.pCompanies);
         recyclerView.setAdapter(adapter);
     }
 
@@ -84,6 +95,7 @@ public class DetailPage extends AppCompatActivity {
         this.actorList = castlist.getCast();
         this.movie = (Movie) intent.getSerializableExtra("movie");
         this.reviews = list.getResults();
+        this.pCompanies = movie.getProductionCompanies();
     }
 
 }
