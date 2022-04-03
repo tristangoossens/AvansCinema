@@ -4,21 +4,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.avanscinema.API.ApiConnection;
 import com.example.avanscinema.API.ResponseListener;
-import com.example.avanscinema.Adapters.recyclerAdapter;
+import com.example.avanscinema.Adapters.RecyclerAdapter;
 import com.example.avanscinema.Classes.Movie;
-import com.example.avanscinema.Classes.Review;
 import com.example.avanscinema.JsonParsers.CastList;
 import com.example.avanscinema.JsonParsers.ReviewList;
 import com.example.avanscinema.R;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
@@ -28,6 +32,9 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
     private ApiConnection apiConnection;
     private Parcelable recyclerViewState;
     private ArrayList<Movie> movieList = new ArrayList<Movie>();
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle actionBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,41 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
         setupSearchBar();
         //Recycler view Method
         setupRecyclerView();
+
+        setupMenu();
+    }
+
+    private void setupMenu() {
+        drawerLayout = findViewById(R.id.drawer_layout);
+        actionBar = new ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.Close);
+        actionBar.setDrawerIndicatorEnabled(true);
+
+        drawerLayout.addDrawerListener(actionBar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        NavigationView nav_view = findViewById(R.id.nav_view);
+        nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch(id) {
+                    case R.id.Movie_list:
+
+                        break;
+                    case R.id.list1:
+
+                        break;
+                }
+
+                return true;
+            }
+        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return actionBar.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -47,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
     //Response call van API
         //Adapter wordt gemaakt
         //Clicked on Movie Item & nieuwe API call met deze Movie
-        recyclerAdapter adapter = new recyclerAdapter(movieList, movie -> {
+        RecyclerAdapter adapter = new RecyclerAdapter(movieList, movie -> {
             //Clicked on Movie Item & nieuwe API call met deze Movie
 
             apiConnection.getCast(MainActivity.this, movie.getId());
@@ -81,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
     @Override
     public void searchMovie(ArrayList<Movie> result) {
         //Weergeeft opgezochte films in een nieuwe Adapter
-        recyclerAdapter adapter = new recyclerAdapter(result, movie -> {
+        RecyclerAdapter adapter = new RecyclerAdapter(result, movie -> {
                 //Clicked on Movie Item & nieuwe API call met deze Movie (voor searched movies)
                 apiConnection.getCast(MainActivity.this, movie.getId());
             }, position -> {

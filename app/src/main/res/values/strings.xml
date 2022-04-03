@@ -3,4 +3,7 @@
     <string name="Runtime">Runtime: </string>
     <string name="minutes">minutes</string>
     <string name="releasedate">\nRelease date:  </string>
+
+    <string name="Open">NavBar</string>
+    <string name="Close">NavBar</string>
 </resources>

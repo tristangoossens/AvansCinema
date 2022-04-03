@@ -28,7 +28,7 @@ public interface TheMovieDatabase {
     @GET("movie/{id}/reviews")
     Call<ReviewList> listOfReviews(@Path("id") int id, @Query("api_key") String api_key);
 
-    //Call voor cast
+    //Call voor cast van een movie
     @GET("movie/{id}/credits")
     Call<CastList> listOfCast(@Path("id") int id, @Query("api_key") String api_key);
 }

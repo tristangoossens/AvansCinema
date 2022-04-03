@@ -20,14 +20,14 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MovieHolder> {
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MovieHolder> {
 
     private final String TAG = getClass().getSimpleName();
     private final ArrayList<Movie> MovieList;
     private final ItemClickListener mMovieClickListener;
     private final OnTouchListener mTouchListener;
 
-    public recyclerAdapter(ArrayList<Movie> MovieList, ItemClickListener itemMovieClickListener, OnTouchListener touchListener) {
+    public RecyclerAdapter(ArrayList<Movie> MovieList, ItemClickListener itemMovieClickListener, OnTouchListener touchListener) {
         this.mMovieClickListener = itemMovieClickListener;
         this.MovieList = MovieList;
         this.mTouchListener = touchListener;
