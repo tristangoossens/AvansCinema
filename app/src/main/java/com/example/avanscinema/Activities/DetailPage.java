@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,13 +31,14 @@ import java.util.Collections;
 public class DetailPage extends AppCompatActivity {
 
     private static final String TAG = DetailPage.class.getSimpleName();
-    private TextView Title, des, runtimeRelease, mGenre;
+    private TextView Title, des, runtimeRelease, mGenre, mReview;
     private ImageView poster;
     private RecyclerView recyclerView;
     private ArrayList<Cast> actorList;
     private ArrayList<Review> reviews;
     private ArrayList<ProductionCompany> pCompanies;
     private TrailerList trailers;
+    private LinearLayout mLinearLayoutReviews;
     private Movie movie;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class DetailPage extends AppCompatActivity {
         des = findViewById(R.id.description_detailpage);
         runtimeRelease = findViewById(R.id.runtime_releaseDate_detailview);
         mGenre = findViewById(R.id.genre_detailview);
+        mReview = findViewById(R.id.review_detailpage);
 
         getIntentData();
         setupActorRecyclerView();
@@ -73,6 +76,9 @@ public class DetailPage extends AppCompatActivity {
             runtimeRelease.setText(getString(R.string.Runtime)+" "+ movie.getRuntime() + getString(R.string.minutes) +   getString(R.string.releasedate) +" "+ movie.getReleaseDate());
             Picasso.get().load(movie.getLandscapeImage()).into(poster);
             mGenre.setText("Genre: " + movie.getGenres().get(0).getName());
+            if (!reviews.isEmpty()){
+                mReview.setVisibility(View.VISIBLE);
+            }
         }
     }
 
