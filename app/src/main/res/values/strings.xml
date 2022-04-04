@@ -8,6 +8,15 @@
     <string name="Close">NavBar</string>
     <string name="Trailer_Instruction">Touch the poster above to watch the movie trailer</string>
 
+    //Begin settings page
+    <string name="taal_aanpassen">Taal aanpassen</string>
+    <string name="nederlands">Nederlands</string>
+    <string name="engels">Engels</string>
+    <string name="licht">Licht</string>
+    <string name="donker">Donker</string>
+    <string name="thema_aanpassen">Thema aanpassen</string>
+    //End setings page
+
     <string-array name="spinner_list_sorteren">
         <item>Datum</item>
         <item>Rating</item>
