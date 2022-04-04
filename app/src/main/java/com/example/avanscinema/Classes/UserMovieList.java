@@ -7,55 +7,41 @@ import java.util.List;
 
 public class UserMovieList {
 
-    @SerializedName("created_by")
-    @Expose
-    private String createdBy;
     @SerializedName("description")
     @Expose
     private String description;
+
     @SerializedName("favorite_count")
     @Expose
     private Integer favoriteCount;
+
     @SerializedName("id")
     @Expose
-    private String id;
-    @SerializedName("items")
-    @Expose
-    private List<UserMovieListItem> items = null;
+    private Integer id;
+
     @SerializedName("item_count")
     @Expose
     private Integer itemCount;
+
     @SerializedName("iso_639_1")
     @Expose
     private String iso6391;
+
+    @SerializedName("list_type")
+    @Expose
+    private String listType;
+
+    @SerializedName("items")
+    @Expose
+    private List<Movie> movies = null;
+
     @SerializedName("name")
     @Expose
     private String name;
+
     @SerializedName("poster_path")
     @Expose
     private String posterPath;
-
-
-    public UserMovieList(String createdBy, String description, Integer favoriteCount, String id, List<UserMovieListItem> items, Integer itemCount, String iso6391, String name, String posterPath) {
-        super();
-        this.createdBy = createdBy;
-        this.description = description;
-        this.favoriteCount = favoriteCount;
-        this.id = id;
-        this.items = items;
-        this.itemCount = itemCount;
-        this.iso6391 = iso6391;
-        this.name = name;
-        this.posterPath = posterPath;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
 
     public String getDescription() {
         return description;
@@ -73,20 +59,12 @@ public class UserMovieList {
         this.favoriteCount = favoriteCount;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
-    }
-
-    public List<UserMovieListItem> getItems() {
-        return items;
-    }
-
-    public void setItems(List<UserMovieListItem> items) {
-        this.items = items;
     }
 
     public Integer getItemCount() {
@@ -103,6 +81,14 @@ public class UserMovieList {
 
     public void setIso6391(String iso6391) {
         this.iso6391 = iso6391;
+    }
+
+    public String getListType() {
+        return listType;
+    }
+
+    public void setListType(String listType) {
+        this.listType = listType;
     }
 
     public String getName() {
