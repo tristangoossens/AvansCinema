@@ -35,6 +35,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.DetailPage" />
+        <activity android:name=".Activities.SettingsPage" />
         <activity android:name=".Activities.TrailerPage" />
     </application>
 
