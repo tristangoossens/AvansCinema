@@ -38,6 +38,7 @@ public class RecyclerAdapterUserListPage extends RecyclerView.Adapter<RecyclerAd
 
         holder.titleTextView.setText(list.getName());
         holder.descriptionTextView.setText(list.getDescription());
+        holder.countTextView.setText(String.format("(%d item(s))", list.getItemCount()));
     }
 
     @Override
@@ -48,12 +49,14 @@ public class RecyclerAdapterUserListPage extends RecyclerView.Adapter<RecyclerAd
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView titleTextView;
         private TextView descriptionTextView;
+        private TextView countTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             this.titleTextView = itemView.findViewById(R.id.user_list_title);
             this.descriptionTextView = itemView.findViewById(R.id.user_list_description);
+            this.countTextView = itemView.findViewById(R.id.user_list_count);
         }
     }
 }
