@@ -10,6 +10,7 @@ import com.example.avanscinema.JsonParsers.CastList;
 import com.example.avanscinema.JsonParsers.MovieList;
 import com.example.avanscinema.JsonParsers.ReviewList;
 import com.example.avanscinema.JsonParsers.TrailerList;
+import com.example.avanscinema.JsonParsers.UserListsList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,6 +20,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiConnection {
     public String api_key = "839967f27e812330b73ed782f61f9286";
+
+    private final String session_id = "7fecf28e278ddcb67c48cda88571d0d96135b614";
+    private final int account_id = 9643096;
     int page = 0;
     boolean hasCast = false;
     boolean hasTrailer = false;
@@ -173,6 +177,28 @@ public class ApiConnection {
             @Override
             public void onFailure(Call<TrailerList> call, Throwable t) {
 
+            }
+        });
+    }
+
+    public void getUserMovieLists(UserListResponseListener responseListener){
+        Call<UserListsList> callUserMovieLists = service.listUserMovieLists(this.account_id, this.session_id, this.api_key);
+
+        callUserMovieLists.enqueue(new Callback<UserListsList>() {
+            @Override
+            public void onResponse(Call<UserListsList> call, Response<UserListsList> response) {
+                if (!(response.code() == 200)) {
+                    Log.d("Bruh", "Error -> " + response.code());
+                    return;
+                }
+
+                Log.d("Test", "onResponse: +" + response.body());
+                responseListener.onUserMovieListResponse(response.body().getUserMovieLists());
+            }
+
+            @Override
+            public void onFailure(Call<UserListsList> call, Throwable t) {
+                Log.d("Bruh", "Error -> " + t.getMessage());
             }
         });
     }
