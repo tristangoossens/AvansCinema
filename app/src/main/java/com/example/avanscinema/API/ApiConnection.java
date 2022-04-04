@@ -73,7 +73,7 @@ public class ApiConnection {
                     return;
                 }
                 assert response.body() != null;
-
+                listener.searchMovie(response.body().getResults());
             }
 
             @Override
