@@ -19,6 +19,7 @@ public class TrailerPage extends YouTubeBaseActivity {
 
     public ArrayList<Trailer> allTrailers;
     public String youtube_api_key = "AIzaSyAiQo8JfHveZkg49sQRWqf3lCuW6hY1PyU";
+    public Trailer trailerClip;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,11 +29,19 @@ public class TrailerPage extends YouTubeBaseActivity {
         Intent intent = getIntent();
         TrailerList trailerList = (TrailerList) intent.getSerializableExtra("trailer");
         allTrailers = trailerList.getResults();
+        for (Trailer t : allTrailers) {
+            if (t.getName().toLowerCase().contains("trailer")) {
+                trailerClip = t;
+            }
+        }
+        if (trailerClip == null) {
+            trailerClip = allTrailers.get(0);
+        }
 
         trailer.initialize(youtube_api_key, new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-                youTubePlayer.loadVideo(allTrailers.get(0).getKey());
+                youTubePlayer.loadVideo(trailerClip.getKey());
                 youTubePlayer.play();
             }
 
