@@ -32,11 +32,11 @@ public class UserListsList {
         this.page = page;
     }
 
-    public List<UserMovieList> getResults() {
+    public List<UserMovieList> getUserMovieLists() {
         return userMovieLists;
     }
 
-    public void setResults(List<UserMovieList> results) {
+    public void setUserMovieLists(List<UserMovieList> results) {
         this.userMovieLists = results;
     }
 
