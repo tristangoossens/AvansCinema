@@ -32,6 +32,7 @@ public class TrailerPage extends YouTubeBaseActivity {
         for (Trailer t : allTrailers) {
             if (t.getName().toLowerCase().contains("trailer")) {
                 trailerClip = t;
+                break;
             }
         }
         if (trailerClip == null) {
