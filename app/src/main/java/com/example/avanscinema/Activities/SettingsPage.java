@@ -50,12 +50,9 @@ public class SettingsPage extends AppCompatActivity implements RadioGroup.OnChec
     private void setupMenu() {
         Toolbar toolbar = findViewById(R.id.settings_Toolbar);
         setSupportActionBar(toolbar);
-
         actionBar = new ActionBarDrawerToggle(SettingsPage.this, drawerLayout, R.string.Open, R.string.Close);
         actionBar.setDrawerIndicatorEnabled(true);
-
         drawerLayout.addDrawerListener(actionBar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         NavigationView nav_view = findViewById(R.id.nav_view_settings);
@@ -124,5 +121,7 @@ public class SettingsPage extends AppCompatActivity implements RadioGroup.OnChec
         Configuration config = new Configuration();
         config.locale = locale;
         SettingsPage.this.getResources().updateConfiguration(config, SettingsPage.this.getResources().getDisplayMetrics());
+        Intent settings = new Intent(getApplicationContext(), SettingsPage.class);
+        startActivity(settings);
     }
 }
