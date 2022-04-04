@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:background="#C6002A"
                     android:gravity="center"
-                    android:text="@string/Trailer_Instruction"
+                    android:text="@string/druk_op_de_afbeelding_hierboven_om_de_trailer_te_openen"
                     android:textColor="#000000"
                     android:textSize="10sp"
                     android:textStyle="bold" />
@@ -127,7 +127,7 @@
                     android:layout_margin="3dp"
                     android:background="@drawable/description_box_list_item"
                     android:gravity="center"
-                    android:text="Actors"
+                    android:text="@string/acteurs_en_actrices"
                     android:textColor="#C6002A"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -148,7 +148,7 @@
                     android:layout_margin="3dp"
                     android:background="@drawable/description_box_list_item"
                     android:gravity="center"
-                    android:text="Production Companies"
+                    android:text="@string/productiebedrijven"
                     android:textColor="#C6002A"
                     android:textSize="20sp"
                     android:textStyle="bold" />

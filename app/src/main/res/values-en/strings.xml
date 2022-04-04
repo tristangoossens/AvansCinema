@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AvansCinema</string>
+    <string name="lengte">"Runtime:  "</string>
+    <string name="minuten">Minutes</string>
+    <string name="Open">NavBar</string>
+    <string name="Close">NavBar</string>
+    <string name="druk_op_de_afbeelding_hierboven_om_de_trailer_te_openen">Click on the picture above to watch the movie trailer.</string>
+    <string name="acteurs_en_actrices">Actors and Actresses</string>
+    <string name="Datum_van_verschijning">"Releasedate: "</string>
+    <string name="productiebedrijven">Production Companies</string>
+    <string name="populaire_films">Popular movies</string>
+    <string name="favorieten">Favorites</string>
+    <string name="bekijk_later">Watch later</string>
+    <string name="instellingen">Settings</string>
+    <string name="jouw_lijsten">Your lists</string>
+    <string name="Datum">Date</string>
+    <string name="Beoordeling">Rating</string>
+    <string name="Verwacht">Expected</string>
+    <string name="lengte_en_datum_vanVerschijning">Runtime: %1$d minuten  Release date: %2$s</string>
+    <string name="genre">Genre: %1$s</string>
+</resources>

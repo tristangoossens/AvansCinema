@@ -101,9 +101,9 @@ public class DetailPage extends AppCompatActivity {
             retrieveInfo(intent);
             Title.setText(movie.getTitle());
             des.setText(movie.getOverview());
-            runtimeRelease.setText(getString(R.string.Runtime)+" "+ movie.getRuntime() + getString(R.string.minutes) +   getString(R.string.releasedate) +" "+ movie.getReleaseDate());
+            runtimeRelease.setText(getResources().getString(R.string.lengte_en_datum_vanVerschijning, movie.getRuntime(), movie.getReleaseDate()));
             Picasso.get().load(movie.getLandscapeImage()).into(poster);
-            mGenre.setText("Genre: " + movie.getGenres().get(0).getName());
+            mGenre.setText(getResources().getString(R.string.genre, movie.getGenres().get(0).getName()));
             if (!reviews.isEmpty()){
                 mReview.setVisibility(View.VISIBLE);
             }
