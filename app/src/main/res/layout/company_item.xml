@@ -15,6 +15,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/company_placeholder"
+        android:background="@color/white"
         android:adjustViewBounds="true"
         />
 
@@ -26,7 +27,7 @@
             android:gravity="center"
             android:textStyle="bold"
             android:textSize="12sp"
-            android:textColor="#000000"
+            android:textColor="@color/textcolor"
             />
 
     </LinearLayout>

@@ -3,6 +3,7 @@ package com.example.avanscinema.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -105,11 +106,11 @@ public class SettingsPage extends AppCompatActivity implements RadioGroup.OnChec
             if (radioGroup == rgTheme) {
                 switch (i){
                     case R.id.darkModeRadioBtn:
-                        // TODO: 4-4-2022 plaats hier de switch functionaliteit naar dark mode
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                         break;
 
                     case R.id.lightModeRadioBtn:
-                        // TODO: 4-4-2022 plaats hier de switch functionaliteit naar light mode
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                         break;
                 }
         }

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#C6002A"
+    android:background="@color/outer_background"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -15,9 +14,9 @@
             android:id="@+id/detail_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#C6002A"
+            android:background="@color/outer_background"
             android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             tools:ignore="MissingConstraints">
 
             <androidx.appcompat.widget.AppCompatImageButton
@@ -31,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="24sp"
                 android:text="AvansCinema" />
 
@@ -66,10 +65,10 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#C6002A"
+                    android:background="@color/outer_background"
                     android:gravity="center"
                     android:text="@string/druk_op_de_afbeelding_hierboven_om_de_trailer_te_openen"
-                    android:textColor="#000000"
+                    android:textColor="@color/white"
                     android:textSize="10sp"
                     android:textStyle="bold" />
 
@@ -80,7 +79,7 @@
                     android:layout_margin="3dp"
                     android:background="@drawable/description_box_list_item"
                     android:gravity="center"
-                    android:textColor="#C6002A"
+                    android:textColor="@color/title_color"
                     android:textSize="25sp"
                     android:textStyle="bold"
                     tools:text="Titel" />
@@ -92,7 +91,7 @@
                     android:layout_margin="3dp"
                     android:background="@drawable/description_box_list_item"
                     android:gravity="center"
-                    android:textColor="#000000"
+                    android:textColor="@color/textcolor"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
@@ -104,7 +103,7 @@
                     android:layout_margin="3dp"
                     android:background="@drawable/description_box_list_item"
                     android:gravity="center"
-                    android:textColor="#000000"
+                    android:textColor="@color/textcolor"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     tools:text="Genre: adventure" />
@@ -116,7 +115,7 @@
                     android:layout_margin="3dp"
                     android:background="@drawable/description_box_list_item"
                     android:gravity="center"
-                    android:textColor="#000000"
+                    android:textColor="@color/textcolor"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     tools:text="length: xxxxx Release date: xxxx" />
@@ -128,7 +127,7 @@
                     android:background="@drawable/description_box_list_item"
                     android:gravity="center"
                     android:text="@string/acteurs_en_actrices"
-                    android:textColor="#C6002A"
+                    android:textColor="@color/title_color"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -149,7 +148,7 @@
                     android:background="@drawable/description_box_list_item"
                     android:gravity="center"
                     android:text="@string/productiebedrijven"
-                    android:textColor="#C6002A"
+                    android:textColor="@color/title_color"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -170,10 +169,11 @@
                     android:background="@drawable/description_box_list_item"
                     android:gravity="center"
                     android:text="Reviews"
-                    android:textColor="#C6002A"
+                    android:textColor="@color/title_color"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    tools:visibility="visible"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"

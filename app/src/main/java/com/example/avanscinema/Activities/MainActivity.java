@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
         setupRecyclerView();
         //Navigation Menu
         setupMenu();
+
     }
 
     private void setupMenu() {

@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background_text"
     android:orientation="vertical">
 
 
@@ -16,15 +17,16 @@
             android:id="@+id/settings_Toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
+            android:background="@color/outer_background"
             android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"/>
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
         <EditText
             android:id="@+id/changeLanguageLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/taal_aanpassen"
+            android:textColor="@color/textcolor"
             android:textAlignment="center" />
 
         <LinearLayout
@@ -45,6 +47,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="@color/textcolor"
                     android:text="@string/nederlands" />
 
                 <RadioButton
@@ -52,6 +55,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="@color/textcolor"
                     android:text="@string/engels" />
             </RadioGroup>
 
@@ -62,6 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/thema_aanpassen"
+            android:textColor="@color/textcolor"
             android:textAlignment="center" />
 
         <LinearLayout
@@ -82,6 +87,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="@color/textcolor"
                     android:text="@string/licht" />
 
                 <RadioButton
@@ -89,6 +95,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="@color/textcolor"
                     android:text="@string/donker" />
             </RadioGroup>
 

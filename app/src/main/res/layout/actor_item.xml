@@ -26,7 +26,7 @@
             tools:text="John doe"
             android:gravity="center"
             android:textStyle="bold"
-            android:textColor="#000000"
+            android:textColor="@color/textcolor"
             />
 
         <TextView
@@ -36,7 +36,7 @@
             tools:text="Shrek"
             android:gravity="center"
             android:textStyle="italic"
-            android:textColor="#83000000"/>
+            android:textColor="@color/textcolor"/>
 
     </LinearLayout>
 
