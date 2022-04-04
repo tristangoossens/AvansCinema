@@ -108,6 +108,7 @@ public class ApiConnection {
                 movie = response.body();
                 if (hasCast && hasTrailer && hasReviews && hasMovie) {
                     listener.getDetails(movie, reviews, cast, trailers);
+                    cleanup();
                 }
             }
 
@@ -128,6 +129,7 @@ public class ApiConnection {
                 reviews = response.body();
                 if (hasCast && hasTrailer && hasReviews && hasMovie) {
                     listener.getDetails(movie, reviews, cast, trailers);
+                    cleanup();
                 }
 
             }
@@ -145,10 +147,11 @@ public class ApiConnection {
                     Log.d("Bruh", "Error -> " + response.code());
                     return;
                 }
-                hasCast = true;
                 cast = response.body();
+                hasCast = true;
                 if (hasCast && hasTrailer && hasReviews && hasMovie) {
                     listener.getDetails(movie, reviews, cast, trailers);
+                    cleanup();
                 }
             }
 
@@ -165,11 +168,11 @@ public class ApiConnection {
                     Log.d("Bruh", "Error -> " + response.code());
                     return;
                 }
-
-                hasTrailer = true;
                 trailers = response.body();
+                hasTrailer = true;
                 if (hasCast && hasTrailer && hasReviews && hasMovie) {
                     listener.getDetails(movie, reviews, cast, trailers);
+                    cleanup();
                 }
 
             }
@@ -179,6 +182,18 @@ public class ApiConnection {
 
             }
         });
+    }
+
+    private void cleanup() {
+        cast = null;
+        trailers = null;
+        reviews = null;
+        movie = null;
+
+        hasCast = false;
+        hasMovie = false;
+        hasReviews = false;
+        hasTrailer = false;
     }
 
     public void getUserMovieLists(UserListResponseListener responseListener){

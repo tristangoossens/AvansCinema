@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
         //Clicked on Movie Item & nieuwe API call met deze Movie
         RecyclerAdapter adapter = new RecyclerAdapter(movieList, movie -> {
             //Clicked on Movie Item & nieuwe API call met deze Movie
-
+            Log.d("movie chosen: ", movie.getTitle());
             apiConnection.getMovieDetails(MainActivity.this, movie.getId());
 
         }, position -> {
