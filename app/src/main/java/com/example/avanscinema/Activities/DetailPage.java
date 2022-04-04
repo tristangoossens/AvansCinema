@@ -24,6 +24,7 @@ import com.example.avanscinema.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class DetailPage extends AppCompatActivity {
@@ -50,6 +51,7 @@ public class DetailPage extends AppCompatActivity {
         getIntentData();
         setupActorRecyclerView();
         setupCompanyRecyclerView();
+        Collections.reverse(this.reviews);
         setupReviewRecyclerView();
 
         poster.setOnClickListener(new View.OnClickListener() {
