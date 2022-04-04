@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
                         apiConnection.getPopularMoviesList(MainActivity.this, true);
                         break;
                     case R.id.Favourites:
-                        //SHow list of Favourite movies
+                        //Show list of Favourite movies
                         break;
                     case R.id.settings:
                         Intent settingsPageIntent = new Intent(MainActivity.this, SettingsPage.class);

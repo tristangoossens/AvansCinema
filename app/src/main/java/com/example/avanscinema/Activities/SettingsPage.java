@@ -9,6 +9,6 @@ import com.example.avanscinema.R;
 public class SettingsPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_list);
+        setContentView(R.layout.acitivty_settings);
     }
 }
