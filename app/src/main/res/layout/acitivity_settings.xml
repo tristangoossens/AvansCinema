@@ -10,14 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/taal_aanpassen"
-        android:textAlignment="center"
-    />
+        android:textAlignment="center" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:orientation="horizontal">
 
         <RadioGroup
+            android:id="@+id/radio_group_language_switch_settings"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -25,18 +27,16 @@
 
             <RadioButton
                 android:id="@+id/dutchModeRadioBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:minHeight="48dp"
                 android:text="@string/nederlands" />
 
             <RadioButton
                 android:id="@+id/englishModeRadioBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:minHeight="48dp"
                 android:text="@string/engels" />
         </RadioGroup>
 
@@ -46,34 +46,34 @@
         android:id="@+id/changeThemeLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
         android:text="@string/thema_aanpassen"
         android:textAlignment="center" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:orientation="horizontal">
 
         <RadioGroup
+            android:id="@+id/radio_group_thema_switch_settings"
             android:layout_width="0dp"
-            android:orientation="horizontal"
             android:layout_height="wrap_content"
-            android:layout_weight="1" >
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/lightModeRadioBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:minHeight="48dp"
                 android:text="@string/licht" />
 
             <RadioButton
                 android:id="@+id/darkModeRadioBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:minHeight="48dp"
                 android:text="@string/donker" />
         </RadioGroup>
 

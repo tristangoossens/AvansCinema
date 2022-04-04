@@ -19,4 +19,8 @@
     <string name="Verwacht">verwacht</string>
     <string name="lengte_en_datum_vanVerschijning">lengte: %1$d minuten   Datum van verschijning: %2$s</string>
     <string name="genre">Genre: %1$s</string>
+    <string name="taal_aanpassen">Taal aanpassen</string>
+    <string name="licht">Licht</string>
+    <string name="donker">Donker</string>
+    <string name="thema_aanpassen">Thema aanpassen</string>
 </resources>
