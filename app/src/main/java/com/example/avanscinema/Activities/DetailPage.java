@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,7 +35,7 @@ public class DetailPage extends AppCompatActivity {
 
     private static final String TAG = DetailPage.class.getSimpleName();
     private TextView Title, des, runtimeRelease, mGenre, mReview;
-    private ImageButton share;
+    private ImageButton share, back;
     private ImageView poster;
     private RecyclerView recyclerView;
     private ArrayList<Cast> actorList;
@@ -54,6 +55,7 @@ public class DetailPage extends AppCompatActivity {
         mGenre = findViewById(R.id.genre_detailview);
         mReview = findViewById(R.id.review_detailpage);
         share = findViewById(R.id.share_detail);
+        back = findViewById(R.id.back_button);
 
         getIntentData();
         setupActorRecyclerView();
@@ -78,8 +80,15 @@ public class DetailPage extends AppCompatActivity {
                 sendIntent.putExtra(Intent.EXTRA_TEXT, movie.getHomepage());
                 sendIntent.setType("text/plain");
 
-                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                Intent shareIntent = Intent.createChooser(sendIntent, "Share this movie!");
                 startActivity(shareIntent);
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+             DetailPage.super.finish();
             }
         });
 
