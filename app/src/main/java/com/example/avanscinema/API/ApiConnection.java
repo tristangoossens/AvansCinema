@@ -20,6 +20,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiConnection {
     public String api_key = "839967f27e812330b73ed782f61f9286";
     int page = 0;
+    boolean hasCast = false;
+    boolean hasTrailer = false;
+    boolean hasReviews = false;
+    boolean hasMovie = false;
+
+    CastList cast;
+    Movie movie;
+    ReviewList reviews;
+    TrailerList trailers;
+
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.themoviedb.org/3/")
@@ -52,28 +62,6 @@ public class ApiConnection {
         });
     }
 
-    public void getMovieDetails(ResponseListener listener, int id, ReviewList reviews, CastList cast, TrailerList trailer) {
-        Call<Movie> call = service.getMovie(id, api_key);
-        call.enqueue(new Callback<Movie>() {
-            @Override
-            public void onResponse(@NonNull Call<Movie> call, @NonNull Response<Movie> response) {
-                if (!(response.code() == 200)) {
-                    Log.d("Bruh", "Error -> " + response.code());
-                    return;
-                }
-                assert response.body() != null;
-                Log.d("Movie requested: ", "" + response.body().getTitle());
-                listener.getDetails(response.body(), reviews, cast, trailer);
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<Movie> call, @NonNull Throwable t) {
-
-            }
-        });
-
-    }
-
     public void searchMovies(ResponseListener listener, String query) {
         Call<MovieList> call = service.listFoundMovies(api_key, query);
 
@@ -85,7 +73,7 @@ public class ApiConnection {
                     return;
                 }
                 assert response.body() != null;
-                listener.searchMovie(response.body().getResults());
+
             }
 
             @Override
@@ -95,17 +83,49 @@ public class ApiConnection {
         });
     }
 
-    public void getReviews(ResponseListener listener, int id, CastList cast, TrailerList trailer) {
-        Call<ReviewList> call = service.listOfReviews(id, api_key);
+    //Alle Calls die bij elkaar horen samengevoegd.
+    public void getMovieDetails(ResponseListener listener, int id) {
+        Call<Movie> callMovie = service.getMovie(id, api_key);
+        Call<TrailerList> callTrailer = service.listOfTrailers(id, api_key);
+        Call<ReviewList> callReviews = service.listOfReviews(id, api_key);
+        Call<CastList> callCast = service.listOfCast(id, api_key);
 
-        call.enqueue(new Callback<ReviewList>() {
+        //Movie details of clicked
+        callMovie.enqueue(new Callback<Movie>() {
+            @Override
+            public void onResponse(@NonNull Call<Movie> call, @NonNull Response<Movie> response) {
+                if (!(response.code() == 200)) {
+                    Log.d("Bruh", "Error -> " + response.code());
+                    return;
+                }
+                assert response.body() != null;
+                Log.d("Movie requested: ", "" + response.body().getTitle());
+                hasMovie = true;
+                movie = response.body();
+                if (hasCast && hasTrailer && hasReviews && hasMovie) {
+                    listener.getDetails(movie, reviews, cast, trailers);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Movie> call, @NonNull Throwable t) {
+
+            }
+        });
+        //Reviews
+        callReviews.enqueue(new Callback<ReviewList>() {
             @Override
             public void onResponse(@NonNull Call<ReviewList> call, @NonNull Response<ReviewList> response) {
                 if (!(response.code() == 200)) {
                     Log.d("Bruh", "Error -> " + response.code());
                     return;
                 }
-               getMovieDetails(listener, id, response.body(), cast, trailer);
+                hasReviews = true;
+                reviews = response.body();
+                if (hasCast && hasTrailer && hasReviews && hasMovie) {
+                    listener.getDetails(movie, reviews, cast, trailers);
+                }
+
             }
 
             @Override
@@ -113,19 +133,19 @@ public class ApiConnection {
 
             }
         });
-    }
-
-    public void getCast(ResponseListener listener, int id, TrailerList trailer) {
-        Call<CastList> call = service.listOfCast(id, api_key);
-
-        call.enqueue(new Callback<CastList>() {
+        //Cast
+        callCast.enqueue(new Callback<CastList>() {
             @Override
             public void onResponse(Call<CastList> call, Response<CastList> response) {
                 if (!(response.code() == 200)) {
                     Log.d("Bruh", "Error -> " + response.code());
                     return;
                 }
-                getReviews(listener, id, response.body(), trailer);
+                hasCast = true;
+                cast = response.body();
+                if (hasCast && hasTrailer && hasReviews && hasMovie) {
+                    listener.getDetails(movie, reviews, cast, trailers);
+                }
             }
 
             @Override
@@ -133,19 +153,21 @@ public class ApiConnection {
 
             }
         });
-    }
-
-    public void getTrailer(ResponseListener listener, int id) {
-        Call<TrailerList> call = service.listOfTrailers(id, api_key);
-
-        call.enqueue(new Callback<TrailerList>() {
+        //Trailer
+        callTrailer.enqueue(new Callback<TrailerList>() {
             @Override
             public void onResponse(Call<TrailerList> call, Response<TrailerList> response) {
                 if (!(response.code() == 200)) {
                     Log.d("Bruh", "Error -> " + response.code());
                     return;
                 }
-                getCast(listener, id, response.body());
+
+                hasTrailer = true;
+                trailers = response.body();
+                if (hasCast && hasTrailer && hasReviews && hasMovie) {
+                    listener.getDetails(movie, reviews, cast, trailers);
+                }
+
             }
 
             @Override

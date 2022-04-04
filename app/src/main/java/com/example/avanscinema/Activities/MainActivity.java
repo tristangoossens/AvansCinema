@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
         RecyclerAdapter adapter = new RecyclerAdapter(movieList, movie -> {
             //Clicked on Movie Item & nieuwe API call met deze Movie
 
-            apiConnection.getTrailer(MainActivity.this, movie.getId());
+            apiConnection.getMovieDetails(MainActivity.this, movie.getId());
 
         }, position -> {
            if (position >= (movieList.size() - 4)) {
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
         //Weergeeft opgezochte films in een nieuwe Adapter
         RecyclerAdapter adapter = new RecyclerAdapter(result, movie -> {
                 //Clicked on Movie Item & nieuwe API call met deze Movie (voor searched movies)
-                apiConnection.getTrailer(MainActivity.this, movie.getId());
+                apiConnection.getMovieDetails(MainActivity.this, movie.getId());
             }, position -> {
             //Niet benodigt voor Search screen, had ook bestaande Method kunnen gebruiken maar dan problemen met Automatisch lijst extend.
                 });
