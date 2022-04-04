@@ -80,6 +80,9 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
                     case R.id.settings:
                         //Go to Settings
                         break;
+                    case R.id.usermovielist:
+
+                        break;
                 }
 
                 return true;

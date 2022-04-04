@@ -28,4 +28,12 @@
         app:showAsAction="never"
         android:icon="@drawable/settings"
         />
+
+    <item
+        android:id="@+id/usermovielist"
+        android:orderInCategory="5"
+        android:title="Your lists"
+        app:showAsAction="never"
+        android:icon="@drawable/ic_list"
+        />
 </menu>
