@@ -1,82 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/settings_drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
 
-    <EditText
-        android:id="@+id/changeLanguageLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/taal_aanpassen"
-        android:textAlignment="center" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <RadioGroup
-            android:id="@+id/radio_group_language_switch_settings"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/dutchModeRadioBtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/nederlands" />
-
-            <RadioButton
-                android:id="@+id/englishModeRadioBtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/engels" />
-        </RadioGroup>
-
-    </LinearLayout>
-
-    <EditText
-        android:id="@+id/changeThemeLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/thema_aanpassen"
-        android:textAlignment="center" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:orientation="horizontal">
-
-        <RadioGroup
-            android:id="@+id/radio_group_thema_switch_settings"
-            android:layout_width="0dp"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/settings_Toolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"/>
+
+        <EditText
+            android:id="@+id/changeLanguageLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/taal_aanpassen"
+            android:textAlignment="center" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/lightModeRadioBtn"
+            <RadioGroup
+                android:id="@+id/radio_group_language_switch_settings"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/licht" />
+                android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/darkModeRadioBtn"
+                <RadioButton
+                    android:id="@+id/dutchModeRadioBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/nederlands" />
+
+                <RadioButton
+                    android:id="@+id/englishModeRadioBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/engels" />
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/changeThemeLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/thema_aanpassen"
+            android:textAlignment="center" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:id="@+id/radio_group_thema_switch_settings"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/donker" />
-        </RadioGroup>
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/lightModeRadioBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/licht" />
+
+                <RadioButton
+                    android:id="@+id/darkModeRadioBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/donker" />
+            </RadioGroup>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        app:headerLayout="@layout/nav_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/navigation_menu" />
+
+</androidx.drawerlayout.widget.DrawerLayout>
