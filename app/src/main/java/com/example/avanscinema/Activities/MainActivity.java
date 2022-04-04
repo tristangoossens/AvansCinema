@@ -81,7 +81,8 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
                         //Go to Settings
                         break;
                     case R.id.usermovielist:
-
+                        Intent userListsIntent = new Intent(MainActivity.this, UserListActivity.class);
+                        startActivity(userListsIntent);
                         break;
                 }
 
