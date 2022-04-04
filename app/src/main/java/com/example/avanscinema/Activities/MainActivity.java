@@ -78,7 +78,8 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
                         //SHow list of Favourite movies
                         break;
                     case R.id.settings:
-                        //Go to Settings
+                        Intent settingsPageIntent = new Intent(MainActivity.this, SettingsPage.class);
+                        startActivity(settingsPageIntent);
                         break;
                     case R.id.usermovielist:
                         Intent userListsIntent = new Intent(MainActivity.this, UserListActivity.class);
