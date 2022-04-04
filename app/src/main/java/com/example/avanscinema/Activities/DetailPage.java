@@ -3,6 +3,8 @@ package com.example.avanscinema.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,6 +34,7 @@ public class DetailPage extends AppCompatActivity {
 
     private static final String TAG = DetailPage.class.getSimpleName();
     private TextView Title, des, runtimeRelease, mGenre, mReview;
+    private ImageButton share;
     private ImageView poster;
     private RecyclerView recyclerView;
     private ArrayList<Cast> actorList;
@@ -50,6 +53,7 @@ public class DetailPage extends AppCompatActivity {
         runtimeRelease = findViewById(R.id.runtime_releaseDate_detailview);
         mGenre = findViewById(R.id.genre_detailview);
         mReview = findViewById(R.id.review_detailpage);
+        share = findViewById(R.id.share_detail);
 
         getIntentData();
         setupActorRecyclerView();
@@ -65,6 +69,21 @@ public class DetailPage extends AppCompatActivity {
                 startActivity(video);
             }
         });
+
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, movie.getHomepage());
+                sendIntent.setType("text/plain");
+
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                startActivity(shareIntent);
+            }
+        });
+
+
     }
 
     private void getIntentData() {
