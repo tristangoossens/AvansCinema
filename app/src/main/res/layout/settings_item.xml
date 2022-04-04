@@ -17,25 +17,32 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/dutchModeRadioBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <RadioGroup
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:minHeight="48dp"
-            android:text="@string/nederlands" />
+            android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/englishModeRadioBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:minHeight="48dp"
-            android:text="@string/engels"
-        />
+            <RadioButton
+                android:id="@+id/dutchModeRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:minHeight="48dp"
+                android:text="@string/nederlands" />
+
+            <RadioButton
+                android:id="@+id/englishModeRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:minHeight="48dp"
+                android:text="@string/engels" />
+        </RadioGroup>
+
     </LinearLayout>
 
-    ``<EditText
+    <EditText
         android:id="@+id/changeThemeLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,22 +54,29 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/lightModeRadioBtn"
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:layout_width="0dp"
+            android:orientation="horizontal"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:minHeight="48dp"
-            android:text="@string/licht" />
+            android:layout_weight="1" >
 
-        <RadioButton
-            android:id="@+id/darkModeRadioBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:minHeight="48dp"
-            android:text="@string/donker"
-            />
+            <RadioButton
+                android:id="@+id/lightModeRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:minHeight="48dp"
+                android:text="@string/licht" />
+
+            <RadioButton
+                android:id="@+id/darkModeRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:minHeight="48dp"
+                android:text="@string/donker" />
+        </RadioGroup>
+
     </LinearLayout>
 
 </LinearLayout>
