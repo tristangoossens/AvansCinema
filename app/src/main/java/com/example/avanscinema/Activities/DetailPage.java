@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.avanscinema.Adapters.RecyclerAdapterActorDetailPage;
 import com.example.avanscinema.Adapters.RecyclerAdapterCompanyDetailPage;
+import com.example.avanscinema.Adapters.RecyclerAdapterReviewDetailPage;
 import com.example.avanscinema.Classes.Cast;
 import com.example.avanscinema.Classes.Movie;
 import com.example.avanscinema.Classes.ProductionCompany;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 public class DetailPage extends AppCompatActivity {
 
     private static final String TAG = DetailPage.class.getSimpleName();
-    private TextView Title, des, runtimeRelease;
+    private TextView Title, des, runtimeRelease, mGenre;
     private ImageView poster;
     private RecyclerView recyclerView;
     private ArrayList<Cast> actorList;
@@ -44,10 +45,12 @@ public class DetailPage extends AppCompatActivity {
         poster = findViewById(R.id.detail_movie);
         des = findViewById(R.id.description_detailpage);
         runtimeRelease = findViewById(R.id.runtime_releaseDate_detailview);
+        mGenre = findViewById(R.id.genre_detailview);
 
         getIntentData();
         setupActorRecyclerView();
         setupCompanyRecyclerView();
+        setupReviewRecyclerView();
 
         poster.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +70,7 @@ public class DetailPage extends AppCompatActivity {
             des.setText(movie.getOverview());
             runtimeRelease.setText(getString(R.string.Runtime)+" "+ movie.getRuntime() + getString(R.string.minutes) +   getString(R.string.releasedate) +" "+ movie.getReleaseDate());
             Picasso.get().load(movie.getLandscapeImage()).into(poster);
+            mGenre.setText("Genre: " + movie.getGenres().get(0).getName());
         }
     }
 
@@ -83,6 +87,13 @@ public class DetailPage extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(DetailPage.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         RecyclerAdapterCompanyDetailPage adapter = new RecyclerAdapterCompanyDetailPage(this.pCompanies);
+        recyclerView.setAdapter(adapter);
+    }
+    private void setupReviewRecyclerView() {
+        recyclerView = findViewById(R.id.review_detail_recyclerview);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(DetailPage.this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        RecyclerAdapterReviewDetailPage adapter = new RecyclerAdapterReviewDetailPage(this.reviews);
         recyclerView.setAdapter(adapter);
     }
 

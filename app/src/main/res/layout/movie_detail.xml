@@ -23,6 +23,7 @@
                 android:scaleType="fitXY"
                 />
             <TextView
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/Trailer_Instruction"
@@ -32,6 +33,7 @@
                 android:textColor="#000000"
                 android:textSize="10sp" />
             <TextView
+                android:layout_margin="3dp"
                 android:id="@+id/title_movie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,6 +45,7 @@
                 android:textSize="25sp" />
             <TextView
                 android:id="@+id/description_detailpage"
+                android:layout_margin="3dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
@@ -52,16 +55,29 @@
                 android:textColor="#000000"
                 android:textSize="15sp" />
             <TextView
-                android:id="@+id/runtime_releaseDate_detailview"
+                android:layout_margin="3dp"
+                android:id="@+id/genre_detailview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="Genre: xxxx  lengte: xxxxx Release data: xxxx"
+                tools:text="Genre: adventure"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:background="@drawable/description_box_list_item"
                 android:textColor="#000000"
                 android:textSize="15sp" />
             <TextView
+                android:layout_margin="3dp"
+                android:id="@+id/runtime_releaseDate_detailview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="length: xxxxx Release date: xxxx"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:background="@drawable/description_box_list_item"
+                android:textColor="#000000"
+                android:textSize="15sp" />
+            <TextView
+                android:layout_margin="3dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Actors"
@@ -71,6 +87,7 @@
                 android:textColor="#C6002A"
                 android:textSize="20sp" />
             <androidx.recyclerview.widget.RecyclerView
+                android:layout_margin="3dp"
                 android:id="@+id/actor_detail_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -79,6 +96,7 @@
 
             </androidx.recyclerview.widget.RecyclerView>
             <TextView
+                android:layout_margin="3dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Production Companies"
@@ -97,6 +115,7 @@
 
             </androidx.recyclerview.widget.RecyclerView>
             <TextView
+                android:layout_margin="3dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Reviews"
@@ -105,15 +124,13 @@
                 android:background="@drawable/description_box_list_item"
                 android:textColor="#C6002A"
                 android:textSize="20sp" />
-            <TextView
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_margin="3dp"
+                android:id="@+id/review_detail_recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:text="Review recyclerview on its way"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:background="@drawable/description_box_list_item"
-                android:textColor="#C6002A"
-                android:textSize="20sp" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
 
         </LinearLayout>
     </ScrollView>

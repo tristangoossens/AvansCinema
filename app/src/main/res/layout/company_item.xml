@@ -16,7 +16,6 @@
         android:layout_height="100dp"
         android:src="@drawable/company_placeholder"
         android:adjustViewBounds="true"
-        android:scaleType="fitXY"
         />
 
         <TextView

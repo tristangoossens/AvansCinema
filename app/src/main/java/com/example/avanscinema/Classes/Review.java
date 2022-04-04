@@ -55,7 +55,9 @@ public class Review implements Serializable {
     }
 
     public String getCreatedAt() {
-        return createdAt;
+        String formattedDate = createdAt.substring(0,19);
+        String[] formattedDate2 = formattedDate.split("T");
+        return formattedDate2[0] + "   " + formattedDate2[1];
     }
 
     public void setCreatedAt(String createdAt) {
