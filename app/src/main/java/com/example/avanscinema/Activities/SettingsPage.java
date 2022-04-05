@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -26,6 +27,7 @@ public class SettingsPage extends AppCompatActivity implements RadioGroup.OnChec
     private RadioGroup rgLangauge, rgTheme;
     private RadioButton enButton, nlButton, darkButton, lightButton;
     private String mLangauge;
+    private TextView switchThemeLabel;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBar;
     private Button saveButton;
@@ -42,6 +44,7 @@ public class SettingsPage extends AppCompatActivity implements RadioGroup.OnChec
         lightButton = findViewById(R.id.lightModeRadioBtn);
         drawerLayout = findViewById(R.id.settings_drawer);
         saveButton = findViewById(R.id.save_button_settings);
+        switchThemeLabel = findViewById(R.id.changeThemeLabel);
         //adding listeners to the radiogroups
         rgLangauge.setOnCheckedChangeListener(this::onCheckedChanged);
         rgTheme.setOnCheckedChangeListener(this::onCheckedChanged);
@@ -53,7 +56,7 @@ public class SettingsPage extends AppCompatActivity implements RadioGroup.OnChec
             }
         });
 
-
+        checkStateOfRadioButtons();
         setupMenu();
 
     }
@@ -144,5 +147,25 @@ public class SettingsPage extends AppCompatActivity implements RadioGroup.OnChec
         Configuration config = new Configuration();
         config.locale = locale;
         SettingsPage.this.getResources().updateConfiguration(config, SettingsPage.this.getResources().getDisplayMetrics());
+    }
+
+    public void checkStateOfRadioButtons() {
+        if (this.switchThemeLabel.getText().toString().equals("Switch Theme")) {
+            this.enButton.setChecked(true);
+        } else {
+            nlButton.setChecked(true);
+        }
+
+        int nightModeFlags =
+                getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        switch (nightModeFlags) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                darkButton.setChecked(true);
+                break;
+
+            case Configuration.UI_MODE_NIGHT_NO:
+                lightButton.setChecked(true);
+                break;
+        }
     }
 }
