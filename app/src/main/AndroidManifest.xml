@@ -18,11 +18,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
+            android:name=".Activities.UserListDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.UserListActivity"
             android:exported="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activities.MainActivity"/>
+                android:value=".Activities.MainActivity" />
         </activity>
         <activity
             android:name=".Activities.MainActivity"
