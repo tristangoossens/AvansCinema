@@ -67,7 +67,7 @@ public class ApiConnection {
     }
 
     public void searchMovies(ResponseListener listener, String query) {
-        Call<MovieList> call = service.listFoundMovies(api_key, query);
+        Call<MovieList> call = service.listFoundMovies(api_key, query, true);
 
         call.enqueue(new Callback<MovieList>() {
             @Override

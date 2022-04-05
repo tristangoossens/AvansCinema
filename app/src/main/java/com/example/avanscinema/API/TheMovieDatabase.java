@@ -24,7 +24,7 @@ public interface TheMovieDatabase {
 
     //Call voor search query (zoeken op film)
     @GET("search/movie")
-    Call<MovieList> listFoundMovies(@Query("api_key") String api_key, @Query("query") String query);
+    Call<MovieList> listFoundMovies(@Query("api_key") String api_key, @Query("query") String query, @Query("include_adult") boolean adult);
 
     //Call voor Reviews van een movie
     @GET("movie/{id}/reviews")
