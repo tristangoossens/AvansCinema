@@ -2,6 +2,7 @@ package com.example.avanscinema.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -16,6 +17,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.avanscinema.API.ApiConnection;
 import com.example.avanscinema.Adapters.RecyclerAdapterActorDetailPage;
 import com.example.avanscinema.Adapters.RecyclerAdapterCompanyDetailPage;
 import com.example.avanscinema.Adapters.RecyclerAdapterReviewDetailPage;
@@ -34,7 +36,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-public class DetailPage extends AppCompatActivity {
+public class DetailPage extends AppCompatActivity implements ApiConnection.detailResponse {
 
     private static final String TAG = DetailPage.class.getSimpleName();
     private TextView Title, des, runtimeRelease, mGenre, mReview;
@@ -104,8 +106,8 @@ public class DetailPage extends AppCompatActivity {
             public void onClick(View view) {
                 float rating = starRating.getRating() * 2;
                 if (rating >= 1){
-                    // TODO: 5-4-2022 post star rating  JELMER HELP!!!!
-                    Toast.makeText(DetailPage.this, getResources().getString(R.string.beoorderling_verstuurd), Toast.LENGTH_SHORT).show();
+                    ApiConnection api = new ApiConnection();
+                    api.rateMovie(DetailPage.this, movie.getId(), rating);
                 } else {
                     Toast.makeText(DetailPage.this, getResources().getString(R.string.ratingtoast), Toast.LENGTH_SHORT).show();
                 }
@@ -170,4 +172,8 @@ public class DetailPage extends AppCompatActivity {
         this.pCompanies = movie.getProductionCompanies();
     }
 
+    @Override
+    public void onResponseRating(String message) {
+        Toast.makeText(getApplicationContext(), "Rating: " + message, Toast.LENGTH_SHORT).show();
+    }
 }

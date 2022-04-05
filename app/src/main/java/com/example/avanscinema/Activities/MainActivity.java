@@ -236,11 +236,22 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
             public void onClick(View view) {
                 switch (sorter) {
                     case "date":
+                        Log.d("did", "get called");
                         if (order.equalsIgnoreCase("asc")) {
-                        apiConnection.sortMoviesOnDate(MainActivity.this, "release_date.asc");
+                            reversesort(movieList);
                         } else {
-                            apiConnection.sortMoviesOnDate(MainActivity.this, "release_date.desc");
+                            sort(movieList);
                         }
+
+                        RecyclerAdapter adapter = new RecyclerAdapter(movieList, movie -> {
+                            //Clicked on Movie Item & nieuwe API call met deze Movie
+                            Log.d("movie chosen: ", "" +movie.getId());
+                            apiConnection.getMovieDetails(MainActivity.this, movie.getId());
+
+                        }, position -> {
+
+                        });
+                        recyclerView.setAdapter(adapter);
                             break;
 
                     case "rating":
@@ -304,7 +315,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
         //Clicked on Movie Item & nieuwe API call met deze Movie
         RecyclerAdapter adapter = new RecyclerAdapter(movieList, movie -> {
             //Clicked on Movie Item & nieuwe API call met deze Movie
-            Log.d("movie chosen: ", movie.getTitle());
+            Log.d("movie chosen: ", "" +movie.getId());
             apiConnection.getMovieDetails(MainActivity.this, movie.getId());
 
         }, position -> {
@@ -336,6 +347,8 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
 
     @Override
     public void searchMovie(ArrayList<Movie> result) {
+        this.movieList.clear();
+        this.movieList.addAll(result);
         //Weergeeft opgezochte films in een nieuwe Adapter
         RecyclerAdapter adapter = new RecyclerAdapter(result, movie -> {
                 //Clicked on Movie Item & nieuwe API call met deze Movie (voor searched movies)
@@ -354,6 +367,14 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
             break;
             }
         }
+    }
+    public void sort(ArrayList<Movie> list)
+    {
+        list.sort((item1, item2) -> item1.getReleaseDate().compareTo(item2.getReleaseDate()));
+    }
+
+    public void reversesort(ArrayList<Movie> list) {
+        list.sort((item2, item1) -> item1.getReleaseDate().compareTo(item2.getReleaseDate()));
     }
 
     private void setupSearchBar() {

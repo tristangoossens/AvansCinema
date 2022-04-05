@@ -1,16 +1,20 @@
 package com.example.avanscinema.API;
 
 import com.example.avanscinema.Classes.Movie;
+import com.example.avanscinema.Classes.Rating;
 import com.example.avanscinema.Classes.UserMovieList;
 import com.example.avanscinema.JsonParsers.CastList;
 import com.example.avanscinema.JsonParsers.GenreList;
+import com.example.avanscinema.JsonParsers.RatingResponse;
 import com.example.avanscinema.JsonParsers.ReviewList;
 import com.example.avanscinema.JsonParsers.MovieList;
 import com.example.avanscinema.JsonParsers.TrailerList;
 import com.example.avanscinema.JsonParsers.UserListsList;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -62,5 +66,6 @@ public interface TheMovieDatabase {
     @GET("discover/movie")
     Call<MovieList> filterOnRate(@Query("api_key") String api_key, @Query("vote_count.gte") int count);
 
-
+    @POST("movie/{id}/rating")
+    Call<RatingResponse> postRating(@Path("id") int id,@Query("api_key") String api_key,@Query("session_id") String session, @Body Rating rating);
 }

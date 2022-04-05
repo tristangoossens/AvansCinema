@@ -5,11 +5,13 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.avanscinema.Classes.Movie;
+import com.example.avanscinema.Classes.Rating;
 import com.example.avanscinema.Classes.Trailer;
 import com.example.avanscinema.Classes.UserMovieList;
 import com.example.avanscinema.JsonParsers.CastList;
 import com.example.avanscinema.JsonParsers.GenreList;
 import com.example.avanscinema.JsonParsers.MovieList;
+import com.example.avanscinema.JsonParsers.RatingResponse;
 import com.example.avanscinema.JsonParsers.ReviewList;
 import com.example.avanscinema.JsonParsers.TrailerList;
 import com.example.avanscinema.JsonParsers.UserListsList;
@@ -343,6 +345,32 @@ public class ApiConnection {
 
             }
         });
+    }
+
+    public void rateMovie(detailResponse listener, int id, float rating) {
+        Rating rat = new Rating(rating);
+        Call<RatingResponse> call = service.postRating(id, api_key,session_id, rat);
+
+        call.enqueue(new Callback<RatingResponse>() {
+            @Override
+            public void onResponse(Call<RatingResponse> call, Response<RatingResponse> response) {
+                if (!(response.code() == 201)) {
+                    Log.d("Error", "Error -> " + response.code());
+                    return;
+                }
+
+               listener.onResponseRating(response.body().getMessage());
+            }
+
+            @Override
+            public void onFailure(Call<RatingResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public interface detailResponse {
+        public void onResponseRating(String message);
     }
 
 
