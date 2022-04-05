@@ -101,6 +101,18 @@
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/save_button_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/opslaan"
+            android:clickable="true"
+            android:background="@drawable/description_box_list_item"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:textStyle="bold"
+            android:textColor="@color/textcolor"/>
+
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView

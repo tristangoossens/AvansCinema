@@ -27,6 +27,7 @@
     <string name="licht">Licht</string>
     <string name="donker">Donker</string>
     <string name="thema_aanpassen">Thema aanpassen</string>
+    <string name="opslaan">Opslaan</string>
     //End setings page
 
     <string-array name="spinner_list_sorteren">

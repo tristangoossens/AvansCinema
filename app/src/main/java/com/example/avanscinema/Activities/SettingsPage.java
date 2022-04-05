@@ -1,19 +1,21 @@
 package com.example.avanscinema.Activities;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import com.example.avanscinema.R;
 import com.google.android.material.navigation.NavigationView;
@@ -26,6 +28,7 @@ public class SettingsPage extends AppCompatActivity implements RadioGroup.OnChec
     private String mLangauge;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBar;
+    private Button saveButton;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +41,17 @@ public class SettingsPage extends AppCompatActivity implements RadioGroup.OnChec
         darkButton = findViewById(R.id.darkModeRadioBtn);
         lightButton = findViewById(R.id.lightModeRadioBtn);
         drawerLayout = findViewById(R.id.settings_drawer);
-
+        saveButton = findViewById(R.id.save_button_settings);
         //adding listeners to the radiogroups
         rgLangauge.setOnCheckedChangeListener(this::onCheckedChanged);
         rgTheme.setOnCheckedChangeListener(this::onCheckedChanged);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SettingsPage.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         setupMenu();
@@ -62,7 +72,7 @@ public class SettingsPage extends AppCompatActivity implements RadioGroup.OnChec
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
-                switch(id) {
+                switch (id) {
                     case R.id.Movie_list:
                         Intent main = new Intent(SettingsPage.this, MainActivity.class);
                         startActivity(main);
@@ -94,25 +104,37 @@ public class SettingsPage extends AppCompatActivity implements RadioGroup.OnChec
         if (radioGroup == rgLangauge) {
             switch (i) {
                 case R.id.dutchModeRadioBtn:
+                    if (!findViewById(R.id.dutchModeRadioBtn).isPressed()) {
+                        return;
+                    }
                     this.mLangauge = "nl_NL";
                     break;
 
                 case R.id.englishModeRadioBtn:
+                    if (!findViewById(R.id.englishModeRadioBtn).isPressed()) {
+                        return;
+                    }
                     this.mLangauge = "en";
                     break;
             }
             switchLanguage();
         }
-            if (radioGroup == rgTheme) {
-                switch (i){
-                    case R.id.darkModeRadioBtn:
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                        break;
+        if (radioGroup == rgTheme) {
+            switch (i) {
+                case R.id.darkModeRadioBtn:
+                    if (!findViewById(R.id.darkModeRadioBtn).isPressed()) {
+                        return;
+                    }
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    break;
 
-                    case R.id.lightModeRadioBtn:
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                        break;
-                }
+                case R.id.lightModeRadioBtn:
+                    if (!findViewById(R.id.lightModeRadioBtn).isPressed()) {
+                        return;
+                    }
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    break;
+            }
         }
     }
 
@@ -122,7 +144,5 @@ public class SettingsPage extends AppCompatActivity implements RadioGroup.OnChec
         Configuration config = new Configuration();
         config.locale = locale;
         SettingsPage.this.getResources().updateConfiguration(config, SettingsPage.this.getResources().getDisplayMetrics());
-        Intent settings = new Intent(getApplicationContext(), SettingsPage.class);
-        startActivity(settings);
     }
 }
