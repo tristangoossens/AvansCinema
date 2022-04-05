@@ -12,10 +12,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.avanscinema.API.ApiConnection;
 import com.example.avanscinema.API.ResponseListener;
-import com.example.avanscinema.API.UserListResponseListener;
+import com.example.avanscinema.API.UserListsResponseListener;
 import com.example.avanscinema.Adapters.RecyclerAdapterUserListPage;
 import com.example.avanscinema.Classes.UserMovieList;
 import com.example.avanscinema.R;
@@ -23,7 +24,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
 
-public class UserListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, UserListResponseListener {
+public class UserListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, UserListsResponseListener {
     private RecyclerView recyclerView;
 
     // Drawer menu class attributes
@@ -48,6 +49,16 @@ public class UserListActivity extends AppCompatActivity implements NavigationVie
 
     private void setRecyclerViewAdapter(List<UserMovieList> userMovieLists) {
         RecyclerAdapterUserListPage userMovieListAdapter = new RecyclerAdapterUserListPage(this, userMovieLists);
+        userMovieListAdapter.setItemClickListener(new RecyclerAdapterUserListPage.ItemClickListener() {
+            // Override the onItemClick method for the ClickListener interface
+            @Override
+            public void onItemClick(int id, View v) {
+                Intent intent = new Intent(UserListActivity.this, UserListDetailActivity.class);
+                intent.putExtra("LIST_ID", id);
+                startActivity(intent);
+            }
+        });
+
         recyclerView.setAdapter(userMovieListAdapter);
     }
 
