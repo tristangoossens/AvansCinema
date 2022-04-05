@@ -324,6 +324,27 @@ public class ApiConnection {
         });
     }
 
+    public void sortMoviesOnDate(ResponseListener listener, String sort_by){
+        Call<MovieList> call = service.sortMoviesDate(api_key, sort_by);
+
+        call.enqueue(new Callback<MovieList>() {
+            @Override
+            public void onResponse(Call<MovieList> call, Response<MovieList> response) {
+                if (!(response.code() == 200)) {
+                    Log.d("Error", "Error -> " + response.code());
+                    return;
+                }
+
+                listener.searchMovie(response.body().getResults());
+            }
+
+            @Override
+            public void onFailure(Call<MovieList> call, Throwable t) {
+
+            }
+        });
+    }
+
 
 }
 

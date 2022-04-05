@@ -48,7 +48,7 @@ public interface TheMovieDatabase {
     Call<UserMovieList> getUserListDetails(@Path("list_id") int list_id, @Query("api_key") String api_key);
 
     @GET("discover/movie")
-    Call<MovieList> sortMovies(@Query("api_key") String api_key, @Query("sort_by") String sorting);
+    Call<MovieList> sortMoviesDate(@Query("api_key") String api_key, @Query("sort_by") String sorting);
 
     @GET("discover/movie")
     Call<MovieList> filterMoviesByGenre(@Query("api_key") String api_key, @Query("with_genres") int genre);
@@ -61,5 +61,6 @@ public interface TheMovieDatabase {
 
     @GET("discover/movie")
     Call<MovieList> filterOnRate(@Query("api_key") String api_key, @Query("vote_count.gte") int count);
+
 
 }

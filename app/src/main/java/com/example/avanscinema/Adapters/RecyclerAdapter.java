@@ -62,6 +62,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MovieH
         holder.Title.setText(title);
         Picasso.get().load(movie.getImage()).resize(150, 200).centerCrop().into(holder.image);
         holder.mDescription.setText(overView);
+        holder.Date.setText(MovieList.get(position).getReleaseDate());
 
         //Click listener voor het openen van Detail scherm
         holder.itemView.setOnClickListener(view -> {
@@ -102,7 +103,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MovieH
 
     //xml wordt hier gekoppeld aan de velden
     public class MovieHolder extends RecyclerView.ViewHolder {
-        private final TextView Title, mDescription;
+        private final TextView Title, mDescription, Date;
         private final ImageView image;
         private final ScrollView mScrollViewDescription;
         private final RatingBar mRatingBar;
@@ -110,6 +111,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MovieH
         public MovieHolder(@NonNull View itemView) {
             super(itemView);
 
+            Date = itemView.findViewById(R.id.releaseYear);
             Title = itemView.findViewById(R.id.Title);
             image = itemView.findViewById(R.id.movie_poster);
             mDescription = itemView.findViewById(R.id.description);

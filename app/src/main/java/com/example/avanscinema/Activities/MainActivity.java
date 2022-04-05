@@ -50,8 +50,11 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
     private ActionBarDrawerToggle actionBar;
     private String filter;
     private String order;
-    private String sort;
+    private String sorter;
     private String genre;
+    private Movie add;
+
+
 
 
     @Override
@@ -99,56 +102,56 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
                 R.array.spinner_list_filter, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerF.setAdapter(adapter);
-                spinnerF.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        //FILTER
+        spinnerF.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                //FILTER
 
-                        switch ((int) adapterView.getItemIdAtPosition(i)) {
-                            case 0:
-                                filter = "none";
-                                break;
-                            case 1:
-                                Toast.makeText(getApplicationContext(), "Filter on Date selected", Toast.LENGTH_SHORT);
-                                filter = "date";
-                                break;
-                            case 2:
-                                Toast.makeText(getApplicationContext(), "Filter on Rate selected", Toast.LENGTH_SHORT);
-                                filter = "rate";
-                                break;
-                            case 3:
-                                Toast.makeText(getApplicationContext(), "Filter on Genre selected", Toast.LENGTH_SHORT);
-                                filter = "genre";
-                                break;
-                        }
-                    }
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-                    }
-                });
-                Spinner spinnerA = findViewById(R.id.spinner_asc_desc);
-                ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.asc_desc, android.R.layout.simple_spinner_item);
-                adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinnerA.setAdapter(adapter1);
-                spinnerA.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        //ASC - DESC
-                        String order;
-                        switch ((int) adapterView.getItemIdAtPosition(i)) {
-                            case 0:
-                                order = "Desc";
-                                break;
-                            case 1:
-                                order = "Asc";
-                                break;
-                        }
-                    }
+                switch ((int) adapterView.getItemIdAtPosition(i)) {
+                    case 0:
+                        filter = "none";
+                        break;
+                    case 1:
+                        Toast.makeText(getApplicationContext(), "Filter on Date selected", Toast.LENGTH_SHORT);
+                        filter = "date";
+                        break;
+                    case 2:
+                        Toast.makeText(getApplicationContext(), "Filter on Rate selected", Toast.LENGTH_SHORT);
+                        filter = "rate";
+                        break;
+                    case 3:
+                        Toast.makeText(getApplicationContext(), "Filter on Genre selected", Toast.LENGTH_SHORT);
+                        filter = "genre";
+                        break;
+                }
+            }
 
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-                    }
-                });
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+        Spinner spinnerA = findViewById(R.id.spinner_asc_desc);
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.asc_desc, android.R.layout.simple_spinner_item);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerA.setAdapter(adapter1);
+        spinnerA.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                //ASC - DESC
+                switch ((int) adapterView.getItemIdAtPosition(i)) {
+                    case 1:
+                        order = "Desc";
+                        break;
+                    case 0:
+                        order = "Asc";
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
         Spinner spinnerS = findViewById(R.id.spinner_sorteren);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.spinner_list_sorteren, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -157,19 +160,19 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 //SORT
-                String sort;
+
                 switch ((int) adapterView.getItemIdAtPosition(i)) {
                     case 0:
-                    sort = "none";
-                    break;
+                        sorter = "none";
+                        break;
                     case 1:
-                        sort = "date";
+                        sorter = "date";
                         break;
                     case 2:
-                        sort = "rating";
+                        sorter = "rating";
                         break;
                     case 3:
-                        sort = "expected";
+                        sorter = "expected";
                         break;
                 }
             }
@@ -185,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
         searchF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-           //FILTER CALL
+                //FILTER CALL
                 switch (filter) {
                     case "none":
                         Toast.makeText(getApplicationContext(), "No filter selected!", Toast.LENGTH_SHORT);
@@ -223,6 +226,28 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
                             Toast.makeText(getApplicationContext(), "This is not a valid year!", Toast.LENGTH_SHORT);
                         }
                         apiConnection.filterMoviesOnRating(MainActivity.this, rate);
+                        break;
+                }
+            }
+        });
+        Button sortButton = findViewById(R.id.SortButton);
+        sortButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (sorter) {
+                    case "date":
+                        if (order.equalsIgnoreCase("asc")) {
+                        apiConnection.sortMoviesOnDate(MainActivity.this, "release_date.asc");
+                        } else {
+                            apiConnection.sortMoviesOnDate(MainActivity.this, "release_date.desc");
+                        }
+                            break;
+
+                    case "rating":
+
+                        break;
+                    case "expected":
+
                         break;
                 }
             }

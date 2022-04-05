@@ -70,13 +70,22 @@
                             tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
                     </ScrollView>
 
+                    <TextView
+                        android:id="@+id/releaseYear"
+                        android:layout_width="90dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="TextView" />
+
                     <RatingBar
                         android:id="@+id/ratingBar"
                         style="@android:style/Widget.DeviceDefault.RatingBar.Small"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginTop="40sp"
+                        android:layout_marginTop="20sp"
                         android:progressBackgroundTint="@color/textcolor"
                         android:progressTint="#EAAB02"
                         android:rating="0"
