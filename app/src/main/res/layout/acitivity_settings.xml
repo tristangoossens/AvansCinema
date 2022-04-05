@@ -21,10 +21,11 @@
             android:minHeight="?attr/actionBarSize"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-        <EditText
+        <TextView
             android:id="@+id/changeLanguageLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:text="@string/taal_aanpassen"
             android:textColor="@color/textcolor"
             android:textAlignment="center" />
@@ -61,10 +62,11 @@
 
         </LinearLayout>
 
-        <EditText
+        <TextView
             android:id="@+id/changeThemeLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:text="@string/thema_aanpassen"
             android:textColor="@color/textcolor"
             android:textAlignment="center" />

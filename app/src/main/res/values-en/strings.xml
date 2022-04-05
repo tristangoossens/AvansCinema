@@ -19,7 +19,6 @@
     <string name="Verwacht">Expected</string>
     <string name="lengte_en_datum_vanVerschijning">Runtime: %1$d minuten  Release date: %2$s</string>
     <string name="genre">Genre: %1$s</string>
-    <string name="taal_aanpassen">Switch Langauge</string>
     <string name="licht">Light</string>
     <string name="donker">Dark</string>
     <string name="thema_aanpassen">Switch Theme</string>

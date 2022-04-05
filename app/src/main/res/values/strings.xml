@@ -21,7 +21,7 @@
     <string name="genre">Genre: %1$s</string>
 
     //Begin settings page
-    <string name="taal_aanpassen">Taal aanpassen</string>
+    <string name="taal_aanpassen" translatable="false">Taal Aanpassen / Switch Language</string>
     <string name="nederlands" translatable="false">Nederlands</string>
     <string name="engels" translatable="false">English</string>
     <string name="licht">Licht</string>
