@@ -153,6 +153,8 @@
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="3dp"
                     android:id="@+id/company_detail_recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -187,6 +189,38 @@
                         android:orientation="vertical" />
 
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/description_box_list_item"
+                    android:gravity="center"
+                    android:text="@string/beoordeel_de_film"
+                    android:textColor="@color/title_color"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <RatingBar
+                    android:id="@+id/ratingBar_detailpage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:stepSize="0.5"
+                    android:progressBackgroundTint="#52EAAB02"
+                    android:progressTint="#EAAB02"
+                    android:rating="0"
+                    android:secondaryProgressTint="#EAAB02" />
+
+                <Button
+                    android:id="@+id/ratting_button_detailpage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/description_box_list_item"
+                    android:layout_gravity="center"
+                    android:text="@string/verstuur"
+                    android:layout_marginBottom="30dp"
+                    />
             </LinearLayout>
         </ScrollView>
 

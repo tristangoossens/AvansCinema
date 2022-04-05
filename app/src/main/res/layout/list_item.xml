@@ -71,17 +71,16 @@
                     </ScrollView>
 
                     <RatingBar
-                        android:layout_gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="40sp"
                         android:id="@+id/ratingBar"
                         style="@android:style/Widget.DeviceDefault.RatingBar.Small"
-                        android:secondaryProgressTint="#EAAB02"
-                        android:rating="0"
-                        android:progressTint="#EAAB02"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="40sp"
                         android:progressBackgroundTint="@color/textcolor"
-                        />
+                        android:progressTint="#EAAB02"
+                        android:rating="0"
+                        android:secondaryProgressTint="#EAAB02" />
 
 
 

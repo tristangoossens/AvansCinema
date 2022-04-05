@@ -28,6 +28,10 @@
     <string name="donker">Donker</string>
     <string name="thema_aanpassen">Thema aanpassen</string>
     <string name="opslaan" translatable="false">Opslaan / Save</string>
+    <string name="beoordeel_de_film">Beoordeel de film!</string>
+    <string name="verstuur">Verstuur!</string>
+    <string name="ratingtoast">Rating van 0 niet mogelijk</string>
+    <string name="beoorderling_verstuurd">Beoordeling verstuurd!</string>
     //End setings page
 
     <string-array name="spinner_list_sorteren">

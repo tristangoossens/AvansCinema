@@ -16,6 +16,7 @@
         android:layout_height="100dp"
         android:src="@drawable/company_placeholder"
         android:background="@color/white"
+        android:layout_margin="4dp"
         android:adjustViewBounds="true"
         />
 

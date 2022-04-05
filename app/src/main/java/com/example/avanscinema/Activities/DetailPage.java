@@ -7,7 +7,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -43,7 +45,8 @@ public class DetailPage extends AppCompatActivity {
     private ArrayList<Review> reviews;
     private ArrayList<ProductionCompany> pCompanies;
     private TrailerList trailers;
-    private LinearLayout mLinearLayoutReviews;
+    private RatingBar starRating;
+    private Button sendButton;
     private Movie movie;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,9 @@ public class DetailPage extends AppCompatActivity {
         mReview = findViewById(R.id.review_detailpage);
         share = findViewById(R.id.share_detail);
         back = findViewById(R.id.back_button);
+        starRating = findViewById(R.id.ratingBar_detailpage);
+        sendButton = findViewById(R.id.ratting_button_detailpage);
+
 
         getIntentData();
         setupActorRecyclerView();
@@ -90,6 +96,19 @@ public class DetailPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
              DetailPage.super.finish();
+            }
+        });
+
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                float rating = starRating.getRating() * 2;
+                if (rating >= 1){
+                    // TODO: 5-4-2022 post star rating  JELMER HELP!!!!
+                    Toast.makeText(DetailPage.this, getResources().getString(R.string.beoorderling_verstuurd), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(DetailPage.this, getResources().getString(R.string.ratingtoast), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
