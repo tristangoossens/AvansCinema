@@ -1,10 +1,21 @@
 package com.example.avanscinema.Activities;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -19,6 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.avanscinema.API.ApiConnection;
 import com.example.avanscinema.API.ResponseListener;
 import com.example.avanscinema.Adapters.RecyclerAdapter;
+import com.example.avanscinema.Classes.Genre;
 import com.example.avanscinema.Classes.Movie;
 import com.example.avanscinema.JsonParsers.CastList;
 import com.example.avanscinema.JsonParsers.ReviewList;
@@ -36,6 +48,10 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
     private ArrayList<Movie> movieList = new ArrayList<Movie>();
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBar;
+    private String filter;
+    private String order;
+    private String sort;
+    private String genre;
 
 
     @Override
@@ -51,6 +67,166 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
         //Navigation Menu
         setupMenu();
 
+        setupSpinners();
+
+        shareButton();
+    }
+
+    private void shareButton() {
+        ImageButton but = findViewById(R.id.share_button_main);
+        but.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StringBuilder sb = new StringBuilder();
+                for (Movie m : movieList) {
+                sb.append(m.getTitle()+ ": " + m.getReleaseDate() + "\n");
+                }
+
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, sb.toString());
+                sendIntent.setType("text/plain");
+
+                Intent shareIntent = Intent.createChooser(sendIntent, "Share this movie!");
+                startActivity(shareIntent);
+            }
+        });
+    }
+
+    private void setupSpinners() {
+        Spinner spinnerF = findViewById(R.id.spinner_filter);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.spinner_list_filter, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerF.setAdapter(adapter);
+                spinnerF.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        //FILTER
+
+                        switch ((int) adapterView.getItemIdAtPosition(i)) {
+                            case 0:
+                                filter = "none";
+                                break;
+                            case 1:
+                                Toast.makeText(getApplicationContext(), "Filter on Date selected", Toast.LENGTH_SHORT);
+                                filter = "date";
+                                break;
+                            case 2:
+                                Toast.makeText(getApplicationContext(), "Filter on Rate selected", Toast.LENGTH_SHORT);
+                                filter = "rate";
+                                break;
+                            case 3:
+                                Toast.makeText(getApplicationContext(), "Filter on Genre selected", Toast.LENGTH_SHORT);
+                                filter = "genre";
+                                break;
+                        }
+                    }
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+                    }
+                });
+                Spinner spinnerA = findViewById(R.id.spinner_asc_desc);
+                ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.asc_desc, android.R.layout.simple_spinner_item);
+                adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerA.setAdapter(adapter1);
+                spinnerA.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        //ASC - DESC
+                        String order;
+                        switch ((int) adapterView.getItemIdAtPosition(i)) {
+                            case 0:
+                                order = "Desc";
+                                break;
+                            case 1:
+                                order = "Asc";
+                                break;
+                        }
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+                    }
+                });
+        Spinner spinnerS = findViewById(R.id.spinner_sorteren);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.spinner_list_sorteren, android.R.layout.simple_spinner_item);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerS.setAdapter(adapter2);
+        spinnerS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                //SORT
+                String sort;
+                switch ((int) adapterView.getItemIdAtPosition(i)) {
+                    case 0:
+                    sort = "none";
+                    break;
+                    case 1:
+                        sort = "date";
+                        break;
+                    case 2:
+                        sort = "rating";
+                        break;
+                    case 3:
+                        sort = "expected";
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        EditText sort = findViewById(R.id.filterTxt);
+        Button searchF = findViewById(R.id.filterButton);
+
+        searchF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+           //FILTER CALL
+                switch (filter) {
+                    case "none":
+                        Toast.makeText(getApplicationContext(), "No filter selected!", Toast.LENGTH_SHORT);
+                        break;
+                    case "date":
+                        if (sort.getText() == null) {
+                            Toast.makeText(getApplicationContext(), "Please give the year of release", Toast.LENGTH_SHORT);
+                            return;
+                        }
+                        int year = 0;
+                        try {
+                            year = Integer.parseInt(sort.getText().toString());
+                        } catch (NumberFormatException e) {
+                            Toast.makeText(getApplicationContext(), "This is not a valid year!", Toast.LENGTH_SHORT);
+                        }
+                        apiConnection.filterOnYear(MainActivity.this, year);
+                        break;
+                    case "genre":
+                        if (sort.getText() == null) {
+                            Toast.makeText(getApplicationContext(), "Enter a genre", Toast.LENGTH_SHORT);
+                            return;
+                        }
+                        genre = sort.getText().toString();
+                        apiConnection.getGenres(MainActivity.this);
+                        break;
+                    case "rate":
+                        if (sort.getText() == null) {
+                            Toast.makeText(getApplicationContext(), "Please give a rating from 1-10", Toast.LENGTH_SHORT);
+                            return;
+                        }
+                        int rate = 0;
+                        try {
+                            rate = Integer.parseInt(sort.getText().toString());
+                        } catch (NumberFormatException e) {
+                            Toast.makeText(getApplicationContext(), "This is not a valid year!", Toast.LENGTH_SHORT);
+                        }
+                        apiConnection.filterMoviesOnRating(MainActivity.this, rate);
+                        break;
+                }
+            }
+        });
     }
 
     private void setupMenu() {
@@ -143,6 +319,16 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
             //Niet benodigt voor Search screen, had ook bestaande Method kunnen gebruiken maar dan problemen met Automatisch lijst extend.
                 });
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void getGenres(ArrayList<Genre> genres) {
+        for (Genre g : genres) {
+            if (g.getName().toLowerCase().contains(this.genre)) {
+            apiConnection.filterMoviesByGenre(MainActivity.this, g.getId());
+            break;
+            }
+        }
     }
 
     private void setupSearchBar() {

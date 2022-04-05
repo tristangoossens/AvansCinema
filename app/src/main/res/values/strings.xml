@@ -18,7 +18,7 @@
     <string name="Beoordeling">Beoordeling</string>
     <string name="Verwacht">verwacht</string>
     <string name="lengte_en_datum_vanVerschijning">lengte: %1$d minuten   Datum van verschijning: %2$s</string>
-    <string name="genre">Genre: %1$s</string>
+    <string name="genre">Genres: %1$s</string>
 
     //Begin settings page
     <string name="taal_aanpassen" translatable="false">Taal Aanpassen / Switch Language</string>
@@ -31,9 +31,20 @@
     //End setings page
 
     <string-array name="spinner_list_sorteren">
+        <item>Sorter</item>
         <item>@string/Datum</item>
         <item>@string/Beoordeling</item>
         <item>@string/Verwacht</item>
+    </string-array>
+    <string-array name="spinner_list_filter">
+        <item>Filter</item>
+        <item>@string/Datum</item>
+        <item>@string/Beoordeling</item>
+        <item>Genre</item>
+    </string-array>
+    <string-array name="asc_desc">
+        <item>Asc</item>
+        <item>Desc</item>
     </string-array>
 
 </resources>

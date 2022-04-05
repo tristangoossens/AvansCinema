@@ -3,6 +3,7 @@ package com.example.avanscinema.API;
 import com.example.avanscinema.Classes.Movie;
 import com.example.avanscinema.Classes.UserMovieList;
 import com.example.avanscinema.JsonParsers.CastList;
+import com.example.avanscinema.JsonParsers.GenreList;
 import com.example.avanscinema.JsonParsers.ReviewList;
 import com.example.avanscinema.JsonParsers.MovieList;
 import com.example.avanscinema.JsonParsers.TrailerList;
@@ -45,4 +46,20 @@ public interface TheMovieDatabase {
 
     @GET("list/{list_id}")
     Call<UserMovieList> getUserListDetails(@Path("list_id") int list_id, @Query("api_key") String api_key);
+
+    @GET("discover/movie")
+    Call<MovieList> sortMovies(@Query("api_key") String api_key, @Query("sort_by") String sorting);
+
+    @GET("discover/movie")
+    Call<MovieList> filterMoviesByGenre(@Query("api_key") String api_key, @Query("with_genres") int genre);
+
+    @GET("discover/movie")
+    Call<MovieList> filterOnDate(@Query("api_key") String api_key, @Query("primary_release_year") int year);
+
+    @GET("genre/movie/list")
+    Call<GenreList> getGenres(@Query("api_key") String api_key);
+
+    @GET("discover/movie")
+    Call<MovieList> filterOnRate(@Query("api_key") String api_key, @Query("vote_count.gte") int count);
+
 }

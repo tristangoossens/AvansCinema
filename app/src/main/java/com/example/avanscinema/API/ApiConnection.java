@@ -8,6 +8,7 @@ import com.example.avanscinema.Classes.Movie;
 import com.example.avanscinema.Classes.Trailer;
 import com.example.avanscinema.Classes.UserMovieList;
 import com.example.avanscinema.JsonParsers.CastList;
+import com.example.avanscinema.JsonParsers.GenreList;
 import com.example.avanscinema.JsonParsers.MovieList;
 import com.example.avanscinema.JsonParsers.ReviewList;
 import com.example.avanscinema.JsonParsers.TrailerList;
@@ -239,5 +240,90 @@ public class ApiConnection {
             }
         });
     }
+    public void filterOnYear(ResponseListener listener, int year) {
+        Call<MovieList> call = service.filterOnDate(api_key, year);
+
+        call.enqueue(new Callback<MovieList>() {
+            @Override
+            public void onResponse(Call<MovieList> call, Response<MovieList> response) {
+                if (!(response.code() == 200)) {
+                    Log.d("Error", "Error -> " + response.code());
+                    return;
+                }
+
+                listener.searchMovie(response.body().getResults());
+            }
+
+            @Override
+            public void onFailure(Call<MovieList> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void getGenres(ResponseListener listener) {
+        Call<GenreList> call = service.getGenres(api_key);
+
+        call.enqueue(new Callback<GenreList>() {
+            @Override
+            public void onResponse(Call<GenreList> call, Response<GenreList> response) {
+                if (!(response.code() == 200)) {
+                    Log.d("Error", "Error -> " + response.code());
+                    return;
+                }
+
+                listener.getGenres(response.body().getGenres());
+            }
+
+            @Override
+            public void onFailure(Call<GenreList> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void filterMoviesByGenre(ResponseListener listener, int genre) {
+        Call<MovieList> call = service.filterMoviesByGenre(api_key, genre);
+
+        call.enqueue(new Callback<MovieList>() {
+            @Override
+            public void onResponse(Call<MovieList> call, Response<MovieList> response) {
+                if (!(response.code() == 200)) {
+                    Log.d("Error", "Error -> " + response.code());
+                    return;
+                }
+
+                listener.searchMovie(response.body().getResults());
+            }
+
+            @Override
+            public void onFailure(Call<MovieList> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void filterMoviesOnRating(ResponseListener listener, int count) {
+        Call<MovieList> call = service.filterOnRate(api_key, count);
+
+        call.enqueue(new Callback<MovieList>() {
+            @Override
+            public void onResponse(Call<MovieList> call, Response<MovieList> response) {
+                if (!(response.code() == 200)) {
+                    Log.d("Error", "Error -> " + response.code());
+                    return;
+                }
+
+                listener.searchMovie(response.body().getResults());
+            }
+
+            @Override
+            public void onFailure(Call<MovieList> call, Throwable t) {
+
+            }
+        });
+    }
+
+
 }
 

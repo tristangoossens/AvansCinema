@@ -18,6 +18,7 @@ import com.example.avanscinema.Adapters.RecyclerAdapterActorDetailPage;
 import com.example.avanscinema.Adapters.RecyclerAdapterCompanyDetailPage;
 import com.example.avanscinema.Adapters.RecyclerAdapterReviewDetailPage;
 import com.example.avanscinema.Classes.Cast;
+import com.example.avanscinema.Classes.Genre;
 import com.example.avanscinema.Classes.Movie;
 import com.example.avanscinema.Classes.ProductionCompany;
 import com.example.avanscinema.Classes.Review;
@@ -103,7 +104,12 @@ public class DetailPage extends AppCompatActivity {
             des.setText(movie.getOverview());
             runtimeRelease.setText(getResources().getString(R.string.lengte_en_datum_vanVerschijning, movie.getRuntime(), movie.getReleaseDate()));
             Picasso.get().load(movie.getLandscapeImage()).into(poster);
-            mGenre.setText(getResources().getString(R.string.genre, movie.getGenres().get(0).getName()));
+            StringBuilder sb = new StringBuilder();
+           for (Genre g : movie.getGenres()) {
+               sb.append(g.getName() + ", ");
+           }
+                mGenre.setText(getResources().getString(R.string.genre, sb));
+
             if (!reviews.isEmpty()){
                 mReview.setVisibility(View.VISIBLE);
             }
