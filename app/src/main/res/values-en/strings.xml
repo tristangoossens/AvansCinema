@@ -22,4 +22,22 @@
     <string name="licht">Light</string>
     <string name="donker">Dark</string>
     <string name="thema_aanpassen">Switch Theme</string>
+
+    <string-array name="spinner_list_sorteren">
+        <item>Sort</item>
+        <item>Date</item>
+        <item>Review</item>
+        <item>Expected</item>
+    </string-array>
+    <string-array name="spinner_list_filter">
+        <item>Filter</item>
+        <item>Date</item>
+        <item>Review</item>
+        <item>Genre</item>
+    </string-array>
+    <string-array name="asc_desc">
+        <item>Asc</item>
+        <item>Desc</item>
+    </string-array>
+
 </resources>
