@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.example.avanscinema.Classes.Movie;
 import com.example.avanscinema.Classes.Trailer;
+import com.example.avanscinema.Classes.UserMovieList;
 import com.example.avanscinema.JsonParsers.CastList;
 import com.example.avanscinema.JsonParsers.MovieList;
 import com.example.avanscinema.JsonParsers.ReviewList;
@@ -196,27 +197,47 @@ public class ApiConnection {
         hasTrailer = false;
     }
 
-    public void getUserMovieLists(UserListResponseListener responseListener){
+    public void getUserMovieLists(UserListsResponseListener responseListener){
         Call<UserListsList> callUserMovieLists = service.listUserMovieLists(this.account_id, this.session_id, this.api_key);
 
         callUserMovieLists.enqueue(new Callback<UserListsList>() {
             @Override
             public void onResponse(Call<UserListsList> call, Response<UserListsList> response) {
                 if (!(response.code() == 200)) {
-                    Log.d("Bruh", "Error -> " + response.code());
+                    Log.d("Error", "Error -> " + response.code());
                     return;
                 }
 
-                Log.d("Test", "onResponse: +" + response.body());
                 responseListener.onUserMovieListResponse(response.body().getUserMovieLists());
             }
 
             @Override
             public void onFailure(Call<UserListsList> call, Throwable t) {
-                Log.d("Bruh", "Error -> " + t.getMessage());
+                Log.d("Error", "Error -> " + t.getMessage());
             }
         });
     }
 
+
+    public void getUserMovieListDetails(UserListResponseListener responseListener, int id){
+        Call<UserMovieList> callUserMovieLists = service.getUserListDetails(id, this.api_key);
+
+        callUserMovieLists.enqueue(new Callback<UserMovieList>() {
+            @Override
+            public void onResponse(Call<UserMovieList> call, Response<UserMovieList> response) {
+                if (!(response.code() == 200)) {
+                    Log.d("Error", "Error -> " + response.code());
+                    return;
+                }
+
+                responseListener.onUserListResponse(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<UserMovieList> call, Throwable t) {
+                Log.d("Error", "Error -> " + t.getMessage());
+            }
+        });
+    }
 }
 

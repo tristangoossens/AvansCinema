@@ -1,6 +1,7 @@
 package com.example.avanscinema.API;
 
 import com.example.avanscinema.Classes.Movie;
+import com.example.avanscinema.Classes.UserMovieList;
 import com.example.avanscinema.JsonParsers.CastList;
 import com.example.avanscinema.JsonParsers.ReviewList;
 import com.example.avanscinema.JsonParsers.MovieList;
@@ -41,4 +42,7 @@ public interface TheMovieDatabase {
     // Call to list user created movie lists
     @GET("account/{account_id}/lists")
     Call<UserListsList> listUserMovieLists(@Path("account_id") int account_id, @Query("session_id") String session_id, @Query("api_key") String api_key);
+
+    @GET("list/{list_id}")
+    Call<UserMovieList> getUserListDetails(@Path("list_id") int list_id, @Query("api_key") String api_key);
 }
