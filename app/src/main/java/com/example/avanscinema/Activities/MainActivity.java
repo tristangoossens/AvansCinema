@@ -352,6 +352,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
         //Weergeeft opgezochte films in een nieuwe Adapter
         RecyclerAdapter adapter = new RecyclerAdapter(result, movie -> {
                 //Clicked on Movie Item & nieuwe API call met deze Movie (voor searched movies)
+            Log.d("movie chosen: ", "" +movie.getId());
                 apiConnection.getMovieDetails(MainActivity.this, movie.getId());
             }, position -> {
             //Niet benodigt voor Search screen, had ook bestaande Method kunnen gebruiken maar dan problemen met Automatisch lijst extend.
