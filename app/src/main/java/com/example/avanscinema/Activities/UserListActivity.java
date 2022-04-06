@@ -20,6 +20,7 @@ import com.example.avanscinema.API.UserListsResponseListener;
 import com.example.avanscinema.Adapters.RecyclerAdapterUserListPage;
 import com.example.avanscinema.Classes.UserMovieList;
 import com.example.avanscinema.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
@@ -40,6 +41,15 @@ public class UserListActivity extends AppCompatActivity implements NavigationVie
         // Get recyclerview component and set a linear layout
         recyclerView = (RecyclerView) findViewById(R.id.user_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent listFormIntent = new Intent(UserListActivity.this, UserListCreateActivity.class);
+                startActivity(listFormIntent);
+            }
+        });
 
         ApiConnection api = new ApiConnection();
         api.getUserMovieLists(this);
