@@ -49,9 +49,6 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
     private String order;
     private String sorter;
     private String genre;
-    private Movie add;
-
-
 
 
     @Override
@@ -296,7 +293,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
                         apiConnection.getPopularMoviesList(MainActivity.this, true);
                         break;
                     case R.id.Favourites:
-                        //Show list of Favourite movies
+                        apiConnection.getFavorite(MainActivity.this);
                         break;
                     case R.id.settings:
                         Intent settingsPageIntent = new Intent(MainActivity.this, SettingsPage.class);
@@ -448,5 +445,6 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
     private void setupRecyclerView() {
         recyclerView = findViewById(R.id.recView);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
+
     }
 }

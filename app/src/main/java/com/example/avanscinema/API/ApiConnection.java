@@ -4,14 +4,14 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.avanscinema.Classes.Media;
 import com.example.avanscinema.Classes.Movie;
 import com.example.avanscinema.Classes.Rating;
-import com.example.avanscinema.Classes.Trailer;
 import com.example.avanscinema.Classes.UserMovieList;
 import com.example.avanscinema.JsonParsers.CastList;
 import com.example.avanscinema.JsonParsers.GenreList;
 import com.example.avanscinema.JsonParsers.MovieList;
-import com.example.avanscinema.JsonParsers.RatingResponse;
+import com.example.avanscinema.JsonParsers.ResponseMessage;
 import com.example.avanscinema.JsonParsers.ReviewList;
 import com.example.avanscinema.JsonParsers.TrailerList;
 import com.example.avanscinema.JsonParsers.UserListsList;
@@ -328,11 +328,11 @@ public class ApiConnection {
 
     public void rateMovie(detailResponse listener, int id, float rating) {
         Rating rat = new Rating(rating);
-        Call<RatingResponse> call = service.postRating(id, api_key,session_id, rat);
+        Call<ResponseMessage> call = service.postRating(id, api_key,session_id, rat);
 
-        call.enqueue(new Callback<RatingResponse>() {
+        call.enqueue(new Callback<ResponseMessage>() {
             @Override
-            public void onResponse(Call<RatingResponse> call, Response<RatingResponse> response) {
+            public void onResponse(Call<ResponseMessage> call, Response<ResponseMessage> response) {
                 if (!(response.code() == 201)) {
                     Log.d("Error", "Error -> " + response.code());
                     return;
@@ -342,7 +342,7 @@ public class ApiConnection {
             }
 
             @Override
-            public void onFailure(Call<RatingResponse> call, Throwable t) {
+            public void onFailure(Call<ResponseMessage> call, Throwable t) {
 
             }
         });
@@ -370,6 +370,50 @@ public class ApiConnection {
 
     public interface detailResponse {
         public void onResponseRating(String message);
+    }
+
+    public void markAsFavourite(int id, boolean add) {
+            Media media = new Media("movie", id, add);
+
+        Call<ResponseMessage> call = service.markAsFavourite(account_id, api_key, session_id, media);
+
+        call.enqueue(new Callback<ResponseMessage>() {
+            @Override
+            public void onResponse(Call<ResponseMessage> call, Response<ResponseMessage> response) {
+                if (response.code() == 201 || response.code() == 200) {
+                    Log.d("Response favourite: ", "Success");
+                    return;
+                }
+                Log.d("Error", "Error -> " + response.code());
+                return;
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseMessage> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void getFavorite(ResponseListener listener) {
+        Call<MovieList> call = service.getFavourite(account_id, session_id, api_key);
+
+        call.enqueue(new Callback<MovieList>() {
+            @Override
+            public void onResponse(Call<MovieList> call, Response<MovieList> response) {
+                if (!(response.code() == 200)) {
+                    Log.d("Error", "Error -> " + response.code());
+                    return;
+                }
+                listener.searchMovie(response.body().getResults());
+            }
+
+            @Override
+            public void onFailure(Call<MovieList> call, Throwable t) {
+
+            }
+        });
     }
 
 

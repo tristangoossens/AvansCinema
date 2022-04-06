@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.ScrollView;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.avanscinema.API.ApiConnection;
 import com.example.avanscinema.Classes.Movie;
 import com.example.avanscinema.R;
 import com.squareup.picasso.Picasso;
@@ -62,7 +64,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MovieH
         Picasso.get().load(movie.getImage()).resize(150, 200).centerCrop().into(holder.image);
         holder.mDescription.setText(overView);
         holder.Date.setText(MovieList.get(position).getReleaseDate());
-
         //Click listener voor het openen van Detail scherm
         holder.itemView.setOnClickListener(view -> {
             mMovieClickListener.onMovieClick(MovieList.get(position));
@@ -71,6 +72,27 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MovieH
         holder.itemView.setOnTouchListener((view, motionEvent) -> {
             mTouchListener.returnItemPosition(position);
             return false;
+        });
+        ApiConnection api = new ApiConnection();
+        holder.favour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.favour.setVisibility(View.INVISIBLE);
+                holder.unfavour.setVisibility(View.VISIBLE);
+
+                api.markAsFavourite(movie.getId(), false);
+
+            }
+        });
+
+        holder.unfavour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.unfavour.setVisibility(View.GONE);
+                holder.favour.setVisibility(View.VISIBLE);
+
+                api.markAsFavourite(movie.getId(), true);
+            }
         });
 
         holder.mRatingBar.setRating(movie.getStarRating());
@@ -107,6 +129,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MovieH
         private final ImageView image;
         private final ScrollView mScrollViewDescription;
         private final RatingBar mRatingBar;
+        private final ImageButton unfavour, favour;
 
         public MovieHolder(@NonNull View itemView) {
             super(itemView);
@@ -117,6 +140,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MovieH
             mDescription = itemView.findViewById(R.id.description);
             mScrollViewDescription = itemView.findViewById(R.id.description_scrollview);
             mRatingBar = itemView.findViewById(R.id.ratingBar);
+            unfavour = itemView.findViewById(R.id.list_not_favour);
+            favour = itemView.findViewById(R.id.list_favour);
 
         }
     }

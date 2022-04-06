@@ -1,11 +1,12 @@
 package com.example.avanscinema.API;
 
+import com.example.avanscinema.Classes.Media;
 import com.example.avanscinema.Classes.Movie;
 import com.example.avanscinema.Classes.Rating;
 import com.example.avanscinema.Classes.UserMovieList;
 import com.example.avanscinema.JsonParsers.CastList;
 import com.example.avanscinema.JsonParsers.GenreList;
-import com.example.avanscinema.JsonParsers.RatingResponse;
+import com.example.avanscinema.JsonParsers.ResponseMessage;
 import com.example.avanscinema.JsonParsers.ReviewList;
 import com.example.avanscinema.JsonParsers.MovieList;
 import com.example.avanscinema.JsonParsers.TrailerList;
@@ -64,8 +65,15 @@ public interface TheMovieDatabase {
     Call<GenreList> getGenres(@Query("api_key") String api_key);
 
     @POST("movie/{id}/rating")
-    Call<RatingResponse> postRating(@Path("id") int id,@Query("api_key") String api_key,@Query("session_id") String session, @Body Rating rating);
+    Call<ResponseMessage> postRating(@Path("id") int id,@Query("api_key") String api_key,@Query("session_id") String session, @Body Rating rating);
 
     @GET("discover/movie")
     Call<MovieList> filteronRate(@Query("api_key") String api_key, @Query("vote_average.gte") int count, @Query("vote_average.lte") int count2);
+
+    @POST("account/{id}/favorite")
+    Call<ResponseMessage> markAsFavourite(@Path("id") int accId, @Query("api_key") String api_key, @Query("session_id") String session, @Body Media media);
+
+    @GET("account/{id}/favorite/movies")
+    Call<MovieList> getFavourite(@Path("id") int accId, @Query("session_id") String session, @Query("api_key") String api_key);
 }
+
