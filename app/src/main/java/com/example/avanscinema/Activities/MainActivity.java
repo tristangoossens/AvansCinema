@@ -279,6 +279,8 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
 
         drawerLayout.addDrawerListener(actionBar);
 
+        actionBar.syncState();
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         NavigationView nav_view = findViewById(R.id.nav_view);

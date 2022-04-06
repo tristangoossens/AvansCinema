@@ -1,9 +1,7 @@
 package com.example.avanscinema.Classes;
 
 import java.io.Serializable;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -116,16 +114,19 @@ public class Movie implements Serializable {
     public void setBelongsToCollection(Object belongsToCollection) {
         this.belongsToCollection = belongsToCollection;
     }
+
     public int getYear() {
        String date = getReleaseDate();
       int year = Integer.parseInt(date.split("-")[0]);
       return year;
     }
+
     public int getMonth() {
         String date = getReleaseDate();
         int month = Integer.parseInt(date.split("-")[1]);
         return month;
     }
+
     public int getDay() {
         String date = getReleaseDate();
         int month = Integer.parseInt(date.split("-")[2]);
@@ -285,8 +286,6 @@ public class Movie implements Serializable {
     public void setTagline(String tagline) {
         this.tagline = tagline;
     }
-
-
 
     public void setTitle(String title) {
         this.title = title;

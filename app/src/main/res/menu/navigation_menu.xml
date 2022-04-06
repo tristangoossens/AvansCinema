@@ -14,13 +14,6 @@
         app:showAsAction="never"
         android:icon="@drawable/favourite"
         />
-    <item
-        android:id="@+id/To_be_seen"
-        android:orderInCategory="3"
-        android:title="@string/bekijk_later"
-        app:showAsAction="never"
-        android:icon="@drawable/to_be_seen"
-        />
 
     <item
         android:id="@+id/usermovielist"
