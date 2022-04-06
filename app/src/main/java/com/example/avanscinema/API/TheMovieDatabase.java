@@ -1,5 +1,6 @@
 package com.example.avanscinema.API;
 
+import com.example.avanscinema.API.RequestBody.AddMovieListRequestBody;
 import com.example.avanscinema.API.RequestBody.AddToListRequestBody;
 import com.example.avanscinema.Classes.Media;
 import com.example.avanscinema.Classes.Movie;
@@ -79,5 +80,8 @@ public interface TheMovieDatabase {
 
     @POST("list/{list_id}/add_item")
     Call<ResponseMessage> addMovieToList(@Path("list_id") int list_id, @Query("api_key") String api_key, @Query("session_id") String session_id, @Body AddToListRequestBody addToListRequestBody);
+
+    @POST("list")
+    Call<ResponseMessage> addMovieList(@Query("api_key") String api_key, @Query("session_id") String session_id, @Body AddMovieListRequestBody addMovieListRequestBody);
 }
 

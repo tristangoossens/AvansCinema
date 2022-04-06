@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.avanscinema.API.RequestBody.AddMovieListRequestBody;
 import com.example.avanscinema.API.RequestBody.AddToListRequestBody;
 import com.example.avanscinema.Classes.Media;
 import com.example.avanscinema.Classes.Movie;
@@ -392,9 +393,30 @@ public class ApiConnection {
         });
     }
 
+    public void addMovieList(formResponse responseListener, String name, String description){
+        AddMovieListRequestBody addMovieListRequestBody = new AddMovieListRequestBody(name, description);
+        Call<ResponseMessage> call = service.addMovieList(this.api_key, this.session_id, addMovieListRequestBody);
+
+        call.enqueue(new Callback<ResponseMessage>() {
+            @Override
+            public void onResponse(Call<ResponseMessage> call, Response<ResponseMessage> response) {
+                responseListener.onListCreateResponse(response.body().getMessage());
+            }
+
+            @Override
+            public void onFailure(Call<ResponseMessage> call, Throwable t) {
+                Log.d("Error", "Error -> " + t.getMessage());
+            }
+        });
+    }
+
     public interface detailResponse {
         public void onResponseRating(String message);
         public void onListAddResponse(String message);
+    }
+
+    public interface formResponse {
+        public void onListCreateResponse(String message);
     }
 
     public void markAsFavourite(int id, boolean add) {
