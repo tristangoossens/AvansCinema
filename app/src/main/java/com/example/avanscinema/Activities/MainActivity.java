@@ -290,6 +290,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
                 switch(id) {
                     case R.id.Movie_list:
                         recyclerViewState = null;
+                        movieList.clear();
                         apiConnection.getPopularMoviesList(MainActivity.this, true);
                         break;
                     case R.id.Favourites:
