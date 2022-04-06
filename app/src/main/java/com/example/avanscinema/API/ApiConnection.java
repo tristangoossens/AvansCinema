@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.avanscinema.API.RequestBody.AddToListRequestBody;
 import com.example.avanscinema.Classes.Media;
 import com.example.avanscinema.Classes.Movie;
 import com.example.avanscinema.Classes.Rating;
@@ -368,12 +369,36 @@ public class ApiConnection {
         });
     }
 
+    public void addMovieToList(detailResponse responseListener, int list_id, int movie_id){
+        AddToListRequestBody addToListRequestBody = new AddToListRequestBody(movie_id);
+        Call<ResponseMessage> call = service.addMovieToList(list_id, this.api_key, this.session_id, addToListRequestBody);
+
+        call.enqueue(new Callback<ResponseMessage>() {
+            @Override
+            public void onResponse(Call<ResponseMessage> call, Response<ResponseMessage> response) {
+                // 403 : Bad request (Duplicate entry)
+                if(response.code() == 403){
+                    responseListener.onListAddResponse("This item is already in the specified list");
+                    return;
+                }
+
+                responseListener.onListAddResponse(response.body().getMessage());
+            }
+
+            @Override
+            public void onFailure(Call<ResponseMessage> call, Throwable t) {
+                Log.d("Error", "Error -> " + t.getMessage());
+            }
+        });
+    }
+
     public interface detailResponse {
         public void onResponseRating(String message);
+        public void onListAddResponse(String message);
     }
 
     public void markAsFavourite(int id, boolean add) {
-            Media media = new Media("movie", id, add);
+        Media media = new Media("movie", id, add);
 
         Call<ResponseMessage> call = service.markAsFavourite(account_id, api_key, session_id, media);
 
