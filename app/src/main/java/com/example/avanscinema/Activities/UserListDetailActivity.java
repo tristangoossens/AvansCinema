@@ -113,8 +113,21 @@ public class UserListDetailActivity extends AppCompatActivity implements UserLis
     }
 
     @Override
+    public void onListItemDeleteResponse(String message) {
+        Toast.makeText(getApplicationContext(), message , Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(UserListDetailActivity.this, UserListDetailActivity.class);
+        intent.putExtra("LIST_ID", list.getId());
+        startActivity(intent);
+    }
+
+    @Override
     public void onItemClick(int id, View v) {
         api.getMovieDetails(UserListDetailActivity.this, id);
+    }
+
+    @Override
+    public void onItemDeleteClick(int movie_id, View v) {
+        api.deleteMovieFromList(UserListDetailActivity.this, list.getId(), movie_id);
     }
 
     @Override
