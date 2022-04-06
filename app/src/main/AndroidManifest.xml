@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
+            android:name=".Activities.UserListCreateActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.UserListDetailActivity"
             android:exported="false" />
         <activity
