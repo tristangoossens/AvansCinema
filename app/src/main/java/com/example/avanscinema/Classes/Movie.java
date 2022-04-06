@@ -194,6 +194,10 @@ public class Movie implements Serializable {
         this.originalTitle = originalTitle;
     }
 
+    public String getOriginalTitle() {
+        return originalTitle;
+    }
+
     public String getOverview() {
         return overview;
     }
