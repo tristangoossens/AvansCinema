@@ -426,6 +426,23 @@ public class ApiConnection {
         });
     }
 
+    public void deleteMovieFromList(deleteResponse responseListener, Integer list_id, int movie_id){
+        AlterListItemRequestBody alterListItemRequestBody = new AlterListItemRequestBody(movie_id);
+        Call<ResponseMessage> call = service.deleteMovieFromList(list_id, this.api_key, this.session_id, alterListItemRequestBody);
+
+        call.enqueue(new Callback<ResponseMessage>() {
+            @Override
+            public void onResponse(Call<ResponseMessage> call, Response<ResponseMessage> response) {
+                responseListener.onListDeleteResponse(response.body().getMessage());
+            }
+
+            @Override
+            public void onFailure(Call<ResponseMessage> call, Throwable t) {
+                Log.d("Error", "Error -> " + t.getMessage());
+            }
+        });
+    }
+
     public interface movieDetailsResponse {
         public void onCombinedDetailsResponse(Movie movie, ReviewList reviews, CastList cast, TrailerList trailer);
     }
@@ -441,6 +458,7 @@ public class ApiConnection {
 
     public interface deleteResponse {
         public void onListDeleteResponse(String message);
+        public void onListItemDeleteResponse(String message);
     }
 
     public void markAsFavourite(int id, boolean add) {

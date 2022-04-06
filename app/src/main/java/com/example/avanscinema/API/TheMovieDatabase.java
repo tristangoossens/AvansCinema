@@ -87,5 +87,8 @@ public interface TheMovieDatabase {
 
     @DELETE("list/{list_id}")
     Call<ResponseMessage> deleteMovieList(@Path("list_id") Integer list_id, @Query("api_key") String api_key, @Query("session_id") String session_id);
+
+    @POST("list/{list_id}/remove_item")
+    Call<ResponseMessage> deleteMovieFromList(@Path("list_id") Integer list_id, @Query("api_key") String api_key, @Query("session_id") String session_id, @Body AlterListItemRequestBody alterListItemRequestBody);
 }
 
