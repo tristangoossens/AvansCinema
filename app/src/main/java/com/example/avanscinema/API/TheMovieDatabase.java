@@ -16,6 +16,7 @@ import com.example.avanscinema.JsonParsers.UserListsList;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -83,5 +84,8 @@ public interface TheMovieDatabase {
 
     @POST("list")
     Call<ResponseMessage> addMovieList(@Query("api_key") String api_key, @Query("session_id") String session_id, @Body AddMovieListRequestBody addMovieListRequestBody);
+
+    @DELETE("list/{list_id}")
+    Call<ResponseMessage> deleteMovieList(@Path("list_id") Integer list_id, @Query("api_key") String api_key, @Query("session_id") String session_id);
 }
 

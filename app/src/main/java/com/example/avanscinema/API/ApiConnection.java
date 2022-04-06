@@ -410,6 +410,22 @@ public class ApiConnection {
         });
     }
 
+    public void deleteMovieList(deleteResponse responseListener, Integer list_id){
+        Call<ResponseMessage> call = service.deleteMovieList(list_id, this.api_key, this.session_id);
+
+        call.enqueue(new Callback<ResponseMessage>() {
+            @Override
+            public void onResponse(Call<ResponseMessage> call, Response<ResponseMessage> response) {
+                responseListener.onListDeleteResponse(response.body().getMessage());
+            }
+
+            @Override
+            public void onFailure(Call<ResponseMessage> call, Throwable t) {
+                Log.d("Error", "Error -> " + t.getMessage());
+            }
+        });
+    }
+
     public interface detailResponse {
         public void onResponseRating(String message);
         public void onListAddResponse(String message);
@@ -417,6 +433,10 @@ public class ApiConnection {
 
     public interface formResponse {
         public void onListCreateResponse(String message);
+    }
+
+    public interface deleteResponse {
+        public void onListDeleteResponse(String message);
     }
 
     public void markAsFavourite(int id, boolean add) {
