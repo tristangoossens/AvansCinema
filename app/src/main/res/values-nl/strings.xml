@@ -39,4 +39,6 @@
         <item>Asc</item>
         <item>Desc</item>
     </string-array>
+    <string name="film_lijst">Toevoegen aan lijst</string>
+    <string name="film_lijst_knop">Toevoegen</string>
 </resources>
