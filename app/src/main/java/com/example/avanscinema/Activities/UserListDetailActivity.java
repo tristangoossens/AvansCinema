@@ -21,11 +21,14 @@ import com.example.avanscinema.API.UserListResponseListener;
 import com.example.avanscinema.Adapters.RecyclerAdapterUserListDetailPage;
 import com.example.avanscinema.Classes.Movie;
 import com.example.avanscinema.Classes.UserMovieList;
+import com.example.avanscinema.JsonParsers.CastList;
+import com.example.avanscinema.JsonParsers.ReviewList;
+import com.example.avanscinema.JsonParsers.TrailerList;
 import com.example.avanscinema.R;
 
 import java.util.List;
 
-public class UserListDetailActivity extends AppCompatActivity implements UserListResponseListener, ApiConnection.deleteResponse, PopupMenu.OnMenuItemClickListener {
+public class UserListDetailActivity extends AppCompatActivity implements UserListResponseListener, ApiConnection.deleteResponse, ApiConnection.movieDetailsResponse, RecyclerAdapterUserListDetailPage.ItemClickListener , PopupMenu.OnMenuItemClickListener {
     private RecyclerView recyclerView;
     private ApiConnection api;
     private UserMovieList list;
@@ -79,6 +82,7 @@ public class UserListDetailActivity extends AppCompatActivity implements UserLis
 
     private void setRecyclerViewAdapter(List<Movie> movieList) {
         RecyclerAdapterUserListDetailPage userMovieListAdapter = new RecyclerAdapterUserListDetailPage(this, movieList);
+        userMovieListAdapter.setItemClickListener(this);
         recyclerView.setAdapter(userMovieListAdapter);
     }
 
@@ -106,5 +110,22 @@ public class UserListDetailActivity extends AppCompatActivity implements UserLis
             Intent intent = new Intent(UserListDetailActivity.this, UserListActivity.class);
             startActivity(intent);
         }
+    }
+
+    @Override
+    public void onItemClick(int id, View v) {
+        api.getMovieDetails(UserListDetailActivity.this, id);
+    }
+
+    @Override
+    public void onCombinedDetailsResponse(Movie movie, ReviewList reviews, CastList cast, TrailerList trailer) {
+        //Response van API Call van Movie Click
+        //Detail page wordt pas geopend wanneer data aanwezig is.
+        Intent detailPage = new Intent(getApplicationContext(), DetailPage.class);
+        detailPage.putExtra("movie", movie);
+        detailPage.putExtra("reviews", reviews);
+        detailPage.putExtra("cast", cast);
+        detailPage.putExtra("trailer", trailer);
+        startActivity(detailPage);
     }
 }

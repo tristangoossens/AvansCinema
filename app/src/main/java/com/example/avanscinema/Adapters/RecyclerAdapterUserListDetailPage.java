@@ -19,6 +19,7 @@ import java.util.List;
 public class RecyclerAdapterUserListDetailPage extends RecyclerView.Adapter<RecyclerAdapterUserListDetailPage.ViewHolder> {
     private List<Movie> movieList;
     private LayoutInflater inflater;
+    private ItemClickListener clickListener;
 
     public RecyclerAdapterUserListDetailPage(Context context, List<Movie> movieLists){
         this.inflater = LayoutInflater.from(context);
@@ -48,6 +49,16 @@ public class RecyclerAdapterUserListDetailPage extends RecyclerView.Adapter<Recy
         return movieList.size();
     }
 
+    // On click interface that will be implemented by the activity class
+    public interface ItemClickListener {
+        void onItemClick(int id, View v);
+    }
+
+    // Method to set the ItemClickListener
+    public void setItemClickListener(RecyclerAdapterUserListDetailPage.ItemClickListener listener){
+        this.clickListener = listener;
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView posterImageView;
         private TextView titleTextView;
@@ -63,7 +74,7 @@ public class RecyclerAdapterUserListDetailPage extends RecyclerView.Adapter<Recy
 
         @Override
         public void onClick(View view) {
-
+            clickListener.onItemClick(movieList.get(getAdapterPosition()).getId(), view);
         }
     }
 }
