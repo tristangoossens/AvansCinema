@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.avanscinema.API.ApiConnection;
+import com.example.avanscinema.API.UserListsResponseListener;
 import com.example.avanscinema.Adapters.RecyclerAdapterActorDetailPage;
 import com.example.avanscinema.Adapters.RecyclerAdapterCompanyDetailPage;
 import com.example.avanscinema.Adapters.RecyclerAdapterReviewDetailPage;
@@ -26,6 +30,7 @@ import com.example.avanscinema.Classes.Genre;
 import com.example.avanscinema.Classes.Movie;
 import com.example.avanscinema.Classes.ProductionCompany;
 import com.example.avanscinema.Classes.Review;
+import com.example.avanscinema.Classes.UserMovieList;
 import com.example.avanscinema.JsonParsers.CastList;
 import com.example.avanscinema.JsonParsers.ReviewList;
 import com.example.avanscinema.JsonParsers.TrailerList;
@@ -34,9 +39,12 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
-public class DetailPage extends AppCompatActivity implements ApiConnection.detailResponse {
+public class DetailPage extends AppCompatActivity implements ApiConnection.detailResponse, UserListsResponseListener {
 
     private static final String TAG = DetailPage.class.getSimpleName();
     private TextView Title, des, runtimeRelease, mGenre, mReview;
@@ -50,6 +58,7 @@ public class DetailPage extends AppCompatActivity implements ApiConnection.detai
     private RatingBar starRating;
     private Button sendButton;
     private Movie movie;
+    private ListWithId selectedList;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +73,7 @@ public class DetailPage extends AppCompatActivity implements ApiConnection.detai
         back = findViewById(R.id.back_button);
         starRating = findViewById(R.id.ratingBar_detailpage);
         sendButton = findViewById(R.id.ratting_button_detailpage);
+        Button saveToListButton = findViewById(R.id.detail_list_save);
 
 
         getIntentData();
@@ -71,6 +81,10 @@ public class DetailPage extends AppCompatActivity implements ApiConnection.detai
         setupCompanyRecyclerView();
         Collections.reverse(this.reviews);
         setupReviewRecyclerView();
+
+        // Get list names and save to list
+        ApiConnection api = new ApiConnection();
+        api.getUserMovieLists(this);
 
         poster.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,7 +128,12 @@ public class DetailPage extends AppCompatActivity implements ApiConnection.detai
             }
         });
 
-
+        saveToListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                api.addMovieToList(DetailPage.this, selectedList.id, movie.getId());
+            }
+        });
     }
 
     private void getIntentData() {
@@ -134,6 +153,52 @@ public class DetailPage extends AppCompatActivity implements ApiConnection.detai
             if (!reviews.isEmpty()){
                 mReview.setVisibility(View.VISIBLE);
             }
+        }
+    }
+
+    // Set up the spinner with all user made lists
+    private void setupListSpinner(List<UserMovieList> userMovieLists){
+        HashMap<String, Integer> userLists = new HashMap<>();
+        List<ListWithId> itemList = new ArrayList<ListWithId>();
+        for(UserMovieList list : userMovieLists){
+            userLists.put(list.getName(), list.getId());
+        }
+
+        Spinner spin = (Spinner) findViewById(R.id.detail_list_spinner);
+
+        for (Map.Entry<String, Integer> entry : userLists.entrySet()) {
+            itemList.add(new ListWithId(entry.getKey(), entry.getValue()));
+        }
+
+        ArrayAdapter<ListWithId> spinnerAdapter = new ArrayAdapter<ListWithId>(this, android.R.layout.simple_spinner_item, itemList);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin.setAdapter(spinnerAdapter);
+        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedList = (ListWithId) parent.getItemAtPosition(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Nothing needs to happen
+            }
+        });
+    }
+
+    // Inner class to implement a key value pair for the list spinner
+    private static class ListWithId {
+        public String name;
+        public Integer id;
+
+        public ListWithId(String name, Integer id) {
+            this.name = name;
+            this.id = id;
+        }
+
+        @Override
+        public String toString(){
+            return this.name;
         }
     }
 
@@ -175,5 +240,15 @@ public class DetailPage extends AppCompatActivity implements ApiConnection.detai
     @Override
     public void onResponseRating(String message) {
         Toast.makeText(getApplicationContext(), "Rating: " + message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onListAddResponse(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onUserMovieListResponse(List<UserMovieList> userMovieLists) {
+        setupListSpinner(userMovieLists);
     }
 }
