@@ -15,6 +15,7 @@
     <string name="instellingen">Settings</string>
     <string name="jouw_lijsten">Your lists</string>
     <string name="Datum">Date</string>
+    <string name="thema">Genre</string>
     <string name="Beoordeling">Rating</string>
     <string name="Verwacht">Expected</string>
     <string name="lengte_en_datum_vanVerschijning">Runtime: %1$d minuten  Release date: %2$s</string>
@@ -26,13 +27,12 @@
     <string-array name="spinner_list_sorteren">
         <item>Sort</item>
         <item>Date</item>
-        <item>Review</item>
-        <item>Expected</item>
+        <item>Rating</item>
     </string-array>
     <string-array name="spinner_list_filter">
         <item>Filter</item>
         <item>Date</item>
-        <item>Review</item>
+        <item>Rating</item>
         <item>Genre</item>
     </string-array>
     <string-array name="asc_desc">

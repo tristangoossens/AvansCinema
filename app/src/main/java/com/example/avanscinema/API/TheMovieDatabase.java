@@ -63,9 +63,9 @@ public interface TheMovieDatabase {
     @GET("genre/movie/list")
     Call<GenreList> getGenres(@Query("api_key") String api_key);
 
-    @GET("discover/movie")
-    Call<MovieList> filterOnRate(@Query("api_key") String api_key, @Query("vote_count.gte") int count);
-
     @POST("movie/{id}/rating")
     Call<RatingResponse> postRating(@Path("id") int id,@Query("api_key") String api_key,@Query("session_id") String session, @Body Rating rating);
+
+    @GET("discover/movie")
+    Call<MovieList> filteronRate(@Query("api_key") String api_key, @Query("vote_average.gte") int count, @Query("vote_average.lte") int count2);
 }

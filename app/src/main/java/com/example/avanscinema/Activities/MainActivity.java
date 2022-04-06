@@ -1,5 +1,6 @@
 package com.example.avanscinema.Activities;
 
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
@@ -191,24 +192,24 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
                 //FILTER CALL
                 switch (filter) {
                     case "none":
-                        Toast.makeText(getApplicationContext(), "No filter selected!", Toast.LENGTH_SHORT);
+                        Toast.makeText(getApplicationContext(), "No filter selected!", Toast.LENGTH_SHORT).show();
                         break;
                     case "date":
                         if (sort.getText() == null) {
-                            Toast.makeText(getApplicationContext(), "Please give the year of release", Toast.LENGTH_SHORT);
+                            Toast.makeText(getApplicationContext(), "Please give the year of release", Toast.LENGTH_SHORT).show();
                             return;
                         }
                         int year = 0;
                         try {
                             year = Integer.parseInt(sort.getText().toString());
                         } catch (NumberFormatException e) {
-                            Toast.makeText(getApplicationContext(), "This is not a valid year!", Toast.LENGTH_SHORT);
+                            Toast.makeText(getApplicationContext(), "Please give the year (in numbers)", Toast.LENGTH_SHORT).show();
                         }
                         apiConnection.filterOnYear(MainActivity.this, year);
                         break;
                     case "genre":
                         if (sort.getText() == null) {
-                            Toast.makeText(getApplicationContext(), "Enter a genre", Toast.LENGTH_SHORT);
+                            Toast.makeText(getApplicationContext(), "Enter a genre", Toast.LENGTH_SHORT).show();
                             return;
                         }
                         genre = sort.getText().toString();
@@ -216,16 +217,17 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
                         break;
                     case "rate":
                         if (sort.getText() == null) {
-                            Toast.makeText(getApplicationContext(), "Please give a rating from 1-10", Toast.LENGTH_SHORT);
+                            Toast.makeText(getApplicationContext(), "Please give a rating from 1-10", Toast.LENGTH_SHORT).show();
                             return;
                         }
                         int rate = 0;
                         try {
                             rate = Integer.parseInt(sort.getText().toString());
                         } catch (NumberFormatException e) {
-                            Toast.makeText(getApplicationContext(), "This is not a valid year!", Toast.LENGTH_SHORT);
+                            Toast.makeText(getApplicationContext(), "Please give the rating (in numbers)", Toast.LENGTH_SHORT).show();
+                            break;
                         }
-                        apiConnection.filterMoviesOnRating(MainActivity.this, rate);
+                       apiConnection.filterOnRate(MainActivity.this, rate);
                         break;
                 }
             }
@@ -236,14 +238,13 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
             public void onClick(View view) {
                 switch (sorter) {
                     case "date":
-                        Log.d("did", "get called");
                         if (order.equalsIgnoreCase("asc")) {
-                            reversesort(movieList);
+                            reversesortOnRelease(movieList);
                         } else {
-                            sort(movieList);
+                            sortOnRelease(movieList);
                         }
 
-                        RecyclerAdapter adapter = new RecyclerAdapter(movieList, movie -> {
+                        RecyclerAdapter adapterRel = new RecyclerAdapter(movieList, movie -> {
                             //Clicked on Movie Item & nieuwe API call met deze Movie
                             Log.d("movie chosen: ", "" +movie.getId());
                             apiConnection.getMovieDetails(MainActivity.this, movie.getId());
@@ -251,11 +252,24 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
                         }, position -> {
 
                         });
-                        recyclerView.setAdapter(adapter);
+                        recyclerView.setAdapter(adapterRel);
                             break;
 
                     case "rating":
+                        if (order.equalsIgnoreCase("asc")) {
+                            reversesortOnRating(movieList);
+                        } else {
+                            sortOnRating(movieList);
+                        }
+                        RecyclerAdapter adapterRat = new RecyclerAdapter(movieList, movie -> {
+                            //Clicked on Movie Item & nieuwe API call met deze Movie
+                            Log.d("movie chosen: ", "" +movie.getId());
+                            apiConnection.getMovieDetails(MainActivity.this, movie.getId());
 
+                        }, position -> {
+
+                        });
+                        recyclerView.setAdapter(adapterRat);
                         break;
                     case "expected":
 
@@ -264,6 +278,26 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
             }
         });
     }
+
+//    private void filterOnRate(int rate) {
+//        ArrayList<Movie> filteredList = new ArrayList<Movie>();
+//        for (Movie m : movieList) {
+//            int vote = (int) Math.floor(m.getVoteAverage());
+//            if (vote == rate) {
+//        filteredList.add(m);
+//            }
+//        }
+
+
+//        RecyclerAdapter adapter = new RecyclerAdapter(filteredList, movie -> {
+//            //Clicked on Movie Item & nieuwe API call met deze Movie (voor searched movies)
+//            Log.d("movie chosen: ", "" +movie.getId());
+//            apiConnection.getMovieDetails(MainActivity.this, movie.getId());
+//        }, position -> {
+//            //Niet benodigt voor Search screen, had ook bestaande Method kunnen gebruiken maar dan problemen met Automatisch lijst extend.
+//        });
+//        recyclerView.setAdapter(adapter);
+//    }
 
     private void setupMenu() {
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -276,6 +310,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
 
         NavigationView nav_view = findViewById(R.id.nav_view);
         nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
@@ -347,8 +382,8 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
 
     @Override
     public void searchMovie(ArrayList<Movie> result) {
-        this.movieList.clear();
-        this.movieList.addAll(result);
+            this.movieList.clear();
+            this.movieList.addAll(result);
         //Weergeeft opgezochte films in een nieuwe Adapter
         RecyclerAdapter adapter = new RecyclerAdapter(result, movie -> {
                 //Clicked on Movie Item & nieuwe API call met deze Movie (voor searched movies)
@@ -362,20 +397,33 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
 
     @Override
     public void getGenres(ArrayList<Genre> genres) {
+        boolean sendToast = true;
         for (Genre g : genres) {
             if (g.getName().toLowerCase().contains(this.genre)) {
+                sendToast = false;
             apiConnection.filterMoviesByGenre(MainActivity.this, g.getId());
             break;
             }
         }
+        if (sendToast) {
+            Toast.makeText(getApplicationContext(), "This Genre could not be found!", Toast.LENGTH_SHORT).show();
+        }
     }
-    public void sort(ArrayList<Movie> list)
+    public void sortOnRelease(ArrayList<Movie> list)
     {
         list.sort((item1, item2) -> item1.getReleaseDate().compareTo(item2.getReleaseDate()));
     }
 
-    public void reversesort(ArrayList<Movie> list) {
+    public void reversesortOnRelease(ArrayList<Movie> list) {
         list.sort((item2, item1) -> item1.getReleaseDate().compareTo(item2.getReleaseDate()));
+    }
+    public void sortOnRating(ArrayList<Movie> list)
+    {
+        list.sort((item1, item2) -> item1.getVoteAverage().compareTo(item2.getVoteAverage()));
+    }
+
+    public void reversesortOnRating(ArrayList<Movie> list) {
+        list.sort((item2, item1) -> item1.getVoteAverage().compareTo(item2.getVoteAverage()));
     }
 
     private void setupSearchBar() {
@@ -418,7 +466,6 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
         recyclerViewState = null;
         movieList.clear();
         apiConnection.getPopularMoviesList(this, true);
-
 
     }
 

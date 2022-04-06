@@ -15,6 +15,7 @@
     <string name="instellingen">Instellingen</string>
     <string name="jouw_lijsten">Jouw lijsten</string>
     <string name="Datum">Datum</string>
+    <string name="thema">Thema</string>
     <string name="Beoordeling">Beoordeling</string>
     <string name="Verwacht">verwacht</string>
     <string name="lengte_en_datum_vanVerschijning">lengte: %1$d minuten   Datum van verschijning: %2$s</string>
@@ -38,13 +39,12 @@
         <item>Sorteer</item>
         <item>@string/Datum</item>
         <item>@string/Beoordeling</item>
-        <item>@string/Verwacht</item>
     </string-array>
     <string-array name="spinner_list_filter">
         <item>Filter</item>
         <item>@string/Datum</item>
         <item>@string/Beoordeling</item>
-        <item>Genre</item>
+        <item>@string/thema</item>
     </string-array>
     <string-array name="asc_desc">
         <item>Asc</item>

@@ -55,31 +55,6 @@
             android:orientation="horizontal">
 
             <Spinner
-                android:id="@+id/spinner_sorteren"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="30dp" />
-
-            <Spinner
-                android:id="@+id/spinner_asc_desc"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/SortButton"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="sort" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal">
-
-            <Spinner
                 android:id="@+id/spinner_filter"
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
@@ -99,6 +74,31 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Filter" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spinner_sorteren"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="30dp" />
+
+            <Spinner
+                android:id="@+id/spinner_asc_desc"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/SortButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="sort" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView

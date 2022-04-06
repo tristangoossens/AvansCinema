@@ -305,27 +305,6 @@ public class ApiConnection {
         });
     }
 
-    public void filterMoviesOnRating(ResponseListener listener, int count) {
-        Call<MovieList> call = service.filterOnRate(api_key, count);
-
-        call.enqueue(new Callback<MovieList>() {
-            @Override
-            public void onResponse(Call<MovieList> call, Response<MovieList> response) {
-                if (!(response.code() == 200)) {
-                    Log.d("Error", "Error -> " + response.code());
-                    return;
-                }
-
-                listener.searchMovie(response.body().getResults());
-            }
-
-            @Override
-            public void onFailure(Call<MovieList> call, Throwable t) {
-
-            }
-        });
-    }
-
     public void sortMoviesOnDate(ResponseListener listener, String sort_by){
         Call<MovieList> call = service.sortMoviesDate(api_key, sort_by);
 
@@ -364,6 +343,26 @@ public class ApiConnection {
 
             @Override
             public void onFailure(Call<RatingResponse> call, Throwable t) {
+
+            }
+        });
+    }
+    public void filterOnRate(ResponseListener listener, int count) {
+        Call<MovieList> call = service.filteronRate(api_key, count, count);
+
+        call.enqueue(new Callback<MovieList>() {
+            @Override
+            public void onResponse(Call<MovieList> call, Response<MovieList> response) {
+                if (!(response.code() == 200)) {
+                    Log.d("Error", "Error -> " + response.code());
+                    return;
+                }
+
+                listener.searchMovie(response.body().getResults());
+            }
+
+            @Override
+            public void onFailure(Call<MovieList> call, Throwable t) {
 
             }
         });
