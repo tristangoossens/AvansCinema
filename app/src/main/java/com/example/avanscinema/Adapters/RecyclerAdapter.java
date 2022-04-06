@@ -14,7 +14,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.avanscinema.Classes.Genre;
 import com.example.avanscinema.Classes.Movie;
 import com.example.avanscinema.R;
 import com.squareup.picasso.Picasso;
@@ -96,6 +95,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MovieH
     public interface ItemClickListener {
         void onMovieClick(Movie movie);
     }
+
     //Interface voor Position wanneer scherm wordt aangeraakt
     public interface OnTouchListener {
         void returnItemPosition(int position);

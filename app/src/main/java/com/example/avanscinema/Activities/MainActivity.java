@@ -1,7 +1,6 @@
 package com.example.avanscinema.Activities;
 
 import android.annotation.SuppressLint;
-import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -14,14 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -278,26 +274,6 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
             }
         });
     }
-
-//    private void filterOnRate(int rate) {
-//        ArrayList<Movie> filteredList = new ArrayList<Movie>();
-//        for (Movie m : movieList) {
-//            int vote = (int) Math.floor(m.getVoteAverage());
-//            if (vote == rate) {
-//        filteredList.add(m);
-//            }
-//        }
-
-
-//        RecyclerAdapter adapter = new RecyclerAdapter(filteredList, movie -> {
-//            //Clicked on Movie Item & nieuwe API call met deze Movie (voor searched movies)
-//            Log.d("movie chosen: ", "" +movie.getId());
-//            apiConnection.getMovieDetails(MainActivity.this, movie.getId());
-//        }, position -> {
-//            //Niet benodigt voor Search screen, had ook bestaande Method kunnen gebruiken maar dan problemen met Automatisch lijst extend.
-//        });
-//        recyclerView.setAdapter(adapter);
-//    }
 
     private void setupMenu() {
         drawerLayout = findViewById(R.id.drawer_layout);
