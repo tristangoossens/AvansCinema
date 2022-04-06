@@ -56,6 +56,24 @@ public class UserListDetailActivity extends AppCompatActivity implements UserLis
                 popup.show();
             }
         });
+        ImageButton share = findViewById(R.id.share_private);
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StringBuilder sb = new StringBuilder();
+                for (Movie m : list.getMovies()) {
+                    sb.append(m.getTitle() + ": " + m.getReleaseDate() + "\n");
+                }
+
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, sb.toString());
+                sendIntent.setType("text/plain");
+
+                Intent shareIntent = Intent.createChooser(sendIntent, "Share this movie!");
+                startActivity(shareIntent);
+            }
+        });
 
 
         // Set onclick listener for back button
