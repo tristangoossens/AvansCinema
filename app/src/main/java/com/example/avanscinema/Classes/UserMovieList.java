@@ -107,4 +107,11 @@ public class UserMovieList {
         this.posterPath = posterPath;
     }
 
+    public List<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
 }
