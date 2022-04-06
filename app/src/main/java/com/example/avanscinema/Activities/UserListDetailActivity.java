@@ -1,13 +1,20 @@
 package com.example.avanscinema.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.avanscinema.API.ApiConnection;
 import com.example.avanscinema.API.UserListResponseListener;
@@ -18,8 +25,10 @@ import com.example.avanscinema.R;
 
 import java.util.List;
 
-public class UserListDetailActivity extends AppCompatActivity implements UserListResponseListener {
+public class UserListDetailActivity extends AppCompatActivity implements UserListResponseListener, ApiConnection.deleteResponse, PopupMenu.OnMenuItemClickListener {
     private RecyclerView recyclerView;
+    private ApiConnection api;
+    private UserMovieList list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +39,20 @@ public class UserListDetailActivity extends AppCompatActivity implements UserLis
         recyclerView = (RecyclerView) findViewById(R.id.user_list_detail_recyclerview);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
-        ApiConnection api = new ApiConnection();
+        api = new ApiConnection();
         api.getUserMovieListDetails(UserListDetailActivity.this, getIntent().getIntExtra("LIST_ID", 1));
+
+        ImageButton optionsButton = (ImageButton) findViewById(R.id.user_list_detail_options_button);
+        optionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(UserListDetailActivity.this, view);
+                popup.setOnMenuItemClickListener(UserListDetailActivity.this);
+                MenuInflater inflater = popup.getMenuInflater();
+                inflater.inflate(R.menu.list_detail_menu, popup.getMenu());
+                popup.show();
+            }
+        });
 
 
         // Set onclick listener for back button
@@ -45,13 +66,15 @@ public class UserListDetailActivity extends AppCompatActivity implements UserLis
     }
 
     private void setData(UserMovieList userMovieList) {
+        list = userMovieList;
+
         TextView titleTextview = (TextView) findViewById(R.id.user_list_detail_title);
         TextView descriptionTextView = (TextView) findViewById(R.id.user_list_detail_description);
 
-        titleTextview.setText(userMovieList.getName());
-        descriptionTextView.setText(userMovieList.getDescription());
+        titleTextview.setText(list.getName());
+        descriptionTextView.setText(list.getDescription());
 
-        setRecyclerViewAdapter(userMovieList.getMovies());
+        setRecyclerViewAdapter(list.getMovies());
     }
 
     private void setRecyclerViewAdapter(List<Movie> movieList) {
@@ -59,9 +82,29 @@ public class UserListDetailActivity extends AppCompatActivity implements UserLis
         recyclerView.setAdapter(userMovieListAdapter);
     }
 
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_delete:
+                api.deleteMovieList(UserListDetailActivity.this, list.getId());
+                break;
+        }
+
+        return true;
+    }
 
     @Override
     public void onUserListResponse(UserMovieList list) {
         setData(list);
+    }
+
+    @Override
+    public void onListDeleteResponse(String message) {
+        Toast.makeText(getApplicationContext(), message , Toast.LENGTH_SHORT).show();
+
+        if(message.contains("success")){
+            Intent intent = new Intent(UserListDetailActivity.this, UserListActivity.class);
+            startActivity(intent);
+        }
     }
 }
