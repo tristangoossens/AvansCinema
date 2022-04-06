@@ -46,6 +46,7 @@
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
+                    android:backgroundTint="@color/background_text"
                     android:visibility="visible"
                     app:srcCompat="@drawable/unfavourite" />
 
@@ -54,6 +55,7 @@
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
+                    android:backgroundTint="@color/background_text"
                     android:visibility="invisible"
                     app:srcCompat="@drawable/favourite" />
             </LinearLayout>
