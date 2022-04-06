@@ -1,7 +1,7 @@
 package com.example.avanscinema.API;
 
 import com.example.avanscinema.API.RequestBody.AddMovieListRequestBody;
-import com.example.avanscinema.API.RequestBody.AddToListRequestBody;
+import com.example.avanscinema.API.RequestBody.AlterListItemRequestBody;
 import com.example.avanscinema.Classes.Media;
 import com.example.avanscinema.Classes.Movie;
 import com.example.avanscinema.Classes.Rating;
@@ -80,7 +80,7 @@ public interface TheMovieDatabase {
     Call<MovieList> getFavourite(@Path("id") int accId, @Query("session_id") String session, @Query("api_key") String api_key);
 
     @POST("list/{list_id}/add_item")
-    Call<ResponseMessage> addMovieToList(@Path("list_id") int list_id, @Query("api_key") String api_key, @Query("session_id") String session_id, @Body AddToListRequestBody addToListRequestBody);
+    Call<ResponseMessage> addMovieToList(@Path("list_id") int list_id, @Query("api_key") String api_key, @Query("session_id") String session_id, @Body AlterListItemRequestBody alterListItemRequestBody);
 
     @POST("list")
     Call<ResponseMessage> addMovieList(@Query("api_key") String api_key, @Query("session_id") String session_id, @Body AddMovieListRequestBody addMovieListRequestBody);

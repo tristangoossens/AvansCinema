@@ -5,7 +5,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.avanscinema.API.RequestBody.AddMovieListRequestBody;
-import com.example.avanscinema.API.RequestBody.AddToListRequestBody;
+import com.example.avanscinema.API.RequestBody.AlterListItemRequestBody;
 import com.example.avanscinema.Classes.Media;
 import com.example.avanscinema.Classes.Movie;
 import com.example.avanscinema.Classes.Rating;
@@ -371,8 +371,8 @@ public class ApiConnection {
     }
 
     public void addMovieToList(detailResponse responseListener, int list_id, int movie_id){
-        AddToListRequestBody addToListRequestBody = new AddToListRequestBody(movie_id);
-        Call<ResponseMessage> call = service.addMovieToList(list_id, this.api_key, this.session_id, addToListRequestBody);
+        AlterListItemRequestBody alterListItemRequestBody = new AlterListItemRequestBody(movie_id);
+        Call<ResponseMessage> call = service.addMovieToList(list_id, this.api_key, this.session_id, alterListItemRequestBody);
 
         call.enqueue(new Callback<ResponseMessage>() {
             @Override
