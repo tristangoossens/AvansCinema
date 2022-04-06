@@ -94,7 +94,7 @@ public class ApiConnection {
     }
 
     //Alle Calls die bij elkaar horen samengevoegd.
-    public void getMovieDetails(ResponseListener listener, int id) {
+    public void getMovieDetails(movieDetailsResponse listener, int id) {
         Call<Movie> callMovie = service.getMovie(id, api_key);
         Call<TrailerList> callTrailer = service.listOfTrailers(id, api_key);
         Call<ReviewList> callReviews = service.listOfReviews(id, api_key);
@@ -113,7 +113,7 @@ public class ApiConnection {
                 hasMovie = true;
                 movie = response.body();
                 if (hasCast && hasTrailer && hasReviews && hasMovie) {
-                    listener.getDetails(movie, reviews, cast, trailers);
+                    listener.onCombinedDetailsResponse(movie, reviews, cast, trailers);
                     cleanup();
                 }
             }
@@ -134,7 +134,7 @@ public class ApiConnection {
                 hasReviews = true;
                 reviews = response.body();
                 if (hasCast && hasTrailer && hasReviews && hasMovie) {
-                    listener.getDetails(movie, reviews, cast, trailers);
+                    listener.onCombinedDetailsResponse(movie, reviews, cast, trailers);
                     cleanup();
                 }
 
@@ -156,7 +156,7 @@ public class ApiConnection {
                 cast = response.body();
                 hasCast = true;
                 if (hasCast && hasTrailer && hasReviews && hasMovie) {
-                    listener.getDetails(movie, reviews, cast, trailers);
+                    listener.onCombinedDetailsResponse(movie, reviews, cast, trailers);
                     cleanup();
                 }
             }
@@ -177,7 +177,7 @@ public class ApiConnection {
                 trailers = response.body();
                 hasTrailer = true;
                 if (hasCast && hasTrailer && hasReviews && hasMovie) {
-                    listener.getDetails(movie, reviews, cast, trailers);
+                    listener.onCombinedDetailsResponse(movie, reviews, cast, trailers);
                     cleanup();
                 }
 
@@ -424,6 +424,10 @@ public class ApiConnection {
                 Log.d("Error", "Error -> " + t.getMessage());
             }
         });
+    }
+
+    public interface movieDetailsResponse {
+        public void onCombinedDetailsResponse(Movie movie, ReviewList reviews, CastList cast, TrailerList trailer);
     }
 
     public interface detailResponse {

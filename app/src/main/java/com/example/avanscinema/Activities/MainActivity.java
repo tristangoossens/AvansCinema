@@ -37,7 +37,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements ResponseListener {
+public class MainActivity extends AppCompatActivity implements ResponseListener, ApiConnection.movieDetailsResponse {
 
     private RecyclerView recyclerView;
     private ApiConnection apiConnection;
@@ -345,7 +345,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener 
     }
 
     @Override
-    public void getDetails(Movie movie, ReviewList reviews, CastList cast, TrailerList trailer) {
+    public void onCombinedDetailsResponse(Movie movie, ReviewList reviews, CastList cast, TrailerList trailer) {
         //Response van API Call van Movie Click
         //Detail page wordt pas geopend wanneer data aanwezig is.
         Intent detailPage = new Intent(getApplicationContext(), DetailPage.class);
