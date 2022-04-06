@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/cardview_dark_background"
     tools:context=".Activities.UserListDetailActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -22,8 +23,65 @@
             android:layout_height="30dp"
             android:layout_gravity="start"
             android:background="@drawable/back" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:text="AvansCinema" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/user_list_detail_options_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="end"
+            android:background="@drawable/ic_more_options" />
     </androidx.appcompat.widget.Toolbar>
 
 
+    <TextView
+        android:id="@+id/user_list_detail_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:background="@drawable/description_box_list_item"
+        android:gravity="center"
+        android:textColor="@color/title_color"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        tools:text="Titel" />
+
+    <TextView
+        android:id="@+id/user_list_detail_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:gravity="center"
+        android:textColor="@color/textcolor"
+        android:background="@drawable/description_box_list_item"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:text="Dit is een test. Deze lijst is gemaakt door het A+Team en word als voorbeeld getoond" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:background="@drawable/description_box_list_item"
+        android:gravity="center"
+        android:textColor="@color/title_color"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:text="Films" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/user_list_detail_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        tools:listitem="@layout/user_list_movie_item">
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>
