@@ -1,22 +1,20 @@
 package com.example.avanscinema.Activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -148,7 +146,7 @@ public class DetailPage extends AppCompatActivity implements ApiConnection.detai
            for (Genre g : movie.getGenres()) {
                sb.append(g.getName() + ", ");
            }
-                mGenre.setText(getResources().getString(R.string.genre, sb));
+                mGenre.setText(getResources().getString(R.string.genres, sb));
 
             if (!reviews.isEmpty()){
                 mReview.setVisibility(View.VISIBLE);
@@ -176,6 +174,7 @@ public class DetailPage extends AppCompatActivity implements ApiConnection.detai
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ((TextView)parent.getChildAt(0)).setTextColor(Color.WHITE);
                 selectedList = (ListWithId) parent.getItemAtPosition(position);
             }
 

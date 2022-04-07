@@ -19,7 +19,11 @@
     <string name="Beoordeling">Beoordeling</string>
     <string name="Verwacht">verwacht</string>
     <string name="lengte_en_datum_vanVerschijning">lengte: %1$d minuten   Datum van verschijning: %2$s</string>
-    <string name="genre">Genres: %1$s</string>
+    <string name="genres">Genres: %1$s</string>
+    <string name="oplopend">Oplopend</string>
+    <string name="aflopend">Aflopend</string>
+    <string name="genre">Genre</string>
+
 
     //Begin settings page
     <string name="taal_aanpassen" translatable="false">Taal Aanpassen / Switch Language</string>
@@ -44,13 +48,21 @@
         <item>Filter</item>
         <item>@string/Datum</item>
         <item>@string/Beoordeling</item>
-        <item>@string/thema</item>
+        <item>@string/genre</item>
     </string-array>
     <string-array name="asc_desc">
-        <item>Asc</item>
-        <item>Desc</item>
+        <item>@string/oplopend</item>
+        <item>@string/aflopend</item>
     </string-array>
     <string name="film_lijst">Toevoegen aan lijst</string>
     <string name="film_lijst_knop">Toevoegen</string>
+    <string name="waarde">value</string>
+    <string name="films">Films</string>
+    <string name="Voegfilmtoe">Add a movie list</string>
+    <string name="naam">Name</string>
+    <string name="opslaan2">save</string>
+    <string name="beschrijving">Description</string>
+    <string name="fill_before_submit">Please fill in all fields before submitting</string>
+    <string name="sorteer">Sorteer</string>
 
 </resources>

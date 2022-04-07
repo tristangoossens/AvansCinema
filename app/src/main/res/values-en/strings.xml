@@ -19,7 +19,7 @@
     <string name="Beoordeling">Rating</string>
     <string name="Verwacht">Expected</string>
     <string name="lengte_en_datum_vanVerschijning">Runtime: %1$d minuten  Release date: %2$s</string>
-    <string name="genre">Genre: %1$s</string>
+    <string name="genres">Genre: %1$s</string>
     <string name="licht">Light</string>
     <string name="donker">Dark</string>
     <string name="thema_aanpassen">Switch Theme</string>
@@ -41,5 +41,20 @@
     </string-array>
     <string name="film_lijst">Add to list</string>
     <string name="film_lijst_knop">Add</string>
+    <string name="beoordeel_de_film">Rate the movie!</string>
+    <string name="verstuur">Send</string>
+    <string name="ratingtoast">Rating of 0 not possible</string>
+    <string name="beoorderling_verstuurd">Rating send</string>
+    <string name="waarde">value</string>
+    <string name="films">Movies</string>
+    <string name="Voegfilmtoe">Create a movie list</string>
+    <string name="naam">Name</string>
+    <string name="beschrijving">Description</string>
+    <string name="oplopend">Ascending</string>
+    <string name="aflopend">Descending</string>
+    <string name="genre">Genre</string>
+    <string name="fill_before_submit">Please fill in all fields before submitting</string>
+    <string name="opslaan2">Save</string>
+    <string name="sorteer">sort</string>
 
 </resources>

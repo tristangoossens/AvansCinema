@@ -2,6 +2,7 @@ package com.example.avanscinema.Activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -100,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener,
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 //FILTER
-
+                ((TextView)adapterView.getChildAt(0)).setTextColor(Color.WHITE);
                 switch ((int) adapterView.getItemIdAtPosition(i)) {
                     case 0:
                         filter = "none";
@@ -131,6 +133,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener,
         spinnerA.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                ((TextView)adapterView.getChildAt(0)).setTextColor(Color.WHITE);
                 //ASC - DESC
                 switch ((int) adapterView.getItemIdAtPosition(i)) {
                     case 1:
@@ -153,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener,
         spinnerS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                ((TextView)adapterView.getChildAt(0)).setTextColor(Color.WHITE);
                 //SORT
 
                 switch ((int) adapterView.getItemIdAtPosition(i)) {

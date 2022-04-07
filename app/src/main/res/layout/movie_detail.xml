@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/outer_background"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/outer_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,9 +30,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:text="AvansCinema"
                 android:textColor="@color/white"
-                android:textSize="24sp"
-                android:text="AvansCinema" />
+                android:textSize="24sp" />
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/share_detail"
@@ -153,11 +153,11 @@
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:layout_marginStart="3dp"
-                    android:layout_marginEnd="3dp"
                     android:id="@+id/company_detail_recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="3dp"
                     android:orientation="horizontal">
 
 
@@ -175,7 +175,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:visibility="invisible"
-                    tools:visibility="visible"/>
+                    tools:visibility="visible" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -206,21 +206,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:stepSize="0.5"
                     android:progressBackgroundTint="#52EAAB02"
                     android:progressTint="#EAAB02"
                     android:rating="0"
-                    android:secondaryProgressTint="#EAAB02" />
+                    android:secondaryProgressTint="#EAAB02"
+                    android:stepSize="0.5" />
 
                 <Button
                     android:id="@+id/ratting_button_detailpage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/description_box_list_item"
                     android:layout_gravity="center"
-                    android:text="@string/verstuur"
                     android:layout_marginBottom="10dp"
-                    />
+                    android:background="@drawable/description_box_list_item"
+                    android:text="@string/verstuur" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -236,15 +235,17 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginBottom="30dp"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <Spinner
                         android:id="@+id/detail_list_spinner"
                         android:layout_width="150dp"
                         android:layout_height="match_parent"
+                        android:layout_gravity="center"
                         android:layout_marginStart="30dp"
+                        android:backgroundTint="@color/white"
                         android:gravity="center" />
 
                     <Button

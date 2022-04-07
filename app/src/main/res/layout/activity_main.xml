@@ -55,17 +55,21 @@
             android:orientation="horizontal">
 
             <Spinner
+                android:backgroundTint="@color/white"
                 android:id="@+id/spinner_filter"
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="30dp" />
 
             <EditText
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:backgroundTint="@color/white"
                 android:id="@+id/filterTxt"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="value"
+                android:hint="@string/waarde"
                 android:inputType="textPersonName" />
 
             <Button
@@ -73,7 +77,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Filter" />
+                android:text="filter" />
         </LinearLayout>
 
         <LinearLayout
@@ -82,12 +86,14 @@
             android:orientation="horizontal">
 
             <Spinner
+                android:backgroundTint="@color/white"
                 android:id="@+id/spinner_sorteren"
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="30dp" />
 
             <Spinner
+                android:backgroundTint="@color/white"
                 android:id="@+id/spinner_asc_desc"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
@@ -98,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="sort" />
+                android:text="@string/sorteer" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView

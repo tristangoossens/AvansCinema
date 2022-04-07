@@ -19,7 +19,7 @@
     <string name="Beoordeling">Beoordeling</string>
     <string name="Verwacht">verwacht</string>
     <string name="lengte_en_datum_vanVerschijning">lengte: %1$d minuten   Datum van verschijning: %2$s</string>
-    <string name="genre">Genre: %1$s</string>
+    <string name="genres">Genre: %1$s</string>
     <string name="licht">Licht</string>
     <string name="donker">Donker</string>
     <string name="thema_aanpassen">Thema aanpassen</string>
@@ -41,4 +41,19 @@
     </string-array>
     <string name="film_lijst">Toevoegen aan lijst</string>
     <string name="film_lijst_knop">Toevoegen</string>
+    <string name="beoordeel_de_film">Beoordeel de film!</string>
+    <string name="verstuur">Verstuur</string>
+    <string name="ratingtoast">Rating van 0 niet mogelijk</string>
+    <string name="beoorderling_verstuurd">Beoorderling verstuurd</string>
+    <string name="waarde">waarde</string>
+    <string name="films">Films</string>
+    <string name="Voegfilmtoe">creëer een filmlijst</string>
+    <string name="naam">Naam</string>
+    <string name="beschrijving">beschrijving</string>
+    <string name="oplopend">Oplopend</string>
+    <string name="aflopend">Aflopend</string>
+    <string name="genre">Genre</string>
+    <string name="fill_before_submit">Vul alstublieft alle velden in voor het aanmaken van een lijst.</string>
+    <string name="opslaan2">Opslaan</string>
+    <string name="sorteer">Sorteer</string>
 </resources>

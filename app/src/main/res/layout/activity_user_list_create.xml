@@ -29,7 +29,7 @@
             android:layout_gravity="center"
             android:textColor="@color/white"
             android:textSize="24sp"
-            android:text="AvansCinema" />
+            android:text="@string/app_name" />
     </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
@@ -45,7 +45,7 @@
             android:textColor="@color/title_color"
             android:textSize="25sp"
             android:textStyle="bold"
-            android:text="Add a movie list"
+            android:text="@string/Voegfilmtoe"
             android:background="@drawable/description_box_list_item"
             android:gravity="center"/>
 
@@ -53,19 +53,19 @@
             android:id="@+id/form_list_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name" />
+            android:hint="@string/naam" />
 
         <EditText
             android:id="@+id/form_list_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Description" />
+            android:hint="@string/beschrijving" />
 
         <Button
             android:id="@+id/form_list_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Save" />
+            android:text="@string/opslaan2" />
     </LinearLayout>
 </LinearLayout>

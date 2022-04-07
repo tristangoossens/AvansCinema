@@ -46,7 +46,7 @@ public class UserListCreateActivity extends AppCompatActivity implements ApiConn
                 if(!name.matches("") && !description.matches("")){
                     api.addMovieList(UserListCreateActivity.this, name, description);
                 }else{
-                    Toast.makeText(getApplicationContext(), "Please fill in all fields before submitting" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), (R.string.fill_before_submit) , Toast.LENGTH_SHORT).show();
                 }
             }
         });
