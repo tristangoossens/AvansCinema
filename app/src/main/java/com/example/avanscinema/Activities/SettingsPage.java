@@ -53,6 +53,7 @@ public class SettingsPage extends AppCompatActivity implements RadioGroup.OnChec
             public void onClick(View view) {
                 Intent intent = new Intent(SettingsPage.this, MainActivity.class);
                 startActivity(intent);
+                SettingsPage.super.finish();
             }
         });
 
@@ -77,18 +78,15 @@ public class SettingsPage extends AppCompatActivity implements RadioGroup.OnChec
                 int id = item.getItemId();
                 switch (id) {
                     case R.id.Movie_list:
-                        Intent main = new Intent(SettingsPage.this, MainActivity.class);
-                        startActivity(main);
-                        break;
                     case R.id.Favourites:
-                        //Show list of Favourite movies
-                        break;
-                    case R.id.settings:
-                        //YOU ARE HERE
+                        Intent mainActivityIntent = new Intent(SettingsPage.this, MainActivity.class);
+                        startActivity(mainActivityIntent);
+                        SettingsPage.super.finish();
                         break;
                     case R.id.usermovielist:
                         Intent userListsIntent = new Intent(SettingsPage.this, UserListActivity.class);
                         startActivity(userListsIntent);
+                        SettingsPage.super.finish();
                         break;
                 }
 

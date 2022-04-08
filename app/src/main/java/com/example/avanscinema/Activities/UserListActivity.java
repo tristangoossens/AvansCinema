@@ -31,6 +31,7 @@ public class UserListActivity extends AppCompatActivity implements NavigationVie
     // Drawer menu class attributes
     private ActionBarDrawerToggle toggle;
     private DrawerLayout drawer;
+    private ApiConnection api = new ApiConnection();
 
 
     @Override
@@ -51,7 +52,7 @@ public class UserListActivity extends AppCompatActivity implements NavigationVie
             }
         });
 
-        ApiConnection api = new ApiConnection();
+
         api.getUserMovieLists(this);
 
         setupDrawerMenu();
@@ -103,19 +104,20 @@ public class UserListActivity extends AppCompatActivity implements NavigationVie
         // Check witch item in the drawer has been clicked
         switch(item.getItemId()) {
             case R.id.Movie_list:
+            case R.id.Favourites:
                 Intent mainActivityIntent = new Intent(UserListActivity.this, MainActivity.class);
                 startActivity(mainActivityIntent);
-                break;
-            case R.id.Favourites:
-                //Show list of Favourite movies
+                UserListActivity.super.finish();
                 break;
             case R.id.settings:
                 Intent settingsPageIntent = new Intent(UserListActivity.this, SettingsPage.class);
                 startActivity(settingsPageIntent);
+                UserListActivity.super.finish();
                 break;
             case R.id.usermovielist:
                 Intent userListsIntent = new Intent(UserListActivity.this, UserListActivity.class);
                 startActivity(userListsIntent);
+                UserListActivity.super.finish();
                 break;
         }
 

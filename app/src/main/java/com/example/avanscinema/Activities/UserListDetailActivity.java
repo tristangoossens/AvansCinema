@@ -154,5 +154,7 @@ public class UserListDetailActivity extends AppCompatActivity implements UserLis
         detailPage.putExtra("cast", cast);
         detailPage.putExtra("trailer", trailer);
         startActivity(detailPage);
+        //Niet gesloten worden, want back button sluit detail page. Dan zou app sluiten
+//        UserListDetailActivity.super.finish();
     }
 }

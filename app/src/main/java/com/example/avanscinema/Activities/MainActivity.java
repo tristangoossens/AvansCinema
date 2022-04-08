@@ -65,9 +65,9 @@ public class MainActivity extends AppCompatActivity implements ResponseListener,
         setupRecyclerView();
         //Navigation Menu
         setupMenu();
-
+        //Spinners
         setupSpinners();
-
+        //Share button
         shareButton();
     }
 
@@ -126,10 +126,13 @@ public class MainActivity extends AppCompatActivity implements ResponseListener,
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+        //Ascending/Descending spinner
         Spinner spinnerA = findViewById(R.id.spinner_asc_desc);
+        //Woordenlijst voor de spinner
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.asc_desc, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerA.setAdapter(adapter1);
+        //Item listener voor asc/desc
         spinnerA.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -149,10 +152,13 @@ public class MainActivity extends AppCompatActivity implements ResponseListener,
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+        //Sorteer spinner
         Spinner spinnerS = findViewById(R.id.spinner_sorteren);
+        //Woordenlijst voor de spinner
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.spinner_list_sorteren, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerS.setAdapter(adapter2);
+        //Item listener voor Sorteren op
         spinnerS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -180,6 +186,8 @@ public class MainActivity extends AppCompatActivity implements ResponseListener,
 
             }
         });
+
+        //Button voor filteren
         EditText sort = findViewById(R.id.filterTxt);
         Button searchF = findViewById(R.id.filterButton);
 
@@ -229,6 +237,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener,
                 }
             }
         });
+        //Button voor sorteren
         Button sortButton = findViewById(R.id.SortButton);
         sortButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -268,25 +277,23 @@ public class MainActivity extends AppCompatActivity implements ResponseListener,
                         });
                         recyclerView.setAdapter(adapterRat);
                         break;
-                    case "expected":
-
-                        break;
                 }
             }
         });
     }
 
     private void setupMenu() {
+        //Layout voor menu
         drawerLayout = findViewById(R.id.drawer_layout);
         actionBar = new ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.Close);
         actionBar.setDrawerIndicatorEnabled(true);
 
         drawerLayout.addDrawerListener(actionBar);
-
+        //ToolBar
         actionBar.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        //Navigatie view
         NavigationView nav_view = findViewById(R.id.nav_view);
         nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @SuppressLint("NonConstantResourceId")
@@ -305,10 +312,12 @@ public class MainActivity extends AppCompatActivity implements ResponseListener,
                     case R.id.settings:
                         Intent settingsPageIntent = new Intent(MainActivity.this, SettingsPage.class);
                         startActivity(settingsPageIntent);
+                        MainActivity.super.finish();
                         break;
                     case R.id.usermovielist:
                         Intent userListsIntent = new Intent(MainActivity.this, UserListActivity.class);
                         startActivity(userListsIntent);
+                        MainActivity.super.finish();
                         break;
                 }
 
@@ -358,6 +367,8 @@ public class MainActivity extends AppCompatActivity implements ResponseListener,
         detailPage.putExtra("cast", cast);
         detailPage.putExtra("trailer", trailer);
         startActivity(detailPage);
+        //Niet gesloten worden, want back button sluit detail page. Dan zou app sluiten
+//        MainActivity.super.finish();
     }
 
     @Override
@@ -377,6 +388,7 @@ public class MainActivity extends AppCompatActivity implements ResponseListener,
 
     @Override
     public void getGenres(ArrayList<Genre> genres) {
+        //Returned genre gevonden met ingevulde letters
         boolean sendToast = true;
         for (Genre g : genres) {
             if (g.getName().toLowerCase().contains(this.genre)) {
