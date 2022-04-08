@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">AvansCinema</string>
-    <string name="lengte">"Lengte: "</string>
-    <string name="minuten">minuten</string>
-    <string name="Datum_van_verschijning">Datum van verschijning</string>
     <string name="Open">NavBar</string>
     <string name="Close">NavBar</string>
     <string name="druk_op_de_afbeelding_hierboven_om_de_trailer_te_openen">Druk op de afbeelding hierboven om de trailer te openen</string>
@@ -11,13 +8,10 @@
     <string name="productiebedrijven">Productiebedrijven</string>
     <string name="populaire_films">Populaire films</string>
     <string name="favorieten">Favorieten</string>
-    <string name="bekijk_later">Bekijk later</string>
     <string name="instellingen">Instellingen</string>
     <string name="jouw_lijsten">Jouw lijsten</string>
     <string name="Datum">Datum</string>
-    <string name="thema">Thema</string>
     <string name="Beoordeling">Beoordeling</string>
-    <string name="Verwacht">verwacht</string>
     <string name="lengte_en_datum_vanVerschijning">lengte: %1$d minuten   Datum van verschijning: %2$s</string>
     <string name="genres">Genre: %1$s</string>
     <string name="licht">Licht</string>
@@ -44,7 +38,6 @@
     <string name="beoordeel_de_film">Beoordeel de film!</string>
     <string name="verstuur">Verstuur</string>
     <string name="ratingtoast">Rating van 0 niet mogelijk</string>
-    <string name="beoorderling_verstuurd">Beoorderling verstuurd</string>
     <string name="waarde">waarde</string>
     <string name="films">Films</string>
     <string name="Voegfilmtoe">creëer een filmlijst</string>

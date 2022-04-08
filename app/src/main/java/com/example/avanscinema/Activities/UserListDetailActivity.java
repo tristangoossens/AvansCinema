@@ -122,12 +122,8 @@ public class UserListDetailActivity extends AppCompatActivity implements UserLis
 
     @Override
     public void onListDeleteResponse(String message) {
-        Toast.makeText(getApplicationContext(), message , Toast.LENGTH_SHORT).show();
-
-        if(message.contains("success")){
             Intent intent = new Intent(UserListDetailActivity.this, UserListActivity.class);
             startActivity(intent);
-        }
     }
 
     @Override

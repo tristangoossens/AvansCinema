@@ -416,7 +416,12 @@ public class ApiConnection {
         call.enqueue(new Callback<ResponseMessage>() {
             @Override
             public void onResponse(Call<ResponseMessage> call, Response<ResponseMessage> response) {
-                responseListener.onListDeleteResponse(response.body().getMessage());
+                if(response.body() != null){
+                    responseListener.onListDeleteResponse(response.body().message);
+                } else {
+                    responseListener.onListDeleteResponse("Deleted");
+                }
+
             }
 
             @Override

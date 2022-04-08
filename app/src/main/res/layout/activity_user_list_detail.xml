@@ -8,7 +8,6 @@
     tools:context=".Activities.UserListDetailActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/user_list_detail_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/outer_background"
